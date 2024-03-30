@@ -1,53 +1,59 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
 
+import Loader from "../components/Loader";
 import Product from "../components/Product";
-import axios from "axios";
-
-interface ProductProps {
-  _id: string;
-  name: string;
-  image: string;
-  description: string;
-  brand: string;
-  category: string;
-  price: number;
-  countInStock: number;
-  rating: number;
-  numReviews: number;
-}
+import { useGetProductsQuery } from "../slices/productsApiSlice";
+import { ProductProps } from "../types/ProductType";
 
 const HomeScreen = () => {
-  const [products, setProducts] = useState<ProductProps[]>([]);
-  // const fetchedProducts = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:8000/api/products");
-  //     const data = await response.json();
-  //     setProducts(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const { data, isLoading, error } = useGetProductsQuery({});
+  const iserror: any = error;
+  console.log(data, "dfalsfksalfj;asdfj");
+
+  // const [products, setProducts] = useState<ProductProps[]>([]);
+  // // const fetchedProducts = async () => {
+  // //   try {
+  // //     const response = await fetch("http://localhost:8000/api/products");
+  // //     const data = await response.json();
+  // //     setProducts(data);
+  // //   } catch (error) {
+  // //     console.log(error);
+  // //   }
+  // // };
+  // // useEffect(() => {
+  // //   fetchedProducts();
+  // // }, []);
+
   // useEffect(() => {
+  //   const fetchedProducts = async () => {
+  //     const { data } = await axios.get("http://localhost:8000/api/products");
+  //     setProducts(data);
+  //   };
   //   fetchedProducts();
   // }, []);
-
-  useEffect(() => {
-    const fetchedProducts = async () => {
-      const { data } = await axios.get("http://localhost:8000/api/products");
-      setProducts(data);
-    };
-    fetchedProducts();
-  }, []);
   return (
-    <div className="font-[sans-serif] bg-[#EEE1D1]">
-      <div className="p-4 mx-auto lg:max-w-7xl sm:max-w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {products &&
-            products?.map((product) => (
-              <Product product={product} key={product._id} />
-            ))}
-        </div>
-      </div>
+    <div>
+      {isLoading ? (
+        <>
+          <Loader />
+        </>
+      ) : error ? (
+        <div>{iserror?.data?.message}</div>
+      ) : (
+        <>
+          <div className="font-[sans-serif] bg-[#EEE1D1]">
+            <div className="p-4 mx-auto lg:max-w-7xl sm:max-w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {data &&
+                  data?.map((product: ProductProps) => (
+                    <Product {...product} key={product._id} />
+                  ))}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

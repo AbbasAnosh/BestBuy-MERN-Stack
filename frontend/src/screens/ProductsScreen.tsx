@@ -1,35 +1,46 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 import Rating from "../components/Rating";
 import { IoChevronForward } from "react-icons/io5";
-import axios from "axios";
 
-interface ProductProps {
-  _id: string;
-  name: string;
-  image: string;
-  description: string;
-  brand: string;
-  category: string;
-  price: number;
-  countInStock: number;
-  rating: number;
-  numReviews: number;
-}
+import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../slices/cartSlice";
 
 const ProductsScreen = () => {
-  const { id: ProductId } = useParams<{ id: string }>();
-  const [Product, setProduct] = useState<ProductProps | null>(null);
-  useEffect(() => {
-    const fetchedProduct = async () => {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/products/${ProductId}`
-      );
+  const { id: productId } = useParams<{ id: string }>();
+  const [qty, setQty] = useState(1);
+  console.log(qty, "quantity");
 
-      setProduct(data);
-    };
-    fetchedProduct();
-  }, [ProductId]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    data: Product,
+    isLoading,
+    error,
+  } = useGetProductDetailsQuery(productId);
+
+  const isError: any = error;
+
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...Product, qty }));
+    navigate("/cart");
+  };
+
+  // const [Product, setProduct] = useState<ProductProps | null>(null);
+  // useEffect(() => {
+  //   const fetchedProduct = async () => {
+  //     const { data } = await axios.get(
+  //       `http://localhost:8000/api/products/${ProductId}`
+  //     );
+
+  //     setProduct(data);
+  //   };
+  //   fetchedProduct();
+  // }, [ProductId]);
 
   return (
     <div className="bg-[#EEE1D1]">
@@ -41,74 +52,105 @@ const ProductsScreen = () => {
           <IoChevronForward className="text-[#E56A40]" />
           <p>Product Page</p>
         </div>
-        <div className="grid items-start grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="w-full lg:sticky top-0 sm:flex gap-2">
-            {/* <div className="sm:space-y-3 w-16 max-sm:flex max-sm:mb-4 max-sm:gap-4">
-              <img
-                src="https://readymadeui.com/images/product1.webp"
-                alt="Product1"
-                className="w-full cursor-pointer outline"
-              />
-              <img
-                src="https://readymadeui.com/images/product6.webp"
-                alt="Product2"
-                className="w-full cursor-pointer"
-              />
-              <img
-                src="https://readymadeui.com/images/product7.webp"
-                alt="Product3"
-                className="w-full cursor-pointer"
-              />
-              <img
-                src="https://readymadeui.com/images/product3.webp"
-                alt="Product4"
-                className="w-full cursor-pointer"
-              />
-            </div> */}
-            <img
-              src={Product?.image}
-              alt="Product"
-              className="w-4/5 rounded object-cover shadow-lg"
-            />
-          </div>
-          <div>
-            <h2 className="text-2xl font-extrabold text-[#0B514B]">
-              {Product?.name}
-            </h2>
-            <div className="flex flex-wrap gap-4 mt-4">
-              <p className="text-xl font-semibold text-[#E56A40]">Price: </p>
-              <p className="text-[#514C49] text-xl font-bold">
-                ${Product?.price}
-              </p>
-            </div>
-            <div className="flex space-x-2 mt-4">
-              <Rating value={Product?.rating} reviews={Product?.numReviews} />
-            </div>
-            <div className="mt-8">
-              <div className="flex items-center space-x-10">
-                <h3 className="text-lg font-bold  text-[#0B514B]">Status: </h3>
-                <p className="text-md font-semibold bg-[#E56A40] text-[#EEE1D1] p-3 rounded-lg">
-                  {Product?.countInStock! > 0 ? "In Stock" : "Out of Stock"}
-                </p>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div>{isError?.data.message}</div>
+        ) : (
+          <>
+            <div className="grid items-start grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="w-full lg:sticky top-0 sm:flex gap-2">
+                {/* <div className="sm:space-y-3 w-16 max-sm:flex max-sm:mb-4 max-sm:gap-4">
+                  <img
+                    src="https://readymadeui.com/images/product1.webp"
+                    alt="Product1"
+                    className="w-full cursor-pointer outline"
+                  />
+                  <img
+                    src="https://readymadeui.com/images/product6.webp"
+                    alt="Product2"
+                    className="w-full cursor-pointer"
+                  />
+                  <img
+                    src="https://readymadeui.com/images/product7.webp"
+                    alt="Product3"
+                    className="w-full cursor-pointer"
+                  />
+                  <img
+                    src="https://readymadeui.com/images/product3.webp"
+                    alt="Product4"
+                    className="w-full cursor-pointer"
+                  />
+                </div> */}
+                <img
+                  src={Product?.image}
+                  alt="Product"
+                  className="lg:w-4/5 rounded object-cover shadow-lg"
+                />
               </div>
-              <button
-                type="button"
-                disabled={Product?.countInStock === 0}
-                className="w-full mt-4 px-4 py-3 bg-[#0B514B] hover:bg-[#E56A40] text-[#EEE1D1]
-                cursor-pointer font-bold rounded"
-              >
-                Add to cart
-              </button>
-            </div>
-            <div className="mt-8">
-              <h3 className="text-lg font-bold text-[#0B514B]">
-                About the item
-              </h3>
-              <div className="space-y-3 mt-4 text-sm text-[#514C49]">
-                {Product?.description}
-              </div>
-            </div>
-            {/* <div className="mt-8 max-w-md">
+              <div>
+                <h2 className="text-2xl font-extrabold text-[#0B514B]">
+                  {Product?.name}
+                </h2>
+                <div className="flex flex-wrap justify-between mt-4">
+                  <p className="text-lg font-bold  text-[#0B514B]">Price: </p>
+                  <p className="text-[#514C49] text-xl font-bold">
+                    ${Product?.price}
+                  </p>
+                </div>
+
+                <Rating value={Product?.rating} reviews={Product?.numReviews} />
+
+                {Product.countInStock > 0 && (
+                  <div className="flex items-center justify-between mt-4">
+                    <p className="text-lg font-bold  text-[#0B514B]">
+                      Quantity
+                    </p>
+                    <form className="border-0">
+                      <select
+                        value={qty}
+                        id="qty"
+                        onChange={(e) => setQty(Number(e.target.value))}
+                        className="bg-[#E56A40] border-0 focus:border-0 focus:ring-0  outline-none text-[#D3D1C2] text-sm
+                              block w-full p-2.5 rounded-md custom-select"
+                      >
+                        {[...Array(Product.countInStock).keys()].map((p) => (
+                          <option key={p + 1} value={p + 1}>
+                            {p + 1}
+                          </option>
+                        ))}
+                      </select>
+                    </form>
+                  </div>
+                )}
+                <div className="mt-8">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-bold  text-[#0B514B]">
+                      Status:{" "}
+                    </h3>
+                    <p className="text-md font-semibold bg-[#E56A40] text-[#EEE1D1] p-3 rounded-lg">
+                      {Product?.countInStock! > 0 ? "In Stock" : "Out of Stock"}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    disabled={Product?.countInStock === 0}
+                    onClick={addToCartHandler}
+                    className="w-full mt-4 px-4 py-3 bg-[#0B514B] hover:bg-[#E56A40] text-[#EEE1D1]
+                                cursor-pointer font-bold rounded"
+                  >
+                    Add to cart
+                  </button>
+                </div>
+                <div className="mt-8">
+                  <h3 className="text-lg font-bold text-[#0B514B]">
+                    About the item
+                  </h3>
+                  <div className="space-y-3 mt-4 text-sm text-[#514C49]">
+                    {Product?.description}
+                  </div>
+                </div>
+                {/* <div className="mt-8 max-w-md">
               <h3 className="text-lg font-bold text-[#0B514B]">Reviews(10)</h3>
               <div className="space-y-3 mt-4">
                 <div className="flex items-center">
@@ -194,8 +236,10 @@ const ProductsScreen = () => {
                 Read all reviews
               </button>
             </div> */}
-          </div>
-        </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

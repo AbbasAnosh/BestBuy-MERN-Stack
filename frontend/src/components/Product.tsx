@@ -1,20 +1,8 @@
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
+import { ProductProps } from "../types/ProductType";
 
-interface ProductProps {
-  _id: string;
-  name: string;
-  image: string;
-  description: string;
-  brand: string;
-  category: string;
-  price: number;
-  countInStock: number;
-  rating: number;
-  numReviews: number;
-}
-
-const Product = ({ product }: ProductProps) => {
+const Product = (product: ProductProps) => {
   return (
     <Link to={`/product/${product._id}`}>
       <div className="bg-[#FDCA44] shadow-md overflow-hidden rounded cursor-pointer hover:-translate-y-2 transition-all relative">

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const Header = () => {
+  const { cartItems } = useSelector((state) => state.cart);
+  console.log(cartItems);
   return (
     <header className="bg-[#064F48] py-4 sm:px-10 px-6 font-[sans-serif] min-h-[70px]">
       <div className="flex flex-wrap items-center lg:gap-y-2 gap-y-4 gap-x-4">
@@ -41,9 +43,14 @@ const Header = () => {
                   paintOrder="fill markers stroke"
                 ></path>
               </svg>
-              <span className="absolute left-auto -ml-1 top-0 rounded-full bg-red-500 px-1 py-0 text-xs text-white">
-                0
-              </span>
+              {cartItems.length > 0 && (
+                <span className="absolute left-auto -ml-1 top-0 rounded-full bg-red-500 px-1 py-0 text-xs text-white">
+                  {cartItems.reduce(
+                    (acc: number, item: any) => acc + item.qty,
+                    0
+                  )}
+                </span>
+              )}
             </span>
             <input
               type="text"

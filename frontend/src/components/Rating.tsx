@@ -7,7 +7,7 @@ export type RatingProps = {
 
 const Rating = ({ value, reviews }: RatingProps) => {
   return (
-    <div className="flex items-center mt-6 justify-between space-x-16">
+    <div className="flex items-center mt-4 justify-between ">
       <div className="flex space-x-2 text-[#FDCA44]">
         <span>
           {value >= 1 ? (
