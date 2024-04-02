@@ -36,7 +36,7 @@ const HomeScreen = () => {
     <div>
       {isLoading ? (
         <>
-          <Loader />
+          <h3>isLoading</h3>
         </>
       ) : error ? (
         <div>{iserror?.data?.message}</div>

@@ -106,7 +106,7 @@ const ProductsScreen = () => {
                     <p className="text-lg font-bold  text-[#0B514B]">
                       Quantity
                     </p>
-                    <form className="border-0">
+                    <form className="border-0 w-[7rem]">
                       <select
                         value={qty}
                         id="qty"
