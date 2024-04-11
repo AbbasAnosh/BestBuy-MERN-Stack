@@ -12,3 +12,9 @@ export interface ProductProps {
   isLoading: boolean;
   error?: string;
 }
+
+export interface ProfileProps {
+  label: string;
+  href: string;
+  icon: JSX.Element;
+}

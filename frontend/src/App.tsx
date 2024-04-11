@@ -4,6 +4,10 @@ import HomeScreen from "./screens/HomeScreen";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductsScreen from "./screens/ProductsScreen";
 import CartScreen from "./screens/CartScreen";
+import LoginScreen from "./screens/LoginScreen";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import RegisterScreen from "./screens/RegisterScreen";
 
 const App = () => {
   return (
@@ -13,8 +17,11 @@ const App = () => {
         <Route path="/" element={<HomeScreen />} />
         <Route path="/product/:id" element={<ProductsScreen />} />
         <Route path="/cart" element={<CartScreen />} />
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/register" element={<RegisterScreen />} />
       </Routes>
       <Footer />
+      <ToastContainer />
     </Router>
   );
 };
