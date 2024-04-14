@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { saveShippingAddress } from "../slices/cartSlice";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 const ShippingPage = () => {
   const cart = useSelector((state: any) => state.cart);
@@ -12,6 +13,12 @@ const ShippingPage = () => {
     shippingAddress?.postalCode || ""
   );
   const [country, setCountry] = useState(shippingAddress?.country || "");
+
+  const [activeStep, setActiveStep] = useState(2);
+
+  const handleStepChange = (step: any) => {
+    setActiveStep(step);
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,6 +31,12 @@ const ShippingPage = () => {
   return (
     <div className="bg-[#EEE1D1]">
       <div className="max-w-4xl max-h-screen mx-auto p-4 ">
+        <div className="mb-[9rem]">
+          <CheckoutSteps
+            activeStep={activeStep}
+            onStepChange={handleStepChange}
+          />
+        </div>
         <form className="mb-20 mt-20 " onSubmit={handleSubmit}>
           <div className="mt-6">
             <h3 className="text-2xl font-bold text-[#064F48] mb-6">
