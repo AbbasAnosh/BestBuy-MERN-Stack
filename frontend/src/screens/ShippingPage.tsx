@@ -31,7 +31,7 @@ const ShippingPage = () => {
   return (
     <div className="bg-[#EEE1D1]">
       <div className="max-w-4xl max-h-screen mx-auto p-4 ">
-        <div className="mb-[9rem]">
+        <div className="mb-[6rem]">
           <CheckoutSteps
             activeStep={activeStep}
             onStepChange={handleStepChange}

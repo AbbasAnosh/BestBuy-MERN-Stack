@@ -24,7 +24,7 @@ const PaymentPage = () => {
   return (
     <div className=" bg-[#EEE1D1] p-6">
       <div className="max-w-4xl mx-auto w-full">
-        <div>
+        <div className="mb-10 pt-3">
           <h2 className="text-2xl font-extrabold text-[#333] inline-block">
             Payment Method
           </h2>
@@ -91,7 +91,7 @@ const PaymentPage = () => {
             </Link>
             <button
               type="submit"
-              className="min-w-[150px] px-6 py-3.5 text-sm bg-[#333] text-white rounded-md hover:bg-[#111]"
+              className="min-w-[150px] px-6 py-3.5 text-sm bg-[#064F48] text-white rounded-md hover:bg-[#E56A40]"
             >
               Confirm payment
             </button>

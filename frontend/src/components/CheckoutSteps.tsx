@@ -32,8 +32,11 @@ const CheckoutSteps = ({ activeStep, onStepChange }: any) => {
   };
 
   return (
-    <div className="lg:col-span-2 max-lg:order-1">
-      <div className="flex justify-between mt-14 relative before:bg-slate-200 before:absolute before:h-1 before:top-1/2 before:transform-y-1/2 before:w-full before:left-0">
+    <div className="pr-4 pl-4 md:pr-6 md:pl-6 lg:pl-0 lg:pr-0">
+      <div
+        className="flex justify-between relative before:bg-slate-200 before:absolute
+       before:h-1 before:top-1/2 before:transform-y-1/2 before:w-full before:left-0"
+      >
         {steps.map(({ step, label, href }) => (
           <div
             className="relative z-10"
@@ -42,8 +45,8 @@ const CheckoutSteps = ({ activeStep, onStepChange }: any) => {
           >
             <Link
               to={href}
-              className={`size-16 rounded-full border-2 bg-white border-zinc-200 flex justify-center items-center transition-all ease-in delay-200 ${
-                activeStep >= step ? "border-white bg-teal-900" : ""
+              className={`size-12 lg:size-16 rounded-full border-2 bg-white border-zinc-200 flex justify-center items-center transition-all ease-in delay-200 ${
+                activeStep >= step ? "border-white bg-[#064F48]" : ""
               }`}
             >
               {activeStep > step ? (
@@ -56,8 +59,8 @@ const CheckoutSteps = ({ activeStep, onStepChange }: any) => {
                 </span>
               )}
             </Link>
-            <div className="absolute top-24 left-1/2 -translate-y-2/4 -translate-x-2/4">
-              <span className="text-lg text-[#064F48] font-semibold text-nowrap">
+            <div className="absolute top-16 lg:top-24 left-1/2 -translate-y-2/4 -translate-x-2/4">
+              <span className="text-sm md:text-md lg:text-lg text-[#064F48] font-semibold text-nowrap">
                 {label}
               </span>
             </div>

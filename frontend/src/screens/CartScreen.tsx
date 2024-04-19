@@ -115,7 +115,7 @@ const CartScreen = () => {
                   </div>
                 ))}
               </div>
-              <div className="shadow-lg p-6 bg-[#E56A40] max-h-[28rem] rounded-lg">
+              <div className="shadow-lg p-6 bg-[#E56A40] max-h-[17rem] rounded-lg">
                 <h3 className="text-xl font-extrabold text-[#EEE1D1] border-b border-[#EEE1D1] pb-4">
                   Order Summary
                 </h3>
@@ -136,15 +136,6 @@ const CartScreen = () => {
                         )
                         .toFixed(2)}
                     </span>
-                  </li>
-                  <li className="flex text-[#EEE1D1] flex-wrap gap-4 text-md py-4">
-                    Shipping <span className="ml-auto font-bold">$</span>
-                  </li>
-                  <li className="flex text-[#EEE1D1] flex-wrap gap-4 text-md py-4">
-                    Tax <span className="ml-auto font-bold">$4.00</span>
-                  </li>
-                  <li className="flex text-[#EEE1D1] flex-wrap gap-4 text-md py-4 font-bold">
-                    Total <span className="ml-auto">$63.5</span>
                   </li>
                 </ul>
                 <button
