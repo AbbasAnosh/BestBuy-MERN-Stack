@@ -11,14 +11,23 @@ import { notFound, errorHandler } from "./middleware/errorHandler.js";
 connectDB();
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cookieParser());
+const corsOptions = {
+  origin: "http://localhost:5173",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
+
+app.get("/api/config/paypal", (req, res) =>
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
+);
 
 app.use(notFound);
 app.use(errorHandler);

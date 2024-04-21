@@ -27,7 +27,8 @@ const orderSchema = new mongoose.Schema(
       country: { type: String, required: true },
     },
     paymentMethod: {
-      type: { type: String, required: true },
+      type: String,
+      required: true,
     },
     paymentResult: {
       id: { type: String },

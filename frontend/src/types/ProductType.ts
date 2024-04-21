@@ -18,3 +18,8 @@ export interface ProfileProps {
   href: string;
   icon: JSX.Element;
 }
+
+export interface ReactPayPalScriptOptions {
+  clientID: string;
+  currency: string;
+}

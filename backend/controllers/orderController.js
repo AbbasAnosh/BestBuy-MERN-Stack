@@ -16,8 +16,9 @@ const addOrderItems = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("Please provide at least one order item");
   } else {
+    console.log(req.body, "reqqqqqqqqqqqqqqqqqqqqqqqqq");
     const order = await Order.create({
-      orderItems: orderItems.map((orderItem) => ({
+      orderItems: orderItems?.map((orderItem) => ({
         ...orderItem,
         product: orderItem._id,
         _id: undefined,
@@ -30,6 +31,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       shippingPrice,
       totalPrice,
     });
+
     const createOrder = await order.save();
     res.status(201).json(createOrder);
   }
@@ -54,7 +56,22 @@ const getOrderById = asyncHandler(async (req, res) => {
 });
 
 const updateOrderToPaid = asyncHandler(async (req, res) => {
-  res.send("update order");
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    order.paymentResult = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_address: req.body.payer.email_address,
+    };
+    const updateOrder = await order.save();
+    res.status(200).json(updateOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
 });
 
 const updateOrderToDelivered = asyncHandler(async (req, res) => {

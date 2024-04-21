@@ -10,7 +10,7 @@ const PlaceOrderPage = () => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state: any) => state.cart);
-  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
+  const [createOrder] = useCreateOrderMutation();
   useEffect(() => {
     if (!cart.shippingAddress.address) {
       navigate("/shipping");
@@ -22,7 +22,7 @@ const PlaceOrderPage = () => {
   const placeOrderHandler = async () => {
     try {
       const res = await createOrder({
-        orderItems: cart.orderItems,
+        orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         itemsPrice: cart.itemsPrice,

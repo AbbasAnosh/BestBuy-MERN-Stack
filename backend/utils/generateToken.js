@@ -4,11 +4,12 @@ const generateToken = (res, userId) => {
   const token = jwt.sign({ userId }, process.env.JWT_SECRET_KEY, {
     expiresIn: "30d",
   });
-
+  console.log(res, "resspondddddd");
+  console.log(token, "tokkkeeeeeennnnnn");
   res.cookie("jwt", token, {
     httpOnly: true,
-    Secure: process.env.NODE_ENV !== "development",
-    sameStie: "strict",
+    secure: process.env.NODE_ENV !== "development",
+    sameSite: "strict",
     maxAge: 30 * 24 * 60 * 60 * 1000,
   });
 };

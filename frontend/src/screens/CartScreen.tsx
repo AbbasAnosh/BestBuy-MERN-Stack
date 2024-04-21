@@ -33,7 +33,7 @@ const CartScreen = () => {
           Shopping Cart
         </h2>
         {cartItems.length === 0 ? (
-          <>
+          <div className="h-[32vh]">
             <h3 className="text-xl">
               The cart is empty{" "}
               <Link
@@ -43,7 +43,7 @@ const CartScreen = () => {
                 Go Back
               </Link>
             </h3>
-          </>
+          </div>
         ) : (
           <>
             <div className="grid lg:grid-cols-3 gap-12 ">

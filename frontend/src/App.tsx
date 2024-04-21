@@ -12,6 +12,9 @@ import ShippingPage from "./screens/ShippingPage";
 import PrivateRoute from "./components/PrivateRoute";
 import PaymentPage from "./screens/PaymentPage";
 import PlaceOrderPage from "./screens/PlaceOrderPage";
+import OrderPage from "./screens/OrderPage";
+import ProfilePage from "./screens/ProfilePage";
+import ProductPage from "./screens/ProductPage";
 
 const App = () => {
   return (
@@ -19,6 +22,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<HomeScreen />} />
+        <Route path="/product" element={<ProductPage />} />
         <Route path="/product/:id" element={<ProductsScreen />} />
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/login" element={<LoginScreen />} />
@@ -27,6 +31,8 @@ const App = () => {
           <Route path="/shipping" element={<ShippingPage />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/placeorder" element={<PlaceOrderPage />} />
+          <Route path="/order/:id" element={<OrderPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Routes>
       <Footer />

@@ -19,7 +19,7 @@ const data = [
 const DropdownQuantity = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="relative flex flex-col items-center w-[340px] h-[340px] rounded-lg">
+    <div className="relative flex flex-col items-center w-[340px] h-[240px] rounded-lg">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         className="bg-blue-400 p-4 w-full flex items-center justify-between font-bold text-lg 

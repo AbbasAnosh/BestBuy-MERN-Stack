@@ -19,8 +19,11 @@ const Header = () => {
   };
   const handleOptionClick = (option: any) => {
     setIsOpen(false);
-    if (option.label === "Logout") {
+    if (option.href === "/logout") {
       handleLogout();
+    }
+    if (option.href === "/profile") {
+      navigate("/profile");
     }
   };
 
@@ -54,7 +57,9 @@ const Header = () => {
             Best<span className="text-[#E56A40]">Buy</span>
           </h1>
         </Link>
-        <div></div>
+        <div>
+          <Link to="/product">Product</Link>
+        </div>
         <div className="flex items-center ml-auto lg:order-1">
           <div className="flex items-center space-x-4">
             {userInfo ? (
