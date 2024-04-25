@@ -14,28 +14,36 @@ import PaymentPage from "./screens/PaymentPage";
 import PlaceOrderPage from "./screens/PlaceOrderPage";
 import OrderPage from "./screens/OrderPage";
 import ProfilePage from "./screens/ProfilePage";
-import ProductPage from "./screens/ProductPage";
+import AdminPrivateRoute from "./components/AdminPrivateRoute";
+import DashboardRoutes from "./dashboard/components/DashboardRoutes";
+import MainLayout from "./components/MainLayout";
+import DashboardHome from "./dashboard/pages/Home";
 
 const App = () => {
   return (
     <Router>
-      <Header />
+      {/* <Header /> */}
       <Routes>
-        <Route path="/" element={<HomeScreen />} />
-        <Route path="/product" element={<ProductPage />} />
-        <Route path="/product/:id" element={<ProductsScreen />} />
-        <Route path="/cart" element={<CartScreen />} />
-        <Route path="/login" element={<LoginScreen />} />
-        <Route path="/register" element={<RegisterScreen />} />
-        <Route path="" element={<PrivateRoute />}>
-          <Route path="/shipping" element={<ShippingPage />} />
-          <Route path="/payment" element={<PaymentPage />} />
-          <Route path="/placeorder" element={<PlaceOrderPage />} />
-          <Route path="/order/:id" element={<OrderPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/product/:id" element={<ProductsScreen />} />
+          <Route path="/cart" element={<CartScreen />} />
+          <Route path="/login" element={<LoginScreen />} />
+          <Route path="/register" element={<RegisterScreen />} />
+          <Route path="" element={<PrivateRoute />}>
+            <Route path="/shipping" element={<ShippingPage />} />
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/placeorder" element={<PlaceOrderPage />} />
+            <Route path="/order/:id" element={<OrderPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Route>
+          <Route path="/dashboard" element={<AdminPrivateRoute />}>
+            <Route index element={<DashboardRoutes />} />
+            <Route path="*" element={<DashboardRoutes />} />
+          </Route>
         </Route>
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
       <ToastContainer />
     </Router>
   );

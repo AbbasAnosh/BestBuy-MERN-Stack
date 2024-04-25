@@ -57,9 +57,7 @@ const Header = () => {
             Best<span className="text-[#E56A40]">Buy</span>
           </h1>
         </Link>
-        <div>
-          <Link to="/product">Product</Link>
-        </div>
+
         <div className="flex items-center ml-auto lg:order-1">
           <div className="flex items-center space-x-4">
             {userInfo ? (

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
 .product_title{
     height: 2.5em;
@@ -9,5 +14,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
+.MuiDataGrid-toolbarContainer{
+  flex-direction: row-reverse;
+}
 
