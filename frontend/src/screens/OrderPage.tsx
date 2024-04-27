@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import {
+  useDeliverOrdersMutation,
   useGetOrderDetailsQuery,
   useGetPayPalClientIdQuery,
   usePayOrderMutation,
@@ -17,6 +18,9 @@ const OrderPage = () => {
     isLoading,
     error,
   } = useGetOrderDetailsQuery(orderId);
+
+  const [deliverOrders, { isLoading: loadingDeliver }] =
+    useDeliverOrdersMutation();
 
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
@@ -80,6 +84,16 @@ const OrderPage = () => {
       .then((orderId) => {
         return orderId;
       });
+  };
+
+  const deliverOrderHandler = async () => {
+    try {
+      await deliverOrders(orderId);
+      refetch();
+      toast.success("Order delivered");
+    } catch (err) {
+      toast.error(err?.data?.message || err.message);
+    }
   };
 
   return isLoading ? (
@@ -225,7 +239,18 @@ const OrderPage = () => {
                 Total <span className="ml-auto">${order.totalPrice}</span>
               </li>
             </ul>
-
+            {userInfo &&
+              userInfo.isAdmin &&
+              order.isPaid &&
+              !order.isDelivered && (
+                <button
+                  onClick={deliverOrderHandler}
+                  type="button"
+                  className="mt-6 text-md px-6 py-2.5 w-full bg-[#064F48] text-white rounded"
+                >
+                  Delivered
+                </button>
+              )}
             {!order.isPaid && (
               <div>
                 {loadingPay && <h1>loading</h1>}

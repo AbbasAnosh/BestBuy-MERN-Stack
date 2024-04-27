@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { useGetMyOrdersQuery } from "../slices/ordersApiSlice";
 import { FaTimes } from "react-icons/fa";
 
-const OrderForm = () => {
-  const { data: orders, isLoading, error } = useGetMyOrdersQuery({});
+const OrderForm = ({ orders, error, isLoading }) => {
   return (
     <>
       {isLoading ? (

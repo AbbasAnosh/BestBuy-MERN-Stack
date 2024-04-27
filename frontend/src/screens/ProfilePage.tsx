@@ -1,12 +1,15 @@
 import UpdateProfile from "../components/UpdateProfile";
 import OrderForm from "../components/OrderForm";
 import { useState } from "react";
+import { useGetMyOrdersQuery } from "../slices/ordersApiSlice";
 
 type ComponentType = "UpdateProfile" | "OrderForm";
 
 const ProfilePage = () => {
   const [selectedComponent, setSelectedComponent] =
     useState<ComponentType>("UpdateProfile");
+
+  const { data: orders, isLoading, error } = useGetMyOrdersQuery({});
 
   return (
     <div className="min-h-screen bg-[#EEE1D1] mx-auto">
@@ -44,7 +47,13 @@ const ProfilePage = () => {
                   Order Lists
                 </h1>
               )}
-              {selectedComponent === "OrderForm" && <OrderForm />}
+              {selectedComponent === "OrderForm" && (
+                <OrderForm
+                  orders={orders}
+                  isLoading={isLoading}
+                  error={error}
+                />
+              )}
             </div>
           </div>
         </div>

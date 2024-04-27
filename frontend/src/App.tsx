@@ -1,5 +1,3 @@
-import Footer from "./components/Footer";
-import Header from "./components/Header";
 import HomeScreen from "./screens/HomeScreen";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductsScreen from "./screens/ProductsScreen";
@@ -15,35 +13,34 @@ import PlaceOrderPage from "./screens/PlaceOrderPage";
 import OrderPage from "./screens/OrderPage";
 import ProfilePage from "./screens/ProfilePage";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
-import DashboardRoutes from "./dashboard/components/DashboardRoutes";
-import MainLayout from "./components/MainLayout";
-import DashboardHome from "./dashboard/pages/Home";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import OrderList from "./screens/Admin/OrderList";
+import ProductListPage from "./screens/Admin/ProductListPage";
 
 const App = () => {
   return (
     <Router>
-      {/* <Header /> */}
+      <Header />
       <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<HomeScreen />} />
-          <Route path="/product/:id" element={<ProductsScreen />} />
-          <Route path="/cart" element={<CartScreen />} />
-          <Route path="/login" element={<LoginScreen />} />
-          <Route path="/register" element={<RegisterScreen />} />
-          <Route path="" element={<PrivateRoute />}>
-            <Route path="/shipping" element={<ShippingPage />} />
-            <Route path="/payment" element={<PaymentPage />} />
-            <Route path="/placeorder" element={<PlaceOrderPage />} />
-            <Route path="/order/:id" element={<OrderPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-          </Route>
-          <Route path="/dashboard" element={<AdminPrivateRoute />}>
-            <Route index element={<DashboardRoutes />} />
-            <Route path="*" element={<DashboardRoutes />} />
-          </Route>
+        <Route path="/" element={<HomeScreen />} />
+        <Route path="/product/:id" element={<ProductsScreen />} />
+        <Route path="/cart" element={<CartScreen />} />
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/register" element={<RegisterScreen />} />
+        <Route path="" element={<PrivateRoute />}>
+          <Route path="/shipping" element={<ShippingPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/placeorder" element={<PlaceOrderPage />} />
+          <Route path="/order/:id" element={<OrderPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Route>
+        <Route path="" element={<AdminPrivateRoute />}>
+          <Route path="/admin/orderlist" element={<OrderList />} />
+          <Route path="/admin/productlist" element={<ProductListPage />} />
         </Route>
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
       <ToastContainer />
     </Router>
   );
