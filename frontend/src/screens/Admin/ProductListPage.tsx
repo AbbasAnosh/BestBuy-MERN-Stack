@@ -7,23 +7,23 @@ import { toast } from "react-toastify";
 const ProductListPage = () => {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery({});
 
-  const [createProduct, { isLoading: productloading }] =
-    useCreateOrderMutation();
+  // const [createProduct, { isLoading: productloading }] =
+  //   useCreateOrderMutation();
 
   const deleteHandler = (id) => {
     console.log(id);
   };
 
-  const createProductHandler = async () => {
-    if (window.confirm("Are you sure you want to create a new product?")) {
-      try {
-        await createProduct();
-        refetch();
-      } catch (err) {
-        toast.error(err?.data?.message || err.message);
-      }
-    }
-  };
+  // const createProductHandler = async () => {
+  //   if (window.confirm("Are you sure you want to create a new product?")) {
+  //     try {
+  //       await createProduct();
+  //       refetch();
+  //     } catch (err) {
+  //       toast.error(err?.data?.message || err.message);
+  //     }
+  //   }
+  // };
   return (
     <div className="bg-[#EEE1D1]">
       <div className="h-screen max-w-7xl mx-auto p-6">
@@ -33,7 +33,7 @@ const ProductListPage = () => {
           </h2>
           <button
             className="flex items-center gap-1 bg-[#064F48] text-white p-2 rounded-md"
-            onClick={createProductHandler}
+            // onClick={createProductHandler}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -5,6 +5,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: "http://localhost:8000/api/products",
       }),
+      providesTags: ["Product"],
       keepUnusedDataFor: 5,
     }),
     getProductDetails: builder.query({
@@ -20,6 +21,21 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Product"],
     }),
+    updateProduct: builder.mutation({
+      query: (data) => ({
+        url: `http://localhost:8000/api/products/${data.productId}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Product"],
+    }),
+    uploadProductImage: builder.mutation({
+      query: ({ productId, formData }) => ({
+        url: `http://localhost:8000/api/upload/${productId}`,
+        method: "POST",
+        body: formData,
+      }),
+    }),
   }),
 });
 
@@ -27,4 +43,6 @@ export const {
   useGetProductsQuery,
   useGetProductDetailsQuery,
   useCreateProductMutation,
+  useUpdateProductMutation,
+  useUploadProductImageMutation,
 } = productsApiSlice;

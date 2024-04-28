@@ -16,7 +16,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("Please provide at least one order item");
   } else {
-    console.log(req.body, "reqqqqqqqqqqqqqqqqqqqqqqqqq");
     const order = await Order.create({
       orderItems: orderItems?.map((orderItem) => ({
         ...orderItem,
