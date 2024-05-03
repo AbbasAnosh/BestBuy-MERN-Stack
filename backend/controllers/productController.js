@@ -19,26 +19,32 @@ export const getProduct = asyncHandler(async (req, res) => {
 });
 
 export const createProduct = asyncHandler(async (req, res) => {
-  const product = new Product({
-    name: "",
-    price: 0,
-    user: req.user._id,
-    image: "",
-    brand: "",
-    category: "",
-    countInStock: 0,
-    description: "",
-    numReviews: 0,
-  });
+  const { name, price, description, image, brand, category, countInStock } =
+    req.body;
 
-  const createdProduct = await product.save();
-  res.status(201).json(createdProduct);
+  try {
+    const product = new Product({
+      user: req.user._id,
+      name,
+      price,
+      description,
+      image,
+      brand,
+      category,
+      countInStock,
+    });
+
+    await product.save();
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
 export const updateProduct = asyncHandler(async (req, res) => {
   const { name, price, description, image, brand, category, countInStock } =
     req.body;
-  console.log(req, "bodydddddd");
+
   const product = await Product.findById(req.params.id);
   if (product) {
     product.name = name;

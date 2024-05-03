@@ -7,25 +7,32 @@ cloudinaryV2.config({
   api_key: process.env.CLOUD_API_KEY,
   api_secret: process.env.CLOUD_SECRET_KEY,
 });
+export async function handleUpload(file) {
+  const res = await cloudinaryV2.uploader.upload(file, {
+    resource_type: "auto",
+  });
+  return res;
+}
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinaryV2,
   params: {
     folder: "bestbuy",
-    // format: async (req, file) => "png",
+    allowedFormats: ["jpeg", "png", "jpg"],
+    format: async (req, file) => "png",
     public_id: (req, file) => file.fieldname + "-" + Date.now(),
   },
 });
+console.log(storage.cloudinaryV2);
+// const fileFilter = (req, file, cb) => {
+//   const allowedTypes = /jpg|jpeg|png/;
+//   const isAccepted = allowedTypes.test(file.mimetype);
+//   if (isAccepted) {
+//     return cb(null, true);
+//   }
+//   return cb(new Error("Only .jpg, .jpeg, and .png files are allowed"), false);
+// };
 
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpg|jpeg|png/;
-  const isAccepted = allowedTypes.test(file.mimetype);
-  if (isAccepted) {
-    return cb(null, true);
-  }
-  return cb(new Error("Only .jpg, .jpeg, and .png files are allowed"), false);
-};
-
-const upload = multer({ storage, fileFilter });
+const upload = multer({ storage });
 
 export default upload;

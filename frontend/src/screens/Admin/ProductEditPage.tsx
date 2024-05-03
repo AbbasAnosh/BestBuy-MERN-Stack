@@ -56,7 +56,7 @@ const ProductEditPage = () => {
       brand,
       category,
       countInStock,
-    }).unwrap();
+    });
     navigate("/admin/productlist");
   };
 
@@ -79,23 +79,6 @@ const ProductEditPage = () => {
     }
   };
 
-  // const uploadFileHandler = async (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     const formData = new FormData();
-  //     formData.append("image", file);
-
-  //     try {
-  //       const res = await uploadProductImage(formData).unwrap();
-  //       toast.success(res.message);
-  //       setImage(res.image);
-  //     } catch (err) {
-  //       toast.error(err?.data?.message || err.message || "An error occurred");
-  //     }
-  //   } else {
-  //     toast.error("No file selected");
-  //   }
-  // };
   return (
     <div>
       <div className="mb-10 flex font-semibold flex-col max-w-7xl mx-auto">

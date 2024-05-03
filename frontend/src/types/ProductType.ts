@@ -23,3 +23,13 @@ export interface ReactPayPalScriptOptions {
   clientID: string;
   currency: string;
 }
+
+export interface formDataProps {
+  name: string;
+  price: string;
+  image: string;
+  brand: string;
+  category: string;
+  countInStock: string;
+  description: string;
+}

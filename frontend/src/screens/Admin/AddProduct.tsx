@@ -1,43 +1,61 @@
 import React, { useState } from "react";
-import { useCreateProductMutation } from "../../slices/productsApiSlice";
+import {
+  useCreateProductMutation,
+  useUploadAllProductImageMutation,
+} from "../../slices/productsApiSlice";
+import { toast } from "react-toastify";
 
 function ProductForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    price: "",
-    image: "",
-    brand: "",
-    category: "",
-    countInStock: "",
-    description: "",
-    numReviews: "",
-  });
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState(0);
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
+  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
+  const [countInStock, setCountInStock] = useState(0);
 
-  const [createProduct, { isLoading: productLoading }] =
-    useCreateProductMutation();
+  const [createProduct] = useCreateProductMutation();
+  const [uploadAllProductImage] = useUploadAllProductImageMutation();
 
-  const handleChange = (e) => {
-    const { name, type } = e.target;
-    if (type === "file") {
-      const file = e.target.files[0];
-      setFormData({ ...formData, [name]: file });
-    } else {
-      setFormData({ ...formData, [name]: e.target.value });
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const productData = {
+      name,
+      price,
+      description,
+      image,
+      brand,
+      category,
+      countInStock,
+    };
+
+    try {
+      const result = await createProduct(productData).unwrap();
+      console.log("Product creation result:", result);
+      toast.success("Product created successfully");
+    } catch (error) {
+      console.error("Product creation error:", error);
+      toast.error("Product creation failed");
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    Object.keys(formData).forEach((key) => {
-      data.append(key, formData[key]);
-    });
-
-    try {
-      const result = await createProduct(data).unwrap();
-      console.log("Product created:", result);
-    } catch (error) {
-      console.error("Failed to create product:", error);
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file);
+      try {
+        const res = await uploadAllProductImage({ formData }).unwrap();
+        toast.success(res.message);
+        setImage(res.image);
+      } catch (err) {
+        toast.error(
+          err.response?.data?.message || err.message || "An error occurred"
+        );
+      }
+    } else {
+      toast.error("No file selected");
     }
   };
 
@@ -58,8 +76,8 @@ function ProductForm() {
           type="text"
           id="name"
           name="name"
-          value={formData.name}
-          onChange={handleChange}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           required
         />
@@ -75,27 +93,45 @@ function ProductForm() {
           type="number"
           id="price"
           name="price"
-          value={formData.price}
-          onChange={handleChange}
+          value={price}
+          onChange={(e) => setPrice(Number(e.target.value))}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           required
         />
       </div>
       <div className="mb-4">
-        <label
-          htmlFor="image"
-          className="block text-gray-700 text-sm font-bold mb-2"
-        >
-          Image
-        </label>
-        <input
-          type="file"
-          id="image"
-          name="image"
-          onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          accept="image/*"
-        />
+        <div className="mb-4">
+          <label
+            htmlFor="imageUrl"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Image URL
+          </label>
+          <input
+            type="text"
+            id="imageUrl"
+            name="image"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="imageFile"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Choose File
+          </label>
+          <input
+            type="file"
+            id="imageFile"
+            name="imageFile"
+            onChange={uploadFileHandler}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            //   accept="image/*"
+          />
+        </div>
       </div>
       <div className="mb-4">
         <label
@@ -108,8 +144,8 @@ function ProductForm() {
           type="text"
           id="brand"
           name="brand"
-          value={formData.brand}
-          onChange={handleChange}
+          value={brand}
+          onChange={(e) => setBrand(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
@@ -124,8 +160,8 @@ function ProductForm() {
           type="text"
           id="category"
           name="category"
-          value={formData.category}
-          onChange={handleChange}
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
@@ -140,8 +176,8 @@ function ProductForm() {
           type="number"
           id="countInStock"
           name="countInStock"
-          value={formData.countInStock}
-          onChange={handleChange}
+          value={countInStock}
+          onChange={(e) => setCountInStock(Number(e.target.value))}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
@@ -155,28 +191,13 @@ function ProductForm() {
         <textarea
           id="description"
           name="description"
-          value={formData.description}
-          onChange={handleChange}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          rows="3"
+          rows={3}
         ></textarea>
       </div>
-      <div className="mb-4">
-        <label
-          htmlFor="numReviews"
-          className="block text-gray-700 text-sm font-bold mb-2"
-        >
-          Number of Reviews
-        </label>
-        <input
-          type="number"
-          id="numReviews"
-          name="numReviews"
-          value={formData.numReviews}
-          onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
-      </div>
+
       <button
         type="submit"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
