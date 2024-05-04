@@ -5,6 +5,8 @@ import {
   getProduct,
   createProduct,
   updateProduct,
+  deleteProduct,
+  createProductReview,
 } from "../controllers/productController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 import upload from "../utils/storage.js";
@@ -15,6 +17,8 @@ router
 router
   .route("/:id")
   .get(getProduct)
-  .put(protect, admin, upload.single("file"), updateProduct);
+  .put(protect, admin, upload.single("file"), updateProduct)
+  .delete(protect, admin, deleteProduct);
+router.route("/:id/reviews").post(protect, createProductReview);
 
 export default router;

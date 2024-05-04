@@ -1,29 +1,26 @@
-import React from "react";
-import { useGetProductsQuery } from "../../slices/productsApiSlice";
-import { Link } from "react-router-dom";
-import { useCreateOrderMutation } from "../../slices/ordersApiSlice";
 import { toast } from "react-toastify";
+import {
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from "../../slices/productsApiSlice";
+import { Link } from "react-router-dom";
 
 const ProductListPage = () => {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery({});
+  const [deleteProduct] = useDeleteProductMutation();
 
-  // const [createProduct, { isLoading: productloading }] =
-  //   useCreateOrderMutation();
-
-  const deleteHandler = (id) => {
-    console.log(id);
+  const deleteHandler = async (id: string) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      try {
+        await deleteProduct(id);
+        toast.success("Product deleted successfully");
+        refetch();
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
   };
 
-  // const createProductHandler = async () => {
-  //   if (window.confirm("Are you sure you want to create a new product?")) {
-  //     try {
-  //       await createProduct();
-  //       refetch();
-  //     } catch (err) {
-  //       toast.error(err?.data?.message || err.message);
-  //     }
-  //   }
-  // };
   return (
     <div className="bg-[#EEE1D1]">
       <div className="h-screen max-w-7xl mx-auto p-6">
@@ -31,10 +28,7 @@ const ProductListPage = () => {
           <h2 className="text-2xl font-extrabold text-[#064F48] inline-block">
             Products
           </h2>
-          <button
-            className="flex items-center gap-1 bg-[#064F48] text-white p-2 rounded-md"
-            // onClick={createProductHandler}
-          >
+          <button className="flex items-center gap-1 bg-[#064F48] text-white p-2 rounded-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-4 fill-white"

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useGetOrderDetailsQuery } from "../../slices/ordersApiSlice";
 import {
   useGetProductDetailsQuery,
   useUpdateProductMutation,
@@ -18,18 +17,12 @@ const ProductEditPage = () => {
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
 
-  const {
-    data: Product,
-    isLoading,
-    error,
-    refetch,
-  } = useGetProductDetailsQuery(productId);
+  const { data: Product, error } = useGetProductDetailsQuery(productId);
 
   const [updateProduct, { isLoading: updateLoading }] =
     useUpdateProductMutation();
 
-  const [uploadProductImage, { isLoading: uploadLoading }] =
-    useUploadProductImageMutation();
+  const [uploadProductImage] = useUploadProductImageMutation();
 
   const navigate = useNavigate();
 

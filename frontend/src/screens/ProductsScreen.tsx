@@ -1,19 +1,26 @@
-// import { useEffect, useState } from "react";
-// import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 import Rating from "../components/Rating";
 import { IoChevronForward } from "react-icons/io5";
 
-import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
+import {
+  useCreateReviewMutation,
+  useGetProductDetailsQuery,
+} from "../slices/productsApiSlice";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../slices/cartSlice";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const ProductsScreen = () => {
   const { id: productId } = useParams<{ id: string }>();
   const [qty, setQty] = useState(1);
-  console.log(qty, "quantity");
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+
+  const [selectedButton, setSelectedButton] = useState("Description");
+  const [active, setActive] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,7 +28,11 @@ const ProductsScreen = () => {
     data: Product,
     isLoading,
     error,
+    refetch,
   } = useGetProductDetailsQuery(productId);
+
+  const [createReview] = useCreateReviewMutation();
+  const { userInfo } = useSelector((state) => state.auth);
 
   const isError: any = error;
 
@@ -30,17 +41,22 @@ const ProductsScreen = () => {
     navigate("/cart");
   };
 
-  // const [Product, setProduct] = useState<ProductProps | null>(null);
-  // useEffect(() => {
-  //   const fetchedProduct = async () => {
-  //     const { data } = await axios.get(
-  //       `http://localhost:8000/api/products/${ProductId}`
-  //     );
-
-  //     setProduct(data);
-  //   };
-  //   fetchedProduct();
-  // }, [ProductId]);
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await createReview({
+        productId,
+        rating,
+        comment,
+      }).unwrap();
+      refetch();
+      toast.success("Review Submitted");
+      setRating(0);
+      setComment("");
+    } catch (err) {
+      toast.error(err.data.message || err.error);
+    }
+  };
 
   return (
     <div className="bg-[#EEE1D1]">
@@ -59,7 +75,7 @@ const ProductsScreen = () => {
         ) : (
           <>
             <div className="grid items-start grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="w-full lg:sticky top-0 sm:flex gap-2">
+              <div className="w-full  top-0 sm:flex gap-2">
                 {/* <div className="sm:space-y-3 w-16 max-sm:flex max-sm:mb-4 max-sm:gap-4">
                   <img
                     src="https://readymadeui.com/images/product1.webp"
@@ -142,100 +158,165 @@ const ProductsScreen = () => {
                     Add to cart
                   </button>
                 </div>
-                <div className="mt-8">
-                  <h3 className="text-lg font-bold text-[#0B514B]">
-                    About the item
-                  </h3>
-                  <div className="space-y-3 mt-4 text-sm text-[#514C49]">
-                    {Product?.description}
-                  </div>
-                </div>
-                {/* <div className="mt-8 max-w-md">
-              <h3 className="text-lg font-bold text-[#0B514B]">Reviews(10)</h3>
-              <div className="space-y-3 mt-4">
-                <div className="flex items-center">
-                  <p className="text-sm text-gray-800 font-bold">5.0</p>
-                  <svg
-                    className="w-5 fill-gray-800 ml-1"
-                    viewBox="0 0 14 13"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <div className="bg-gray-300 rounded w-full h-2 ml-3">
-                    <div className="w-2/3 h-full rounded bg-gray-800"></div>
-                  </div>
-                  <p className="text-sm text-gray-800 font-bold ml-3">66%</p>
-                </div>
-                <div className="flex items-center">
-                  <p className="text-sm text-gray-800 font-bold">4.0</p>
-                  <svg
-                    className="w-5 fill-gray-800 ml-1"
-                    viewBox="0 0 14 13"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <div className="bg-gray-300 rounded w-full h-2 ml-3">
-                    <div className="w-1/3 h-full rounded bg-gray-800"></div>
-                  </div>
-                  <p className="text-sm text-gray-800 font-bold ml-3">33%</p>
-                </div>
-                <div className="flex items-center">
-                  <p className="text-sm text-gray-800 font-bold">3.0</p>
-                  <svg
-                    className="w-5 fill-gray-800 ml-1"
-                    viewBox="0 0 14 13"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <div className="bg-gray-300 rounded w-full h-2 ml-3">
-                    <div className="w-1/6 h-full rounded bg-gray-800"></div>
-                  </div>
-                  <p className="text-sm text-gray-800 font-bold ml-3">16%</p>
-                </div>
-                <div className="flex items-center">
-                  <p className="text-sm text-gray-800 font-bold">2.0</p>
-                  <svg
-                    className="w-5 fill-gray-800 ml-1"
-                    viewBox="0 0 14 13"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <div className="bg-gray-300 rounded w-full h-2 ml-3">
-                    <div className="w-1/12 h-full rounded bg-gray-800"></div>
-                  </div>
-                  <p className="text-sm text-gray-800 font-bold ml-3">8%</p>
-                </div>
-                <div className="flex items-center">
-                  <p className="text-sm text-gray-800 font-bold">1.0</p>
-                  <svg
-                    className="w-5 fill-gray-800 ml-1"
-                    viewBox="0 0 14 13"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <div className="bg-gray-300 rounded w-full h-2 ml-3">
-                    <div className="w-[6%] h-full rounded bg-gray-800"></div>
-                  </div>
-                  <p className="text-sm text-gray-800 font-bold ml-3">6%</p>
-                </div>
               </div>
-              <button
-                type="button"
-                className="w-full mt-8 px-4 py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
-              >
-                Read all reviews
-              </button>
-            </div> */}
+            </div>
+            <div className="mt-10 max-w-7xl">
+              <ul className="flex border-b pb-1 border-[#0B514B] gap-1">
+                <li
+                  onClick={() => {
+                    setSelectedButton("Description");
+                    setActive(!active);
+                  }}
+                  className={`${
+                    active
+                      ? "text-[#0B514B] font-bold text-sm hover:bg-gray-100 py-3 px-8 border-2 border-[#E56A40] rounded-md cursor-pointer transition-all"
+                      : "text-white font-bold text-sm bg-[#0B514B] py-3 px-8 border-b-2 border-[#E56A40] cursor-pointer transition-all rounded-md"
+                  }`}
+                >
+                  Description
+                </li>
+                <li
+                  onClick={() => {
+                    setSelectedButton("Reviews");
+                    setActive(!active);
+                  }}
+                  className={`${
+                    active
+                      ? "text-white font-bold text-sm bg-[#0B514B] py-3 px-8 border-b-2 border-[#E56A40] cursor-pointer transition-all rounded-md"
+                      : "text-[#0B514B] font-bold text-sm hover:bg-gray-100 py-3 px-8 border-2 border-[#E56A40] rounded-md cursor-pointer transition-all"
+                  }`}
+                >
+                  Reviews
+                </li>
+              </ul>
+              <div className="mt-8">
+                {selectedButton === "Description" && (
+                  <>
+                    <h3 className="text-lg font-bold text-[#0B514B]">
+                      Product Description
+                    </h3>
+                    <p className="text-sm text-gray-700 mt-4">
+                      {Product?.description}
+                    </p>
+                  </>
+                )}
+
+                {selectedButton === "Reviews" && (
+                  <>
+                    <h3 className="text-lg font-bold text-[#0B514B]">
+                      Product Reviews
+                    </h3>
+                    <div className="mt-8 ">
+                      {Product.reviews.length === 0 && <h1>No Reviews</h1>}
+
+                      <div className="mb-16 gap-6 flex flex-col lg:flex-row lg:justify-between">
+                        <div className="flex-1 flex-col gap-3">
+                          {/* <h2 className="text-md font-bold text-[#0B514B]">
+                            Write a Customer review
+                          </h2> */}
+                          {userInfo ? (
+                            <div>
+                              <form
+                                onSubmit={submitHandler}
+                                className="relative mb-10 flex flex-col gap-5"
+                              >
+                                <div className="mb-10">
+                                  <select
+                                    value={rating}
+                                    onChange={(e) =>
+                                      setRating(Number(e.target.value))
+                                    }
+                                    className="absolute bg-white py-2 min-w-full w-max divide-y border-[#0B514B] rounded-md outline-[#E56A40]"
+                                  >
+                                    <option className="py-3 px-6 hover:bg-gray-100 text-black text-sm cursor-pointer">
+                                      Review options
+                                    </option>
+                                    <option
+                                      value="1"
+                                      className="py-3 px-6 hover:bg-gray-100 text-black text-sm cursor-pointer"
+                                    >
+                                      1 - Poor
+                                    </option>
+                                    <option
+                                      value="2"
+                                      className="py-3 px-6 hover:bg-gray-100 text-black text-sm cursor-pointer"
+                                    >
+                                      2 - Fair
+                                    </option>
+                                    <option
+                                      value="3"
+                                      className="py-3 px-6 hover:bg-gray-100 text-black text-sm cursor-pointer"
+                                    >
+                                      3 - Good
+                                    </option>
+                                    <option
+                                      value="4"
+                                      className="py-3 px-6 hover:bg-gray-100 text-black text-sm cursor-pointer"
+                                    >
+                                      4 - Very Good
+                                    </option>
+                                    <option
+                                      value="5"
+                                      className="py-3 px-6 hover:bg-gray-100 text-black text-sm cursor-pointer"
+                                    >
+                                      5 - Excellent
+                                    </option>
+                                  </select>
+                                </div>
+                                <textarea
+                                  placeholder="Leave a comment"
+                                  className="p-4  bg-white w-full block text-sm border
+                                       border-[#0B514B] focus:outline-0 focus:ring-0 rounded"
+                                  rows={4}
+                                  value={comment}
+                                  onChange={(e) => setComment(e.target.value)}
+                                ></textarea>
+                                <button
+                                  type="submit"
+                                  className="px-8 py-2.5 rounded text-sm font-semibold bg-[#064F48] text-white hover:bg-[#D76A40]"
+                                >
+                                  Submit
+                                </button>
+                              </form>
+                            </div>
+                          ) : (
+                            <>
+                              <h1 className="text-lg font-semibold">
+                                Please{" "}
+                                <Link
+                                  to="/login"
+                                  className="underline underline-[#064F48] hover:text-[#E56A40] "
+                                >
+                                  sign in
+                                </Link>{" "}
+                                to write a review
+                              </h1>
+                            </>
+                          )}
+                        </div>
+                        <div className="flex-1">
+                          {Product.reviews.map((review) => (
+                            <div
+                              key={review._id}
+                              className="flex flex-col gap-2"
+                            >
+                              <h1 className="bg-white p-2 rounded-md text-md font-normals">
+                                {review.name}
+                              </h1>
+                              <Rating value={review.rating} />
+                              <p className="bg-white p-2 rounded-md text-md font-normal">
+                                {review.createdAt.substring(0, 10)}
+                              </p>
+                              <p className="bg-white p-2 rounded-md text-md font-normal">
+                                {review.comment}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </>

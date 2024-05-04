@@ -20,11 +20,15 @@ import ProductListPage from "./screens/Admin/ProductListPage";
 import Dashboard from "./screens/Dashboard";
 import ProductForm from "./screens/Admin/AddProduct";
 import ProductEditPage from "./screens/Admin/ProductEditPage";
+import UserList from "./screens/Admin/UserList";
+import UserEdite from "./screens/Admin/UserEdite";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <Router>
-      <Header />
+      {/* <Header /> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/product/:id" element={<ProductsScreen />} />
@@ -44,6 +48,8 @@ const App = () => {
           <Route path="/admin/productlist" element={<ProductListPage />} />
           <Route path="/admin/addproduct" element={<ProductForm />} />
           <Route path="/admin/product/:id/edit" element={<ProductEditPage />} />
+          <Route path="/admin/userlist" element={<UserList />} />
+          <Route path="/admin/user/:id/edit" element={<UserEdite />} />
         </Route>
       </Routes>
       <Footer />

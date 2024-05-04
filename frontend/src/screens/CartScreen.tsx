@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { IoChevronForward } from "react-icons/io5";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
-import { updateCart } from "../utils/cartUtils";
 
 const CartScreen = () => {
   const navigate = useNavigate();

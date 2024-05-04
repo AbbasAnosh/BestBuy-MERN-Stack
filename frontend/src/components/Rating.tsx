@@ -2,10 +2,10 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 export type RatingProps = {
   value: number;
-  reviews: number;
+  review: number;
 };
 
-const Rating = ({ value, reviews }: RatingProps) => {
+const Rating = ({ value, review }: RatingProps) => {
   return (
     <div className="flex items-center mt-4 justify-between ">
       <div className="flex space-x-2 text-[#FDCA44]">
@@ -56,7 +56,7 @@ const Rating = ({ value, reviews }: RatingProps) => {
         </span>
       </div>
       <p className="text-[#075049] text-sm text-nowrap">
-        {reviews} <span className="text-[#E56A40]">reviews</span>
+        {review} <span className="text-[#E56A40]">reviews</span>
       </p>
     </div>
   );
