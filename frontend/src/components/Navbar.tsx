@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../slices/usersApiSlice";
 import { logout } from "../slices/authSlice";
-import { FaUser } from "react-icons/fa";
-import { AiOutlineLogout } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 
@@ -13,7 +11,6 @@ const Navbar = () => {
   const { cartItems } = useSelector((state: any) => state.cart);
   const { userInfo } = useSelector((state: any) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [mobile, setMobile] = useState(false);
@@ -26,15 +23,6 @@ const Navbar = () => {
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
-  const handleOptionClick = (option: any) => {
-    setIsOpen(false);
-    if (option.href === "/logout") {
-      handleLogout();
-    }
-    if (option.href === "/profile") {
-      navigate("/profile");
-    }
-  };
 
   const [logoutApiCall]: any = useLogoutMutation();
   const handleLogout = async () => {
@@ -46,18 +34,7 @@ const Navbar = () => {
       console.log(error);
     }
   };
-  const options = [
-    {
-      label: "View profile",
-      href: "/profile",
-      icon: <FaUser />,
-    },
-    {
-      label: "Logout",
-      href: "/logout",
-      icon: <AiOutlineLogout />,
-    },
-  ];
+
   return (
     <div className=" bg-[#064F48]">
       <header className="flex shadow-lg py-4 px-4 sm:px-10 max-w-7xl mx-auto   min-h-[70px] tracking-wide relative z-50 items-center justify-between">
@@ -95,7 +72,10 @@ const Navbar = () => {
               About
             </li>
             <li className="relative px-1 after:absolute after:bg-pink-500 after:w-0 hover:after:w-full hover:after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300">
-              <div className="flex flex-col justify-center items-center cursor-pointer relative">
+              <Link
+                to="/cart"
+                className="flex flex-col justify-center items-center cursor-pointer relative"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18px"
@@ -109,7 +89,6 @@ const Navbar = () => {
                     data-original="#000000"
                   />
                 </svg>
-                {/* <span className="text-xs font-semibold mt-1 text-white">Bag</span> */}
                 {cartItems.length > 0 && (
                   <span className="absolute left-3 -top-2 rounded-full bg-red-500 px-1 py-0 text-xs text-white">
                     {cartItems.reduce(
@@ -118,68 +97,96 @@ const Navbar = () => {
                     )}
                   </span>
                 )}
-              </div>
+              </Link>
             </li>
           </ul>
         </div>
 
         <div className="flex items-center">
-          <ul className="hidden lg:flex space-x-4">
-            <li className="relative px-1 after:absolute after:bg-pink-500 after:w-full after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300">
-              <div
-                className="flex flex-col justify-center items-center cursor-pointer"
-                onClick={handleToggle}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18px"
-                  height="18px"
-                  viewBox="0 0 512 512"
-                  fill="#ffffff"
+          <ul className="hidden md:flex space-x-4">
+            {userInfo ? (
+              <li className="relative px-1 after:absolute after:bg-pink-500 after:w-full after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300">
+                <div
+                  className="flex flex-col justify-center items-center cursor-pointer"
+                  onClick={handleToggle}
                 >
-                  <path
-                    d="M337.711 241.3a16 16 0 0 0-11.461 3.988c-18.739 16.561-43.688 25.682-70.25 25.682s-51.511-9.121-70.25-25.683a16.007 16.007 0 0 0-11.461-3.988c-78.926 4.274-140.752 63.672-140.752 135.224v107.152C33.537 499.293 46.9 512 63.332 512h385.336c16.429 0 29.8-12.707 29.8-28.325V376.523c-.005-71.552-61.831-130.95-140.757-135.223zM446.463 480H65.537V376.523c0-52.739 45.359-96.888 104.351-102.8C193.75 292.63 224.055 302.97 256 302.97s62.25-10.34 86.112-29.245c58.992 5.91 104.351 50.059 104.351 102.8zM256 234.375a117.188 117.188 0 1 0-117.188-117.187A117.32 117.32 0 0 0 256 234.375zM256 32a85.188 85.188 0 1 1-85.188 85.188A85.284 85.284 0 0 1 256 32z"
-                    data-original="#000000"
-                  />
-                </svg>
-                <span className="text-xs font-semibold mt-1 text-white">
-                  Profile
-                </span>
-              </div>
-              {isOpen && (
-                <div className="bg-white z-20 shadow-lg py-6 px-6 sm:min-w-[320px] max-sm:min-w-[250px] max-sm:-right-32 absolute right-0 top-14">
-                  <h6 className="font-semibold text-sm">Welcome</h6>
-                  <p className="text-sm text-gray-500 mt-1">
-                    To access account and manage orders
-                  </p>
-                  <button
-                    type="button"
-                    className="bg-transparent border border-gray-300 hover:border-pink-500 px-4 py-2 mt-4 text-sm text-pink-500 font-semibold"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18px"
+                    height="18px"
+                    viewBox="0 0 512 512"
+                    fill="#ffffff"
                   >
-                    LOGIN / SIGNUP
-                  </button>
-                  <hr className="border-b-0 my-4" />
-                  <ul className="space-y-1.5">
-                    <li>
-                      <a
-                        href="javascript:void(0)"
-                        className="text-sm text-gray-500 hover:text-pink-500"
-                      >
-                        Order
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="javascript:void(0)"
-                        className="text-sm text-gray-500 hover:text-pink-500"
-                      >
-                        Wishlist
-                      </a>
-                    </li>
-                  </ul>
+                    <path
+                      d="M337.711 241.3a16 16 0 0 0-11.461 3.988c-18.739 16.561-43.688 25.682-70.25 25.682s-51.511-9.121-70.25-25.683a16.007 16.007 0 0 0-11.461-3.988c-78.926 4.274-140.752 63.672-140.752 135.224v107.152C33.537 499.293 46.9 512 63.332 512h385.336c16.429 0 29.8-12.707 29.8-28.325V376.523c-.005-71.552-61.831-130.95-140.757-135.223zM446.463 480H65.537V376.523c0-52.739 45.359-96.888 104.351-102.8C193.75 292.63 224.055 302.97 256 302.97s62.25-10.34 86.112-29.245c58.992 5.91 104.351 50.059 104.351 102.8zM256 234.375a117.188 117.188 0 1 0-117.188-117.187A117.32 117.32 0 0 0 256 234.375zM256 32a85.188 85.188 0 1 1-85.188 85.188A85.284 85.284 0 0 1 256 32z"
+                      data-original="#000000"
+                    />
+                  </svg>
+                  <span className="text-xs font-semibold mt-1 text-white">
+                    {userInfo.name}
+                  </span>
                 </div>
-              )}
-            </li>
+                {isOpen && (
+                  <div className="bg-white z-20 shadow-lg py-6 px-6 sm:min-w-[320px] max-sm:min-w-[250px] max-sm:-right-32 absolute right-0 top-14">
+                    <h6 className="font-semibold text-sm">Welcome</h6>
+                    <p className="text-sm text-gray-500 mt-1">
+                      To access account and manage orders
+                    </p>
+
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="bg-transparent border border-gray-300 hover:border-[#064F48] px-4 py-2 mt-4 text-sm text-[#064F48] font-semibold"
+                    >
+                      LOGOUT
+                    </button>
+                    <hr className="border-b-0 my-4" />
+                    <ul className="space-y-1.5">
+                      <li>
+                        <Link
+                          to="/profile"
+                          className="text-sm text-gray-500 hover:text-[#064F48]"
+                        >
+                          Profile
+                        </Link>
+                      </li>
+                      {/* <li>
+                        <Link
+                          to="/order"
+                          className="text-sm text-gray-500 hover:text-pink-500"
+                        >
+                          Order
+                        </Link>
+                      </li> */}
+                    </ul>
+                  </div>
+                )}
+              </li>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="flex flex-col justify-center items-center cursor-pointer"
+                  onClick={handleToggle}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18px"
+                    height="18px"
+                    viewBox="0 0 512 512"
+                    fill="#ffffff"
+                  >
+                    <path
+                      d="M337.711 241.3a16 16 0 0 0-11.461 3.988c-18.739 16.561-43.688 25.682-70.25 25.682s-51.511-9.121-70.25-25.683a16.007 16.007 0 0 0-11.461-3.988c-78.926 4.274-140.752 63.672-140.752 135.224v107.152C33.537 499.293 46.9 512 63.332 512h385.336c16.429 0 29.8-12.707 29.8-28.325V376.523c-.005-71.552-61.831-130.95-140.757-135.223zM446.463 480H65.537V376.523c0-52.739 45.359-96.888 104.351-102.8C193.75 292.63 224.055 302.97 256 302.97s62.25-10.34 86.112-29.245c58.992 5.91 104.351 50.059 104.351 102.8zM256 234.375a117.188 117.188 0 1 0-117.188-117.187A117.32 117.32 0 0 0 256 234.375zM256 32a85.188 85.188 0 1 1-85.188 85.188A85.284 85.284 0 0 1 256 32z"
+                      data-original="#000000"
+                    />
+                  </svg>
+                  <span className="text-xs font-semibold mt-1 text-white">
+                    Profile
+                  </span>
+                </Link>
+              </>
+            )}
             <li className="relative px-1 after:absolute after:bg-pink-500 after:w-0 hover:after:w-full hover:after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300">
               <div className="flex flex-col justify-center items-center cursor-pointer">
                 <svg
@@ -200,7 +207,10 @@ const Navbar = () => {
               </div>
             </li>
             <li className="relative px-1 after:absolute after:bg-pink-500 after:w-0 hover:after:w-full hover:after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300">
-              <div className="flex flex-col justify-center items-center cursor-pointer relative">
+              <Link
+                to="/cart"
+                className="flex flex-col justify-center items-center cursor-pointer relative"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18px"
@@ -224,11 +234,11 @@ const Navbar = () => {
                     )}
                   </span>
                 )}
-              </div>
+              </Link>
             </li>
           </ul>
 
-          <ul className="flex lg:hidden space-x-4">
+          <ul className="flex md:hidden space-x-4">
             <li className="hidden md:relative px-1 after:absolute after:bg-pink-500 after:w-full after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300">
               <div
                 className="flex flex-col justify-center items-center cursor-pointer"
@@ -265,12 +275,12 @@ const Navbar = () => {
                   <hr className="border-b-0 my-4" />
                   <ul className="space-y-1.5">
                     <li>
-                      <a
-                        href="javascript:void(0)"
+                      <Link
+                        to=""
                         className="text-sm text-gray-500 hover:text-pink-500"
                       >
                         Order
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -296,7 +306,10 @@ const Navbar = () => {
               </div>
             </li>
             <li className="hidden md:relative px-1 after:absolute after:bg-pink-500 after:w-0 hover:after:w-full hover:after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300">
-              <div className="flex flex-col justify-center items-center cursor-pointer relative">
+              <Link
+                to="/cart"
+                className="flex flex-col justify-center items-center cursor-pointer relative"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18px"
@@ -320,9 +333,9 @@ const Navbar = () => {
                     )}
                   </span>
                 )}
-              </div>
+              </Link>
             </li>
-            <li className="relative">
+            <li className="relative]">
               <button id="toggleOpen" className="" onClick={handleMobile}>
                 {!mobile ? (
                   <GiHamburgerMenu className="text-xl text-white" />
@@ -331,50 +344,55 @@ const Navbar = () => {
                 )}
               </button>
               {mobile && (
-                <div className="bg-white z-20 shadow-lg py-6 px-6 sm:min-w-[320px] max-sm:min-w-[250px] absolute right-0 top-14">
-                  <button
-                    type="button"
-                    className="bg-transparent border border-gray-300 hover:border-pink-500 px-4 py-2 mt-4 text-sm text-pink-500 font-semibold"
-                  >
-                    LOGIN / SIGNUP
-                  </button>
-                  <hr className="border-b-0 my-4" />
-
+                <div className="bg-white h-[80vh] z-20 shadow-lg py-6 px-6 sm:min-w-[320px] max-sm:min-w-[250px] absolute right-0 top-[70px]">
                   <ul className="space-y-1.5">
-                    <li onClick={() => setDropdownOpen(!dropdownOpen)}>
-                      <a
-                        href="javascript:void(0)"
-                        className="text-sm text-gray-500 hover:text-pink-500"
-                      >
-                        Gift Cards
-                      </a>
-                      {dropdownOpen && (
+                    {userInfo ? (
+                      <ul>
+                        <li>
+                          <button
+                            onClick={handleLogout}
+                            type="button"
+                            className="bg-transparent border border-[#064F48] hover:border-[#064F48] px-4 py-2 mt-4 text-sm text-[#064F48] font-semibold"
+                          >
+                            LOGOUT
+                          </button>
+                        </li>
+                        <hr className="border-b-1 border-[#064F48] my-4" />
+                        <li onClick={() => setDropdownOpen(!dropdownOpen)}>
+                          <Link
+                            to="/profile"
+                            className="text-sm text-gray-500 hover:text-[#064F48]"
+                          >
+                            {userInfo.name}
+                          </Link>
+                          {/* {dropdownOpen && (
                         <div>
                           <h1>hello</h1>
                           <h1>hello</h1>
                           <h1>hello</h1>
                           <h1>hello</h1>
                         </div>
-                      )}
-                    </li>
+                      )} */}
+                        </li>
+                      </ul>
+                    ) : (
+                      <li>
+                        <button
+                          type="button"
+                          className="bg-transparent border border-gray-300 hover:border-[#064F48] px-4 py-2 mt-4 text-sm text-[#064F48] font-semibold"
+                        >
+                          LOGIN / SIGNUP
+                        </button>
+                      </li>
+                    )}
+                    <hr className="border-b-0 my-4" />
                     <li>
-                      <a
-                        href="javascript:void(0)"
-                        className="text-sm text-gray-500 hover:text-pink-500"
+                      <Link
+                        to=""
+                        className="text-sm text-gray-500 hover:text-[#064F48]"
                       >
                         Contact Us
-                      </a>
-                    </li>
-                  </ul>
-                  <hr className="border-b-0 my-4" />
-                  <ul className="space-y-1.5">
-                    <li>
-                      <a
-                        href="javascript:void(0)"
-                        className="text-sm text-gray-500 hover:text-pink-500"
-                      >
-                        Coupons
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
