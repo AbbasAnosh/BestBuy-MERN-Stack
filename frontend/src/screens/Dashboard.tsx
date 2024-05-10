@@ -1,12 +1,6 @@
 import OverviewIcon from "../../public/icons/overview.svg";
 import ShoppingBagIcon from "../../public/icons/shopping-bag.svg";
 import GraphIcon from "../../public/icons/graph.svg";
-import WalletIcon from "../../public/icons/wallet.svg";
-import FileIcon from "../../public/icons/file.svg";
-import ChatIcon from "../../public/icons/chat.svg";
-import GroupChatIcon from "../../public/icons/group-chat.svg";
-import SettingsIcon from "../../public/icons/settings.svg";
-import LogoutIcon from "../../public/icons/logout.svg";
 import User from "../../public/icons/user.svg";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 
@@ -20,15 +14,8 @@ import { useGetUsersQuery } from "../slices/usersApiSlice";
 const sidebar = [
   { name: "Products", icon: ShoppingBagIcon },
   { name: "Orders", icon: OverviewIcon },
-  { name: "Analytics", icon: GraphIcon },
   { name: "Users", icon: User },
-  // { name: "Payout", icon: WalletIcon },
-  // { name: "Statements", icon: FileIcon },
-
-  // { name: "Help", icon: ChatIcon },
-  // { name: "Community", icon: GroupChatIcon },
-  // { name: "Settings", icon: SettingsIcon },
-  // { name: "Logout", icon: LogoutIcon },
+  { name: "Analytics", icon: GraphIcon },
 ];
 
 const Dashboard = () => {

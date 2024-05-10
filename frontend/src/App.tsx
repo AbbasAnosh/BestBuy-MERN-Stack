@@ -23,6 +23,7 @@ import ProductEditPage from "./screens/Admin/ProductEditPage";
 import UserList from "./screens/Admin/UserList";
 import UserEdite from "./screens/Admin/UserEdite";
 import Navbar from "./components/Navbar";
+import Homepage from "./screens/Homepage";
 
 const App = () => {
   return (
@@ -30,7 +31,8 @@ const App = () => {
       {/* <Header /> */}
       <Navbar />
       <Routes>
-        <Route path="/" element={<HomeScreen />} />
+        <Route path="/" element={<Homepage />} />
+        <Route path="/home" element={<HomeScreen />} />
         <Route path="/product/:id" element={<ProductsScreen />} />
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/login" element={<LoginScreen />} />
