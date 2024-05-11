@@ -40,9 +40,12 @@ const Navbar = () => {
       <header className="flex shadow-lg py-4 px-4 sm:px-10 max-w-7xl mx-auto   min-h-[70px] tracking-wide relative z-50 items-center justify-between">
         <div className="hidden md:flex items-center ">
           <ul className="cursor-pointer flex gap-4 text-white">
-            <li className="relative font-semibold px-1 after:absolute after:bg-pink-500 after:w-0 hover:after:w-full hover:after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300">
+            <Link
+              to="/shop"
+              className="relative font-semibold px-1 after:absolute after:bg-pink-500 after:w-0 hover:after:w-full hover:after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300"
+            >
               Product
-            </li>
+            </Link>
             <li className="relative px-1 font-semibold after:absolute after:bg-pink-500 after:w-0 hover:after:w-full hover:after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300">
               About
             </li>

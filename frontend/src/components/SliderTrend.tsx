@@ -22,7 +22,7 @@ const SampleNextArrow: React.FC<ArrowProps> = ({
       style={{
         ...style,
         display: "block",
-        background: "purple",
+        background: "#064F48",
         color: "white",
         borderRadius: "50%",
         width: "40px",
@@ -31,6 +31,7 @@ const SampleNextArrow: React.FC<ArrowProps> = ({
         cursor: "pointer",
         fontSize: "24px",
         lineHeight: "40px",
+        right: "20px",
       }}
       onClick={onClick}
     ></div>
@@ -48,7 +49,7 @@ const SamplePrevArrow: React.FC<ArrowProps> = ({
       style={{
         ...style,
         display: "block",
-        background: "purple",
+        background: "#064F48",
         color: "white",
         borderRadius: "50%",
         width: "40px",
@@ -58,6 +59,7 @@ const SamplePrevArrow: React.FC<ArrowProps> = ({
         cursor: "pointer",
         fontSize: "24px",
         lineHeight: "40px",
+        left: "-10px",
       }}
       onClick={onClick}
     ></div>
@@ -128,8 +130,10 @@ const SliderTrend: React.FC = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
@@ -160,7 +164,7 @@ const SliderTrend: React.FC = () => {
   };
 
   return (
-    <div className="slider-container max-w-[95vw] h-[50vh] mx-auto">
+    <div className="max-w-[90vw] h-[50vh] mx-auto lg:pl-[45px]">
       <Slider {...settings}>
         {data.map((item) => (
           <div
