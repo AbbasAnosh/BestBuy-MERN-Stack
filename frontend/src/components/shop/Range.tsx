@@ -8,7 +8,7 @@ const Range = () => {
   };
 
   return (
-    <div className="bg-slate-400 p-8 space-y-6 rounded-sm ">
+    <div className="space-y-6 py-8 ">
       <div>
         <p className="text-lg font-sm border-b-2 pb-4">Price Range</p>
       </div>

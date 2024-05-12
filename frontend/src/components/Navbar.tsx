@@ -44,7 +44,7 @@ const Navbar = () => {
               to="/shop"
               className="relative font-semibold px-1 after:absolute after:bg-pink-500 after:w-0 hover:after:w-full hover:after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300"
             >
-              Product
+              Shop
             </Link>
             <li className="relative px-1 font-semibold after:absolute after:bg-pink-500 after:w-0 hover:after:w-full hover:after:h-[3px] after:block after:-bottom-2 after:left-0 after:transition-all after:duration-300">
               About

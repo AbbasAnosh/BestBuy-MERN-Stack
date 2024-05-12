@@ -25,8 +25,9 @@ const Homepage = () => {
       <div className="max-w-7xl mx-auto px-4">
         <NewArrivals />
         <OurBestSellers />
-
-        <YearProduct />
+        <div className="pt-20">
+          <YearProduct />
+        </div>
       </div>
       <div>
         {isLoading ? (

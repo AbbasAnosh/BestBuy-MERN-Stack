@@ -5,7 +5,7 @@ import Rating from "./Rating";
 const TrendingProduct = (product: ProductProps) => {
   return (
     <Link to={`/product/${product._id}`} className="block ">
-      <div className="bg-gray-100 p-2 group overflow-hidden cursor-pointer relative z-50 hover:before:bg-black before:absolute before:inset-0 before:opacity-20 before:transition-all">
+      <div className="bg-gray-100 p-2 group overflow-hidden cursor-pointer relative z-40 hover:before:bg-black before:absolute before:inset-0 before:opacity-20 before:transition-all">
         <div className="w-full h-[300px] overflow-hidden mx-auto aspect-w-16 aspect-h-8">
           <img
             src={product.image}

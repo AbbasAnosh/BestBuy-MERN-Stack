@@ -13,7 +13,6 @@ import PlaceOrderPage from "./screens/PlaceOrderPage";
 import OrderPage from "./screens/OrderPage";
 import ProfilePage from "./screens/ProfilePage";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
-import Header from "./components/Header";
 
 import OrderList from "./screens/Admin/OrderList";
 import ProductListPage from "./screens/Admin/ProductListPage";
@@ -28,12 +27,15 @@ import Homepage from "./screens/Homepage";
 import Footer from "./components/footer/Footer";
 import FooterBottom from "./components/footer/FooterBottom";
 import ShopPage from "./screens/ShopPage";
+import NewHeader from "./components/home/header/Header";
+import HeaderBottom from "./components/home/header/HeaderBottom";
 
 const App = () => {
   return (
     <Router>
-      {/* <Header /> */}
-      <Navbar />
+      <NewHeader />
+      <HeaderBottom />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/shop" element={<ShopPage />} />

@@ -2,11 +2,11 @@ import NavTitle from "../shopComponent/NavTitle";
 
 const Search = () => {
   return (
-    <div className=" space-y-6 rounded-sm ">
+    <div className=" space-y-2 rounded-sm ">
       <div>
-        <NavTitle title="Search Product" />
+        <NavTitle title="Search Product" icons={false} />
       </div>
-      <div className="flex rounded-md border-2 border-slate-300 overflow-hidden">
+      <div className="flex rounded-sm border-2 border-[#F2F3F5] overflow-hidden">
         <input
           type="email"
           placeholder="Search Something..."

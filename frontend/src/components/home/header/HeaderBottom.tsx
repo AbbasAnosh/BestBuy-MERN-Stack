@@ -49,34 +49,34 @@ const HeaderBottom = () => {
             ref={ref}
             className="flex h-14 cursor-pointer items-center gap-2 text-primeColor"
           >
-            <HiOutlineMenuAlt4 className="w-5 h-5" />
-            <p className="text-[14px] font-normal">Shop by Category</p>
+            <HiOutlineMenuAlt4 className="w-5 h-5 z-[500]" />
+            <p className="text-[14px] font-normal z-[500]">Shop by Category</p>
 
             {show && (
               <motion.ul
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute top-36 z-50 bg-primeColor bg-black w-auto text-[#767676] h-auto p-4 pb-6"
+                className="absolute top-[96px] z-[1000] left-0 bg-primeColor bg-[#064F48] w-[16vw] text-[#767676] h-[50vh] p-4 pb-6"
               >
                 <Link to={"category/imprimante"}>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                     Imprimante
                   </li>
                 </Link>
 
                 <Link to={"category/ancre"}>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                     ancre
                   </li>
                 </Link>
                 <Link to={"category/Ruban"}>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                     ruban
                   </li>
                 </Link>
                 <Link to={"category/Bac"}>
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                     Bac de dechet
                   </li>
                 </Link>
@@ -85,7 +85,7 @@ const HeaderBottom = () => {
           </div>
           <div className="relative w-full lg:w-[600px] h-[50px] text-base text-primeColor bg-white flex items-center gap-2 justify-between px-6 rounded-xl">
             <input
-              className="flex-1 h-full outline-none placeholder:text-[#C4C4C4] placeholder:text-[14px]"
+              className="flex-1 h-full outline-none ring-0 border-0 focus:border-0 focus:ring-0 placeholder:text-[#C4C4C4] placeholder:text-[14px]"
               type="text"
               //   onChange={handleSearch}
               //   value={searchQuery}
@@ -149,22 +149,22 @@ const HeaderBottom = () => {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute top-6 left-0 z-50 bg-primeColor w-44 bg-black text-[#767676] h-auto p-4 pb-6"
+                className="absolute top-14 -right-4 z-50 bg-primeColor w-64 bg-[#064F48] text-[#767676] h-[50vh] p-4 pb-6"
               >
                 <Link to="/signin">
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                     Login
                   </li>
                 </Link>
                 <Link onClick={() => setShowUser(false)} to="/signup">
-                  <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                     Sign Up
                   </li>
                 </Link>
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                   Profile
                 </li>
-                <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400  hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200  hover:border-b-white hover:text-white duration-300 cursor-pointer">
                   Others
                 </li>
               </motion.ul>
