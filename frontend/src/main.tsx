@@ -33,7 +33,8 @@ const PayPalWrapper = () => {
 const RootComponent = () => (
   <React.StrictMode>
     <Provider store={store}>
-      <PayPalWrapper />
+      <App />
+      {/* <PayPalWrapper /> */}
     </Provider>
   </React.StrictMode>
 );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const Slider = () => {
+const ParentSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const data = [
     {
@@ -85,4 +85,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default ParentSlider;

@@ -14,7 +14,7 @@ import OrderPage from "./screens/OrderPage";
 import ProfilePage from "./screens/ProfilePage";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+
 import OrderList from "./screens/Admin/OrderList";
 import ProductListPage from "./screens/Admin/ProductListPage";
 import Dashboard from "./screens/Dashboard";
@@ -25,6 +25,10 @@ import UserEdite from "./screens/Admin/UserEdite";
 import Navbar from "./components/Navbar";
 import Homepage from "./screens/Homepage";
 import Shop from "./screens/Shop";
+import NewHeader from "./components/home/header/Header";
+import HeaderBottom from "./components/home/header/HeaderBottom";
+import Footer from "./components/footer/Footer";
+import FooterBottom from "./components/footer/FooterBottom";
 
 const App = () => {
   return (
@@ -56,7 +60,9 @@ const App = () => {
           <Route path="/admin/user/:id/edit" element={<UserEdite />} />
         </Route>
       </Routes>
+      {/* <Footer /> */}
       <Footer />
+      <FooterBottom />
       <ToastContainer />
     </Router>
   );
