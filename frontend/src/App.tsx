@@ -24,11 +24,10 @@ import UserList from "./screens/Admin/UserList";
 import UserEdite from "./screens/Admin/UserEdite";
 import Navbar from "./components/Navbar";
 import Homepage from "./screens/Homepage";
-import Shop from "./screens/Shop";
-import NewHeader from "./components/home/header/Header";
-import HeaderBottom from "./components/home/header/HeaderBottom";
+
 import Footer from "./components/footer/Footer";
 import FooterBottom from "./components/footer/FooterBottom";
+import ShopPage from "./screens/ShopPage";
 
 const App = () => {
   return (
@@ -37,7 +36,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop" element={<ShopPage />} />
         <Route path="/home" element={<HomeScreen />} />
         <Route path="/product/:id" element={<ProductsScreen />} />
         <Route path="/cart" element={<CartScreen />} />
