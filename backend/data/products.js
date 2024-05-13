@@ -5,7 +5,7 @@ const products = [
     description:
       "Carry your essentials in style with this sleek and versatile travel bag. It offers ample storage space and a modern design to complement any outfit.",
     brand: "Samsung",
-    category: "Electronics",
+    category: "Apparels",
     price: 149.99,
     countInStock: 8,
     rating: 4.7,
@@ -17,7 +17,7 @@ const products = [
     description:
       "Introducing the Samsung Galaxy Watch 5, a perfect blend of style and functionality. Stay connected, track your fitness, and enhance your lifestyle with this cutting-edge smartwatch.",
     brand: "Samsung",
-    category: "Electronics",
+    category: "Wearable Electronics",
     price: 1199.99,
     countInStock: 6,
     rating: 4.8,
@@ -29,7 +29,7 @@ const products = [
     description:
       "Unleash your creativity with the Nikon D850 DSLR Camera. Featuring a high-resolution sensor, fast autofocus, and robust build quality, it's perfect for professional photographers.",
     brand: "Nikon",
-    category: "Electronics",
+    category: "Cameras, Photo & Video",
     price: 2499.99,
     countInStock: 3,
     rating: 4.9,
@@ -41,7 +41,7 @@ const products = [
     description:
       "Enter the next generation of gaming with the Xbox Series X. With 4K gaming, lightning-fast load times, and immersive sound, it's the ultimate gaming console.",
     brand: "Microsoft",
-    category: "Electronics",
+    category: "Computers & Accessories",
     price: 499.99,
     countInStock: 9,
     rating: 4.6,
@@ -53,7 +53,7 @@ const products = [
     description:
       "Elevate your style and protect your eyes with these stylish polarized sunglasses. Designed for both fashion and function, they offer UV protection and a sleek look.",
     brand: "Razer",
-    category: "Electronics",
+    category: "Smartphones & Tablets",
     price: 79.99,
     countInStock: 11,
     rating: 4.5,
@@ -65,7 +65,7 @@ const products = [
     description:
       "Step up your style and comfort with the Adidas Ultra Boost Sneakers. Featuring responsive cushioning and a sleek design, they're perfect for both casual wear and active lifestyles.",
     brand: "Google",
-    category: "Electronics",
+    category: "Apparels",
     price: 49.99,
     countInStock: 5,
     rating: 4.3,
@@ -77,7 +77,7 @@ const products = [
     description:
       "Conquer the outdoors in style with Timberland Classic Waterproof Boots. Built to withstand any terrain, these boots offer durability, comfort, and timeless design.",
     brand: "Apple",
-    category: "Electronics",
+    category: "Apparels",
     price: 399.99,
     countInStock: 4,
     rating: 4.9,
@@ -89,7 +89,7 @@ const products = [
     description:
       "Immerse yourself in your music with the Bose QuietComfort 45 Wireless Headphones. Featuring noise-canceling technology and all-day comfort, they're perfect for work or travel.",
     brand: "Bose",
-    category: "Electronics",
+    category: "Headphones",
     price: 329.99,
     countInStock: 7,
     rating: 4.7,

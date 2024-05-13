@@ -33,9 +33,9 @@ import HeaderBottom from "./components/home/header/HeaderBottom";
 const App = () => {
   return (
     <Router>
-      <NewHeader />
-      <HeaderBottom />
-      {/* <Navbar /> */}
+      {/* <NewHeader /> */}
+      {/* <HeaderBottom /> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/shop" element={<ShopPage />} />

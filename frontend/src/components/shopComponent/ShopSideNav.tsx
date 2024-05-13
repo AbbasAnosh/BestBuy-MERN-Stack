@@ -4,14 +4,13 @@ import Brand from "./Brand";
 import Category from "./Category";
 import Price from "./Price";
 import Color from "./Color";
-import Search from "../shop/Search";
+
 import Range from "../shop/Range";
 
-const ShopSideNav = () => {
+const ShopSideNav = ({ setSelectedCategory }) => {
   return (
     <div className="w-full flex flex-col gap-6 ">
-      <Search />
-      <Category icons={false} />
+      <Category icons={false} setSelectedCategory={setSelectedCategory} />
       <Range />
       <Brand />
       <Price />

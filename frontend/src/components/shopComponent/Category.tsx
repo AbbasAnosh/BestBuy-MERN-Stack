@@ -4,7 +4,7 @@ import { ImPlus } from "react-icons/im";
 import { motion } from "framer-motion";
 import NavTitle from "./NavTitle";
 
-const Category = () => {
+const Category = ({ setSelectedCategory }) => {
   const [showSubCatOne, setShowSubCatOne] = useState(true);
 
   const category = [
@@ -34,6 +34,16 @@ const Category = () => {
     },
   ];
 
+  const handleCategoryChange = (category, isChecked) => {
+    setSelectedCategory((prevSelectedCategories) => {
+      if (isChecked) {
+        return [...prevSelectedCategories, category];
+      } else {
+        return prevSelectedCategories.filter((c) => c !== category);
+      }
+    });
+  };
+
   return (
     <div className="w-full">
       <div
@@ -55,7 +65,13 @@ const Category = () => {
                   key={item._id}
                   className="border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 hover:text-primeColor hover:border-gray-400 duration-300"
                 >
-                  <input type="checkbox" id={item._id} />
+                  <input
+                    type="checkbox"
+                    id={item._id}
+                    onChange={(e) =>
+                      handleCategoryChange(item.title, e.target.checked)
+                    }
+                  />
                   {item.title}
                   {item.icons && (
                     <span

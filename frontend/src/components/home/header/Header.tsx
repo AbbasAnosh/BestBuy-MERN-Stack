@@ -24,7 +24,7 @@ const navBarList = [
   {
     _id: 1004,
     title: "Contact",
-    link: "contact",
+    link: "/contact",
   },
 ];
 

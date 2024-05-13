@@ -8,7 +8,7 @@ const Search = () => {
       </div>
       <div className="flex rounded-sm border-2 border-[#F2F3F5] overflow-hidden">
         <input
-          type="email"
+          type="text"
           placeholder="Search Something..."
           className="w-full outline-none border-0 focus:ring-0 focus:border-0 focus:outline-none bg-white text-sm px-5 py-3"
         />
