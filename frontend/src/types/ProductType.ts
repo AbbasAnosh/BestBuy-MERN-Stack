@@ -13,6 +13,12 @@ export interface ProductProps {
   error?: string;
 }
 
+export interface CartState {
+  cartItems: ProductProps[];
+  shippingAddress: {};
+  paymentMethod: string;
+}
+
 export interface ProfileProps {
   label: string;
   href: string;

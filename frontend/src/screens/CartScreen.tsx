@@ -64,10 +64,10 @@ const CartScreen = () => {
                       </h3>
 
                       <div className="flex items-center justify-between ">
-                        <h4 className="text-lg font-bold text-[#D3D1C2] text-nowrap ">
+                        <h4 className="w-1/3 text-lg font-bold text-[#D3D1C2] text-nowrap ">
                           ${item.price}
                         </h4>
-                        <div className="">
+                        <div className="w-1/3">
                           <form className="border-0">
                             <select
                               value={item.qty}
@@ -75,8 +75,8 @@ const CartScreen = () => {
                               onChange={(e) =>
                                 addToCartHandler(item, Number(e.target.value))
                               }
-                              className="bg-[#E56A40] border-0 focus:border-0 focus:ring-0  outline-none text-[#D3D1C2] text-semibold
-                              block w-full p-2.5 rounded-md custom-select"
+                              className="bg-[#E56A40] border-0 focus:border-0 focus:ring-0 outline-none text-[#D3D1C2] text-semibold
+                              block w-16 p-2.5 rounded-md custom-select"
                             >
                               {[...Array(item.countInStock).keys()].map((p) => (
                                 <option key={p + 1} value={p + 1}>

@@ -38,7 +38,7 @@ const Product = (product: ProductProps) => {
               ? `${product.description.substring(0, 105)}...`
               : product.description}
           </p>
-          <Rating value={product.rating} reviews={product.numReviews} />
+          <Rating value={product.rating} review={product.numReviews} />
         </div>
       </div>
     </Link>

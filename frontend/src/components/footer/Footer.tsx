@@ -29,7 +29,7 @@ const Footer = () => {
   //     }
   //   };
   return (
-    <footer className="bg-[#f2eded] py-12 px-10 font-sans tracking-wide">
+    <footer className="bg-[#f2eded] py-12 px-10 tracking-wide">
       <div className="lg:max-w-[50%] mx-auto text-center">
         <h3 className="text-3xl font-bold text-gray-800">Newsletter</h3>
         <p className="text-base mt-6 ">
@@ -57,7 +57,7 @@ const Footer = () => {
 
       <div className="grid max-sm:grid-cols-1 max-lg:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
-          <FooterListTitle title=" About Us" />
+          <FooterListTitle title="About Us" />
           <p className="text-base w-full xl:w-[80%]">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim sint
             ab ullam, numquam nesciunt in.

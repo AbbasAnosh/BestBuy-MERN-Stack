@@ -12,8 +12,8 @@ const NewArrivals = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    nextArrow: <NextArrowSample />,
-    prevArrow: <PrevArrowSample />,
+    nextArrow: <NextArrowSample onClick={() => {}} />,
+    prevArrow: <PrevArrowSample onClick={() => {}} />,
     responsive: [
       {
         breakpoint: 1025,
