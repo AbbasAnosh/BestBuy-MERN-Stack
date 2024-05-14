@@ -29,17 +29,21 @@ import FooterBottom from "./components/footer/FooterBottom";
 import ShopPage from "./screens/ShopPage";
 import NewHeader from "./components/home/header/Header";
 import HeaderBottom from "./components/home/header/HeaderBottom";
+import AboutPage from "./screens/AboutPage";
+import ContactPage from "./screens/ContactPage";
 
 const App = () => {
   return (
     <Router>
-      {/* <NewHeader /> */}
-      {/* <HeaderBottom /> */}
-      <Navbar />
+      <NewHeader />
+      <HeaderBottom />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/home" element={<HomeScreen />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/product/:id" element={<ProductsScreen />} />
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/login" element={<LoginScreen />} />

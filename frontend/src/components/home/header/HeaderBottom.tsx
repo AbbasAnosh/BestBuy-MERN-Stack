@@ -5,7 +5,6 @@ import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
 
 import { Link, useNavigate } from "react-router-dom";
 import { BsSuitHeartFill } from "react-icons/bs";
-import Flex from "../designLayout/Flex";
 import { useGetProductsQuery } from "../../../slices/productsApiSlice";
 import { CartState, ProductProps } from "../../../types/ProductType";
 import { useSelector } from "react-redux";
@@ -14,7 +13,6 @@ const HeaderBottom = () => {
   const [show, setShow] = useState(false);
   const [showUser, setShowUser] = useState(false);
   const navigate = useNavigate();
-  // const ref = useRef();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>([]);
   const { data: products } = useGetProductsQuery({});
@@ -37,42 +35,51 @@ const HeaderBottom = () => {
 
   return (
     <div className="w-full bg-[#F5F5F3] relative">
-      <div className="max-w-container mx-auto">
-        <Flex className="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full px-4 pb-4 lg:pb-0 h-full lg:h-24">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full px-4 pb-4 lg:pb-0 h-full lg:h-24">
           <div
             onClick={() => setShow(!show)}
-            // ref={ref}
-            className="flex h-14 cursor-pointer items-center gap-2 text-primeColor"
+            className="flex h-14 cursor-pointer items-center gap-2"
           >
-            <HiOutlineMenuAlt4 className="w-5 h-5 z-[500]" />
-            <p className="text-[14px] font-normal z-[500]">Shop by Category</p>
+            <HiOutlineMenuAlt4 className="w-5 h-5 z-50" />
+            <p className="text-[14px] font-normal z-50">Shop by Category</p>
 
             {show && (
               <motion.ul
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute top-[96px] z-[1000] left-0 bg-primeColor bg-[#064F48] w-[16vw] text-[#767676] h-[50vh] p-4 pb-6"
+                className="absolute top-[96px] z-50 left-26 bg-[#064F48] w-[16vw] text-[#767676] h-[50vh] p-4 pb-6"
               >
                 <Link to={"category/imprimante"}>
                   <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Imprimante
+                    Computers & Accessories
                   </li>
                 </Link>
 
                 <Link to={"category/ancre"}>
                   <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    ancre
+                    Smartphones & Tablets
                   </li>
                 </Link>
                 <Link to={"category/Ruban"}>
                   <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    ruban
+                    TV, Video & Audio
                   </li>
                 </Link>
                 <Link to={"category/Bac"}>
                   <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Bac de dechet
+                    Cameras, Photo & Video
+                  </li>
+                </Link>
+                <Link to={"category/Bac"}>
+                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                    Headphones
+                  </li>
+                </Link>
+                <Link to={"category/Bac"}>
+                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                    Wearable Electronics
                   </li>
                 </Link>
               </motion.ul>
@@ -164,7 +171,7 @@ const HeaderBottom = () => {
             </Link>
             <BsSuitHeartFill />
           </div>
-        </Flex>
+        </div>
       </div>
     </div>
   );

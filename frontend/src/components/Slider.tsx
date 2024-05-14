@@ -49,17 +49,17 @@ const ParentSlider = () => {
             key={slide.id}
             className="w-screen flex items-center flex-col md:flex-row h-full bg-gradient-to-r from-blue-500 to-blue-300"
           >
-            <div className="w-full md:w-1/2 h-full flex flex-col justify-center items-center  p-10 text-center">
-              <h1 className="text-white text-4xl md:text-5xl font-bold mb-4">
+            <div className="w-full h-1/2 md:w-1/2 md:h-full flex flex-col justify-center items-center  p-10 text-center">
+              <h1 className="text-white text-xl md:text-5xl font-bold mb-4">
                 {slide.text}
               </h1>
-              <button className="mt-4 px-6 py-2 bg-white text-blue-500 font-bold rounded hover:bg-gray-100 transition-colors">
+              <button className="md:mt-4 px-6 py-2 bg-white text-blue-500 font-bold rounded hover:bg-gray-100 transition-colors">
                 Shop Now
               </button>
             </div>
-            <div className="w-full md:w-1/2 h-full">
+            <div className="w-full md:w-1/2 h-1/2 md:h-full">
               <img
-                className="w-full h-full object-cover"
+                className="w-56 h-56 md:h-full md:w-full object-cover"
                 src={slide.image}
                 alt={`Slide ${index + 1}`}
               />
@@ -67,15 +67,15 @@ const ParentSlider = () => {
           </div>
         ))}
       </div>
-      <div className="flex absolute inset-x-0 bottom-16 justify-center gap-2.5">
+      <div className="flex absolute inset-x-0 bottom-0 lg:bottom-16 justify-center gap-2.5">
         <div
-          className="w-12 h-12 bg-white flex items-center justify-center cursor-pointer shadow-md hover:bg-gray-200 transition-colors"
+          className="w-8 h-8 lg:w-12 lg:h-12 bg-white flex items-center justify-center cursor-pointer shadow-md hover:bg-gray-200 transition-colors"
           onClick={prevSlide}
         >
           <FaChevronLeft className="text-blue-500 text-2xl" />
         </div>
         <div
-          className="w-12 h-12 bg-white flex items-center justify-center cursor-pointer shadow-md hover:bg-gray-200 transition-colors"
+          className="w-8 h-8 lg:w-12 lg:h-12 bg-white flex items-center justify-center cursor-pointer shadow-md hover:bg-gray-200 transition-colors"
           onClick={nextSlide}
         >
           <FaChevronRight className="text-blue-500 text-2xl" />
