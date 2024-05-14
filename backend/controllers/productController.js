@@ -102,3 +102,43 @@ export const createProductReview = asyncHandler(async (req, res) => {
     throw new Error("Resources not found");
   }
 });
+
+export const getNewArrivals = asyncHandler(async (req, res) => {
+  try {
+    const newProducts = await Product.find({ isNewArrival: true }).sort({
+      createdAt: -1,
+    });
+    res.json(newProducts);
+  } catch (error) {
+    res.status(404);
+    throw new Error("Can't get the new arrivals.");
+  }
+});
+
+export const getFeaturedProducts = asyncHandler(async (req, res) => {
+  try {
+    const featuredProducts = await Product.find({ isFeatured: true }).sort({
+      createdAt: -1,
+    });
+    res.json(featuredProducts);
+  } catch (error) {
+    res.status(404);
+    throw new Error("Can't get the featured products.");
+  }
+});
+
+export const getTopRatedProducts = asyncHandler(async (req, res) => {
+  const minNumberOfReviews = 10;
+
+  try {
+    const topProducts = await Product.find({
+      numReviews: { $gte: minNumberOfReviews },
+    })
+      .sort({ rating: -1 })
+      .limit(8);
+    res.json(topProducts);
+  } catch (error) {
+    res.status(404);
+    throw new Error("Can't get the top rated products.");
+  }
+});

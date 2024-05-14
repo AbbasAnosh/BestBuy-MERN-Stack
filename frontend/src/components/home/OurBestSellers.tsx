@@ -5,8 +5,11 @@ import NextArrow from "./NextArrow";
 import PrevArrow from "./PrevArrow";
 import Product from "./products/Product";
 import Heading from "./products/Heading";
+import { useGetFeaturedProductsQuery } from "../../slices/productsApiSlice";
 
 const OurBestSellers = () => {
+  const { data: featuredProducts } = useGetFeaturedProductsQuery({});
+  console.log(featuredProducts);
   const settings = {
     infinite: true,
     speed: 500,
@@ -42,74 +45,17 @@ const OurBestSellers = () => {
     ],
   };
 
-  const data = [
-    {
-      id: 1,
-      image:
-        "https://elyssi.redpixelthemes.com/assets/img/unlicensed/shoes-4.png",
-      name: "Siberian Boots",
-      price: "$67",
-    },
-    {
-      id: 2,
-      image:
-        "https://elyssi.redpixelthemes.com/assets/img/unlicensed/watch-3.png",
-      name: "Siberian Boots",
-      price: "$67",
-    },
-    {
-      id: 3,
-      image:
-        "https://elyssi.redpixelthemes.com/assets/img/unlicensed/backpack-2.png",
-      name: "Siberian Boots",
-      price: "$67",
-    },
-    {
-      id: 4,
-      image:
-        "https://elyssi.redpixelthemes.com/assets/img/unlicensed/purse-1.png",
-      name: "Siberian Boots",
-      price: "$67",
-    },
-    {
-      id: 5,
-      image:
-        "https://elyssi.redpixelthemes.com/assets/img/unlicensed/sunglass-3.png",
-      name: "Siberian Boots",
-      price: "$67",
-    },
-    {
-      id: 6,
-      image:
-        "https://elyssi.redpixelthemes.com/assets/img/unlicensed/watch-1.png",
-      name: "Siberian Boots",
-      price: "$67",
-    },
-    {
-      id: 7,
-      image:
-        "https://elyssi.redpixelthemes.com/assets/img/unlicensed/backpack-2.png",
-      name: "Siberian Boots",
-      price: "$67",
-    },
-    {
-      id: 8,
-      image:
-        "https://elyssi.redpixelthemes.com/assets/img/unlicensed/shoes-1.png",
-      name: "Siberian Boots",
-      price: "$67",
-    },
-  ];
   return (
     <div className="w-full py-12">
-      <Heading heading="Our Best Sellers" />
+      <Heading heading="Featured Products" />
       <Slider {...settings}>
-        {data.map((product) => (
+        {featuredProducts?.map((product) => (
           <div key={product.id} className="px-2">
             <Product
               img={product.image}
               productName={product.name}
               price={product.price}
+              isFeatured={product.isFeatured}
             />
           </div>
         ))}
@@ -119,3 +65,62 @@ const OurBestSellers = () => {
 };
 
 export default OurBestSellers;
+
+// const data = [
+//   {
+//     id: 1,
+//     image:
+//       "https://elyssi.redpixelthemes.com/assets/img/unlicensed/shoes-4.png",
+//     name: "Siberian Boots",
+//     price: "$67",
+//   },
+//   {
+//     id: 2,
+//     image:
+//       "https://elyssi.redpixelthemes.com/assets/img/unlicensed/watch-3.png",
+//     name: "Siberian Boots",
+//     price: "$67",
+//   },
+//   {
+//     id: 3,
+//     image:
+//       "https://elyssi.redpixelthemes.com/assets/img/unlicensed/backpack-2.png",
+//     name: "Siberian Boots",
+//     price: "$67",
+//   },
+//   {
+//     id: 4,
+//     image:
+//       "https://elyssi.redpixelthemes.com/assets/img/unlicensed/purse-1.png",
+//     name: "Siberian Boots",
+//     price: "$67",
+//   },
+//   {
+//     id: 5,
+//     image:
+//       "https://elyssi.redpixelthemes.com/assets/img/unlicensed/sunglass-3.png",
+//     name: "Siberian Boots",
+//     price: "$67",
+//   },
+//   {
+//     id: 6,
+//     image:
+//       "https://elyssi.redpixelthemes.com/assets/img/unlicensed/watch-1.png",
+//     name: "Siberian Boots",
+//     price: "$67",
+//   },
+//   {
+//     id: 7,
+//     image:
+//       "https://elyssi.redpixelthemes.com/assets/img/unlicensed/backpack-2.png",
+//     name: "Siberian Boots",
+//     price: "$67",
+//   },
+//   {
+//     id: 8,
+//     image:
+//       "https://elyssi.redpixelthemes.com/assets/img/unlicensed/shoes-1.png",
+//     name: "Siberian Boots",
+//     price: "$67",
+//   },
+// ];

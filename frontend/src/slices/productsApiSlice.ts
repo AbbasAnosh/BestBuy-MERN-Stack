@@ -62,6 +62,27 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Product"],
     }),
+    getNewArrival: builder.query({
+      query: () => ({
+        url: "http://localhost:8000/api/products/new-arrival",
+      }),
+      providesTags: ["Product"],
+      keepUnusedDataFor: 5,
+    }),
+    getFeaturedProducts: builder.query({
+      query: () => ({
+        url: "http://localhost:8000/api/products/featured-products",
+      }),
+      providesTags: ["Product"],
+      keepUnusedDataFor: 5,
+    }),
+    getTopProducts: builder.query({
+      query: () => ({
+        url: "http://localhost:8000/api/products/top-products",
+      }),
+      providesTags: ["Product"],
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
@@ -74,4 +95,7 @@ export const {
   useUploadAllProductImageMutation,
   useDeleteProductMutation,
   useCreateReviewMutation,
+  useGetNewArrivalQuery,
+  useGetFeaturedProductsQuery,
+  useGetTopProductsQuery,
 } = productsApiSlice;

@@ -10,6 +10,7 @@ const products = [
     countInStock: 8,
     rating: 4.7,
     numReviews: 15,
+    isNewArrival: true,
   },
   {
     name: "Samsung Galaxy Watch 5",
@@ -22,6 +23,7 @@ const products = [
     countInStock: 6,
     rating: 4.8,
     numReviews: 20,
+    isFeatured: true,
   },
   {
     name: "Nikon D850 DSLR Camera",
@@ -34,6 +36,7 @@ const products = [
     countInStock: 3,
     rating: 4.9,
     numReviews: 18,
+    isFeatured: true,
   },
   {
     name: "Xbox Series X",
@@ -46,6 +49,8 @@ const products = [
     countInStock: 9,
     rating: 4.6,
     numReviews: 25,
+    isNewArrival: true,
+    isFeatured: true,
   },
   {
     name: "Stylish Polarized Sunglasses",
@@ -58,6 +63,8 @@ const products = [
     countInStock: 11,
     rating: 4.5,
     numReviews: 14,
+    isNewArrival: true,
+    isFeatured: true,
   },
   {
     name: "Adidas Ultra Boost Sneakers",
@@ -70,6 +77,8 @@ const products = [
     countInStock: 5,
     rating: 4.3,
     numReviews: 10,
+    isNewArrival: true,
+    isFeatured: true,
   },
   {
     name: "Timberland Classic Waterproof Boots",
@@ -82,6 +91,8 @@ const products = [
     countInStock: 4,
     rating: 4.9,
     numReviews: 22,
+    isNewArrival: true,
+    isFeatured: true,
   },
   {
     name: "Bose QuietComfort 45 Wireless Headphones",
@@ -94,6 +105,8 @@ const products = [
     countInStock: 7,
     rating: 4.7,
     numReviews: 16,
+    isNewArrival: true,
+    isFeatured: true,
   },
 ];
 

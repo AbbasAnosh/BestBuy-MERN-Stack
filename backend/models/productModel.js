@@ -64,11 +64,24 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    isNewArrival: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    isFeatured: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,
   }
 );
+
+productSchema.index({ isNewArrival: 1 });
+productSchema.index({ isFeatured: 1 });
 
 const Product = mongoose.model("Product", productSchema);
 

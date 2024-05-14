@@ -1,12 +1,8 @@
 import Services from "../components/Services";
-import Trends from "../components/Trends";
 import TrendingProduct from "../components/TrendingProduct";
-import { useGetProductsQuery } from "../slices/productsApiSlice";
+import { useGetTopProductsQuery } from "../slices/productsApiSlice";
 import { ProductProps } from "../types/ProductType";
-import SliderTrend from "../components/SliderTrend";
 
-import Offer from "../components/Offer";
-import Banner from "../components/home/Banner";
 import NewArrivals from "../components/home/NewArrival";
 import Heading from "../components/home/products/Heading";
 import OurBestSellers from "../components/home/OurBestSellers";
@@ -14,7 +10,8 @@ import YearProduct from "../components/home/YearProduct";
 import ParentSlider from "../components/Slider";
 
 const Homepage = () => {
-  const { data, isLoading, error } = useGetProductsQuery({});
+  const { data, isLoading, error } = useGetTopProductsQuery({});
+
   const iserror: any = error;
   return (
     <div>
@@ -54,7 +51,6 @@ const Homepage = () => {
           </>
         )}
       </div>
-      {/* <Offer /> */}
     </div>
   );
 };
