@@ -1,35 +1,53 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import NavTitle from "./NavTitle";
+import { BrandProps, BrandsProps } from "../../types/ProductType";
 
-const Brand = () => {
+const Brand: React.FC<BrandsProps> = ({ setSelectedBrand }) => {
   const [showBrands, setShowBrands] = useState(true);
+  const handleBrandChange = (brand: BrandProps, isChecked: boolean) => {
+    setSelectedBrand((prevSelectedBrands) => {
+      if (isChecked) {
+        return [...prevSelectedBrands, brand];
+      } else {
+        return prevSelectedBrands.filter((b) => b !== brand);
+      }
+    });
+  };
 
   const brands = [
     {
-      _id: 900,
+      _id: 1,
       title: "Apple",
     },
     {
-      _id: 901,
-      title: "Bosh",
+      _id: 2,
+      title: "Michael Kors",
     },
     {
-      _id: 902,
-      title: "Canon Inc.",
+      _id: 3,
+      title: "Samsung",
     },
 
     {
-      _id: 903,
-      title: "Dell",
+      _id: 4,
+      title: "Nikon",
     },
     {
-      _id: 903,
-      title: "LG Electronics",
+      _id: 5,
+      title: "Microsoft",
     },
     {
-      _id: 903,
-      title: "Panasonic",
+      _id: 6,
+      title: "Ray Ban",
+    },
+    {
+      _id: 7,
+      title: "Adidas",
+    },
+    {
+      _id: 8,
+      title: "Ray Ban",
     },
   ];
 
@@ -53,7 +71,13 @@ const Brand = () => {
                 key={item._id}
                 className="border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 hover:text-primeColor hover:border-gray-400 duration-300"
               >
-                <input type="checkbox" id={item._id} />
+                <input
+                  type="checkbox"
+                  id={String(item._id)}
+                  onChange={(e) =>
+                    handleBrandChange(item.title, e.target.checked)
+                  }
+                />
                 {item.title}
               </li>
             ))}

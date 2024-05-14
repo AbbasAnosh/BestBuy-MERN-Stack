@@ -1,7 +1,20 @@
 import React from "react";
 import NavTitle from "./NavTitle";
+import { PriceProps, PriceRange } from "../../types/ProductType";
 
-const Price = () => {
+const Price: React.FC<PriceProps> = ({
+  setSelectedPriceRanges,
+  selectedPriceRanges,
+}) => {
+  const handlePriceRangeChange = (selectedRange: PriceRange) => {
+    setSelectedPriceRanges((prevRanges) => {
+      if (prevRanges.find((range) => range._id === selectedRange._id)) {
+        return prevRanges.filter((range) => range._id !== selectedRange._id);
+      } else {
+        return [...prevRanges, selectedRange];
+      }
+    });
+  };
   const priceList = [
     {
       _id: 950,
@@ -44,6 +57,14 @@ const Price = () => {
               key={item._id}
               className="border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 hover:text-primeColor hover:border-gray-400 duration-300"
             >
+              <input
+                type="checkbox"
+                id={String(item._id)}
+                checked={selectedPriceRanges.some(
+                  (range) => range._id === item._id
+                )}
+                onChange={() => handlePriceRangeChange(item)}
+              />
               ${item.priceOne.toFixed(2)} - ${item.priceTwo.toFixed(2)}
             </li>
           ))}

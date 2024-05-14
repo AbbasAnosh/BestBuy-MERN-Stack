@@ -1,40 +1,43 @@
-import React, { useState } from "react";
-// import { FaPlus } from "react-icons/fa";
+import { useState } from "react";
 import { ImPlus } from "react-icons/im";
 import { motion } from "framer-motion";
 import NavTitle from "./NavTitle";
+import { CategoriesProps, CategoryProps } from "../../types/ProductType";
 
-const Category = ({ setSelectedCategory }) => {
+const Category: React.FC<CategoriesProps> = ({ setSelectedCategory }) => {
   const [showSubCatOne, setShowSubCatOne] = useState(true);
 
   const category = [
     {
-      _id: 9006,
+      _id: 1,
       title: "Computers & Accessories",
     },
     {
-      _id: 9007,
+      _id: 2,
       title: "Smartphones & Tablets",
     },
     {
-      _id: 9008,
+      _id: 3,
       title: "TV, Video & Audio",
     },
     {
-      _id: 9009,
+      _id: 4,
       title: "Cameras, Photo & Video",
     },
     {
-      _id: 90010,
+      _id: 5,
       title: "Headphones",
     },
     {
-      _id: 90011,
+      _id: 6,
       title: "Wearable Electronics",
     },
   ];
 
-  const handleCategoryChange = (category, isChecked) => {
+  const handleCategoryChange = (
+    category: CategoryProps,
+    isChecked: boolean
+  ) => {
     setSelectedCategory((prevSelectedCategories) => {
       if (isChecked) {
         return [...prevSelectedCategories, category];
@@ -67,7 +70,7 @@ const Category = ({ setSelectedCategory }) => {
                 >
                   <input
                     type="checkbox"
-                    id={item._id}
+                    id={String(item._id)}
                     onChange={(e) =>
                       handleCategoryChange(item.title, e.target.checked)
                     }

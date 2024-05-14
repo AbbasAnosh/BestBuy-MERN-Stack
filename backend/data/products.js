@@ -4,7 +4,7 @@ const products = [
     image: "/images/bag.jpg",
     description:
       "Carry your essentials in style with this sleek and versatile travel bag. It offers ample storage space and a modern design to complement any outfit.",
-    brand: "Samsung",
+    brand: "Michael_Kors",
     category: "Apparels",
     price: 149.99,
     countInStock: 8,
@@ -52,7 +52,7 @@ const products = [
     image: "/images/sunglass.jpg",
     description:
       "Elevate your style and protect your eyes with these stylish polarized sunglasses. Designed for both fashion and function, they offer UV protection and a sleek look.",
-    brand: "Razer",
+    brand: "Ray Ban",
     category: "Smartphones & Tablets",
     price: 79.99,
     countInStock: 11,
@@ -64,7 +64,7 @@ const products = [
     image: "/images/sneakers.jpg",
     description:
       "Step up your style and comfort with the Adidas Ultra Boost Sneakers. Featuring responsive cushioning and a sleek design, they're perfect for both casual wear and active lifestyles.",
-    brand: "Google",
+    brand: "Adidas",
     category: "Apparels",
     price: 49.99,
     countInStock: 5,
@@ -76,7 +76,7 @@ const products = [
     image: "/images/boot.jpg",
     description:
       "Conquer the outdoors in style with Timberland Classic Waterproof Boots. Built to withstand any terrain, these boots offer durability, comfort, and timeless design.",
-    brand: "Apple",
+    brand: "Michael Kors",
     category: "Apparels",
     price: 399.99,
     countInStock: 4,
@@ -88,7 +88,7 @@ const products = [
     image: "/images/headphone.jpg",
     description:
       "Immerse yourself in your music with the Bose QuietComfort 45 Wireless Headphones. Featuring noise-canceling technology and all-day comfort, they're perfect for work or travel.",
-    brand: "Bose",
+    brand: "Apple",
     category: "Headphones",
     price: 329.99,
     countInStock: 7,

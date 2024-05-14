@@ -1,19 +1,23 @@
-import React from "react";
-
 import Brand from "./Brand";
 import Category from "./Category";
 import Price from "./Price";
-import Color from "./Color";
-
 import Range from "../shop/Range";
+import { ShopSideNavProps } from "../../types/ProductType";
 
-const ShopSideNav = ({ setSelectedCategory }) => {
+const ShopSideNav: React.FC<ShopSideNavProps> = ({
+  setSelectedCategory,
+  setSelectedBrand,
+  setSelectedPriceRanges,
+  selectedPriceRanges,
+}) => {
   return (
     <div className="w-full flex flex-col gap-6 ">
       <Category icons={false} setSelectedCategory={setSelectedCategory} />
-      <Range />
-      <Brand />
-      <Price />
+      <Brand setSelectedBrand={setSelectedBrand} />
+      <Price
+        setSelectedPriceRanges={setSelectedPriceRanges}
+        selectedPriceRanges={selectedPriceRanges}
+      />
     </div>
   );
 };
