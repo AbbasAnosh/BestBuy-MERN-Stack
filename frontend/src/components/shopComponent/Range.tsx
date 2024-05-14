@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import { RangeProp } from "../../types/ProductType";
 
-const Range = () => {
-  const [rangeValue, setRangeValue] = useState(50);
-
-  const handleRangeChange = (event) => {
-    setRangeValue(event.target.value);
+const Range: React.FC<RangeProp> = ({ rangeValue, setRangeValue }) => {
+  const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRangeValue(Number(e.target.value));
   };
 
   return (

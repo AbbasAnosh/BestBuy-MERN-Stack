@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import { useLocation } from "react-router-dom";
 
-const Breadcrumbs = ({ prevLocation, title }) => {
+const Breadcrumbs = ({
+  prevLocation,
+  title,
+}: {
+  prevLocation: string;
+  title: string;
+}) => {
   const location = useLocation();
   const [locationPath, setLocationPath] = useState("");
   useEffect(() => {

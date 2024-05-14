@@ -21,6 +21,7 @@ const ShopPage = () => {
   const [selectedPriceRanges, setSelectedPriceRanges] = useState<PriceRange[]>(
     []
   );
+  const [priceRange, setPriceRange] = useState({ min: 5, max: 10000 });
   // const itemsPerPageFromBanner = (itemsPerPage) => {
   //   setItemsPerPage(itemsPerPage);
   // };
@@ -38,10 +39,14 @@ const ShopPage = () => {
         product.price >= range.priceOne && product.price <= range.priceTwo
     );
 
+    const isPriceRange =
+      product.price >= priceRange.min && product.price <= priceRange.max;
+
     return (
       isCategorySelected &&
       isBrandSelected &&
-      (selectedPriceRanges.length === 0 || isPriceInRange)
+      (selectedPriceRanges.length === 0 || isPriceInRange) &&
+      isPriceRange
     );
   });
 
@@ -56,6 +61,10 @@ const ShopPage = () => {
             setSelectedBrand={setSelectedBrand}
             setSelectedPriceRanges={setSelectedPriceRanges}
             selectedPriceRanges={selectedPriceRanges}
+            rangeValue={priceRange.max}
+            setRangeValue={(value) =>
+              setPriceRange({ ...priceRange, max: value })
+            }
           />
         </div>
         <div className="w-full mdl:w-[80%] lgl:w-[75%] h-full flex flex-col gap-10">

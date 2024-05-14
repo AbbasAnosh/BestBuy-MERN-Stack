@@ -1,8 +1,8 @@
 import Brand from "../components/shop/Brand";
 import Categories from "../components/shop/Categories";
 import Checkbox from "../components/shop/Checkbox";
-import Product from "../components/shop/Product";
-import Range from "../components/shop/Range";
+import Product from "../components/shopComponent/Product";
+import Range from "../components/shopComponent/Range";
 import Search from "../components/shop/Search";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 import { ProductProps } from "../types/ProductType";

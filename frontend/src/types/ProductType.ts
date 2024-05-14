@@ -53,12 +53,18 @@ export type CategoryProps = {
   _id: string;
   title: string;
 };
+export type RangeProp = {
+  rangeValue: number;
+  setRangeValue: (value: number) => void;
+};
 
 export type ShopSideNavProps = {
   setSelectedCategory: React.Dispatch<React.SetStateAction<CategoryProps[]>>;
   setSelectedBrand: React.Dispatch<React.SetStateAction<BrandProps[]>>;
   setSelectedPriceRanges: React.Dispatch<React.SetStateAction<PriceRange[]>>;
   selectedPriceRanges: PriceRange[];
+  rangeValue: number;
+  setRangeValue: (value: number) => void;
 };
 
 export type PriceProps = {
