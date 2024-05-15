@@ -4,6 +4,7 @@ import { MdOutlineLabelImportant } from "react-icons/md";
 import Image from "../designLayout/Image";
 import { useAddProductToWishListMutation } from "../../../slices/wishListApiSlice";
 import { toast } from "react-toastify";
+import Badge from "./Badge";
 
 const Product = (props) => {
   const [addProductToWishList] = useAddProductToWishListMutation();
@@ -24,18 +25,9 @@ const Product = (props) => {
       <div className="max-w-80 max-h-80 relative overflow-y-hidden ">
         <div className="relative">
           <Image className="w-full h-full" imgSrc={props.img} />
-          <div className="absolute top-0 right-0 z-50">
-            {props.isNewArrival && (
-              <div className="py-[5px] px-[10px] text-white bg-[#77dd77] font-medium rounded-bl-[5px]">
-                New
-              </div>
-            )}
-
-            {props.isFeatured && (
-              <div className="py-[5px] px-[10px] text-white bg-[#77dd77] font-medium rounded-bl-[5px]">
-                Featured
-              </div>
-            )}
+          <div className="absolute top-6 left-8">
+            {props.isNewArrival && <Badge text="New" />}
+            {props.isFeatured && <Badge text="Featured" />}
           </div>
         </div>
 

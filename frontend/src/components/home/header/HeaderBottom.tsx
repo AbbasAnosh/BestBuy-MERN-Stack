@@ -8,6 +8,7 @@ import { BsSuitHeartFill } from "react-icons/bs";
 import { useGetProductsQuery } from "../../../slices/productsApiSlice";
 import { CartState, ProductProps } from "../../../types/ProductType";
 import { useSelector } from "react-redux";
+import { useGetWishListQuery } from "../../../slices/wishListApiSlice";
 
 const HeaderBottom = () => {
   const [show, setShow] = useState(false);
@@ -18,6 +19,8 @@ const HeaderBottom = () => {
   const { data: products } = useGetProductsQuery({});
   const { cartItems } = useSelector((state: { cart: CartState }) => state.cart);
   const [close, setClose] = useState(false);
+  const { data: wishlistData } = useGetWishListQuery({});
+  const wishlistItems = wishlistData?.wishlistItems;
 
   useEffect(() => {
     if (searchQuery.length > 0 && products?.length > 0) {
@@ -165,7 +168,7 @@ const HeaderBottom = () => {
               <div className="relative">
                 <FaShoppingCart />
                 {cartItems.length > 0 && (
-                  <span className="absolute font-titleFont -top-2 -right-3 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-red-600 text-white">
+                  <span className="absolute -top-2 -right-3 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-red-600 text-white">
                     {cartItems.reduce(
                       (acc: number, item: any) => acc + item.qty,
                       0
@@ -174,7 +177,16 @@ const HeaderBottom = () => {
                 )}
               </div>
             </Link>
-            <BsSuitHeartFill />
+            <Link to="/wishlist">
+              <div className="relative">
+                <BsSuitHeartFill />
+                {wishlistItems && wishlistItems.length > 0 && (
+                  <span className="absolute -top-2 -right-3 text-xs w-4 h-4 z-50 flex items-center justify-center rounded-full bg-red-600 text-white">
+                    {wishlistItems.length}
+                  </span>
+                )}
+              </div>
+            </Link>
           </div>
         </div>
       </div>
