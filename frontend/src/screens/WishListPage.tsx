@@ -7,8 +7,10 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { addToCart } from "../slices/cartSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Breadcrumbs from "../components/shopComponent/BreadCrumps";
+import { useEffect, useState } from "react";
 
 const WishListPage = () => {
   const { data: wishlistData, refetch } = useGetWishListQuery({});
@@ -40,8 +42,15 @@ const WishListPage = () => {
     navigate("/cart");
   };
 
+  const [prevLocation, setPrevLocation] = useState("");
+
+  useEffect(() => {
+    setPrevLocation(location.state?.from || "Shop");
+  }, [location]);
+
   return (
-    <>
+    <div className="max-w-7xl mx-auto ">
+      <Breadcrumbs title="wishlist" prevLocation={prevLocation} />
       {!wishlistItems || wishlistItems.length === 0 ? (
         <motion.div
           initial={{ y: 30, opacity: 0 }}
@@ -74,7 +83,7 @@ const WishListPage = () => {
         </motion.div>
       ) : (
         <>
-          <div className="max-w-7xl mx-auto py-4">
+          <div className="py-4">
             <div className="flex items-center justify-between py-7 px-10">
               <div>
                 <h1 className="text-2xl font-semibold leading-relaxed text-gray-800">
@@ -169,7 +178,7 @@ const WishListPage = () => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 
