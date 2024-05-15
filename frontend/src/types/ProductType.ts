@@ -11,6 +11,8 @@ export interface ProductProps {
   numReviews: number;
   isLoading: boolean;
   error?: string;
+  isFeatured: boolean;
+  isNewArrival: boolean;
 }
 
 export interface CartState {

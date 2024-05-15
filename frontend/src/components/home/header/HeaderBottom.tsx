@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
@@ -17,6 +17,7 @@ const HeaderBottom = () => {
   const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>([]);
   const { data: products } = useGetProductsQuery({});
   const { cartItems } = useSelector((state: { cart: CartState }) => state.cart);
+  const [close, setClose] = useState(false);
 
   useEffect(() => {
     if (searchQuery.length > 0 && products?.length > 0) {
@@ -95,11 +96,15 @@ const HeaderBottom = () => {
             />
             <FaSearch className="w-5 h-5" />
             {searchQuery && (
-              <div className="absolute w-full h-96 cursor-pointer bg-white p-3 space-y-2 divide-y divide-black top-16 left-0 z-50 overflow-y-scroll ...">
+              <div className="absolute w-full h-96 cursor-pointer bg-white p-3 space-y-2 divide-y divide-black top-16 left-0 z-50 overflow-y-scroll">
                 {filteredProducts.map((product) => (
                   <div
                     key={product._id}
-                    onClick={() => navigate(`/product/${product._id}`)}
+                    onClick={() => {
+                      navigate(`/product/${product._id}`);
+                      setSearchQuery("");
+                      setClose(true);
+                    }}
                     className="flex items-center gap-3 ..."
                   >
                     <img

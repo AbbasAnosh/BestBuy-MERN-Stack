@@ -1,11 +1,24 @@
-import React, { useState } from "react";
 import { BsSuitHeartFill } from "react-icons/bs";
-import { GiReturnArrow } from "react-icons/gi";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineLabelImportant } from "react-icons/md";
 import Image from "../designLayout/Image";
+import { useAddProductToWishListMutation } from "../../../slices/wishListApiSlice";
+import { toast } from "react-toastify";
 
 const Product = (props) => {
+  const [addProductToWishList] = useAddProductToWishListMutation();
+  const handleAddToWishList = async (e) => {
+    e.preventDefault();
+    console.log(e.message, "messsageeedfds");
+    try {
+      const result = await addProductToWishList({ _id: props.id }).unwrap();
+      console.log("Product creation result:", result);
+      toast.success("Product added to wishlist");
+    } catch (err) {
+      toast.error(err.message || err.error);
+    }
+  };
+
   return (
     <div className="w-full relative group">
       <div className="max-w-80 max-h-80 relative overflow-y-hidden ">
@@ -40,7 +53,10 @@ const Product = (props) => {
                 <MdOutlineLabelImportant />
               </span>
             </li>
-            <li className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full">
+            <li
+              onClick={handleAddToWishList}
+              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
+            >
               Add to Wish List
               <span>
                 <BsSuitHeartFill />

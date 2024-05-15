@@ -1,7 +1,7 @@
-import OverviewIcon from "../../public/icons/overview.svg";
-import ShoppingBagIcon from "../../public/icons/shopping-bag.svg";
-import GraphIcon from "../../public/icons/graph.svg";
-import User from "../../public/icons/user.svg";
+import OverviewIcon from "/icons/overview.svg";
+import ShoppingBagIcon from "/icons/shopping-bag.svg";
+import GraphIcon from "/icons/graph.svg";
+import User from "/icons/user.svg";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 
 import { useState } from "react";

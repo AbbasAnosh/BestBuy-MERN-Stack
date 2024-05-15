@@ -68,45 +68,6 @@ const ShopPage = () => {
   };
 
   const filteredAndSortedProducts = applyFilters(data || []);
-
-  // const filteredProducts = data?.filter((product: ProductProps) => {
-  //   const category = product.category;
-  //   const brand = product.brand;
-  //   const isCategorySelected =
-  //     selectedCategory.length === 0 ||
-  //     (category && selectedCategory.includes(category));
-  //   const isBrandSelected =
-  //     selectedBrand.length === 0 || (brand && selectedBrand.includes(brand));
-  //   const isPriceInRange = selectedPriceRanges.some(
-  //     (range) =>
-  //       product.price >= range.priceOne && product.price <= range.priceTwo
-  //   );
-
-  //   const isPriceRange =
-  //     product.price >= priceRange.min && product.price <= priceRange.max;
-
-  //   return (
-  //     isCategorySelected &&
-  //     isBrandSelected &&
-  //     (selectedPriceRanges.length === 0 || isPriceInRange) &&
-  //     isPriceRange
-  //   );
-  // });
-
-  // let sortedAndFilteredProducts = [...(filteredProducts || [])];
-
-  // if (sortOption === "Best Sellers") {
-  //   sortedAndFilteredProducts.sort((a, b) => b.rating - a.rating);
-  // } else if (sortOption === "New Arrival") {
-  //   sortedAndFilteredProducts.sort(
-  //     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  //   );
-  // } else if (sortOption === "Featured") {
-  //   sortedAndFilteredProducts = sortedAndFilteredProducts.filter(
-  //     (product) => product.isFeatured
-  //   );
-  // }
-
   return (
     <div className="max-w-7xl mx-auto px-4">
       <Breadcrumbs title="Products" prevLocation="" />
@@ -134,6 +95,7 @@ const ShopPage = () => {
                   img={product.image}
                   productName={product.name}
                   price={product.price}
+                  isNewArrival={product.isNewArrival}
                 />
               </div>
             ))}
