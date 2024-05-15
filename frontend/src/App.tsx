@@ -31,6 +31,7 @@ import NewHeader from "./components/home/header/Header";
 import HeaderBottom from "./components/home/header/HeaderBottom";
 import AboutPage from "./screens/AboutPage";
 import ContactPage from "./screens/ContactPage";
+import WishListPage from "./screens/WishListPage";
 
 const App = () => {
   return (
@@ -51,6 +52,7 @@ const App = () => {
         <Route path="" element={<PrivateRoute />}>
           <Route path="/shipping" element={<ShippingPage />} />
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/wishlist" element={<WishListPage />} />
           <Route path="/placeorder" element={<PlaceOrderPage />} />
           <Route path="/order/:id" element={<OrderPage />} />
           <Route path="/profile" element={<ProfilePage />} />

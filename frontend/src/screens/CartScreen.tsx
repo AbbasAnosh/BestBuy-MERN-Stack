@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { IoChevronForward } from "react-icons/io5";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
+import { motion } from "framer-motion";
 
 const CartScreen = () => {
   const navigate = useNavigate();
@@ -32,17 +33,35 @@ const CartScreen = () => {
           Shopping Cart
         </h2>
         {cartItems.length === 0 ? (
-          <div className="h-[32vh]">
-            <h3 className="text-xl">
-              The cart is empty{" "}
-              <Link
-                to="/"
-                className="bg-[#E56A40] p-2 rounded-lg text-[#EEE1D1]"
-              >
-                Go Back
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="flex flex-col mdl:flex-row justify-center items-center gap-4 pb-20"
+          >
+            <div>
+              <img
+                className="w-80 rounded-lg p-4 mx-auto"
+                src="/empty-cart.svg"
+                alt="emptyCart"
+              />
+            </div>
+            <div className="max-w-[500px] p-4 py-8 bg-white flex gap-4 flex-col items-center rounded-md shadow-lg">
+              <h1 className="text-[#064F48] text-xl font-bold uppercase">
+                Your Cart is empty
+              </h1>
+              <p className="text-sm text-center px-10 -mt-2">
+                {
+                  "It’s waiting to be filled! Add some items to your cart, like books, gadgets, or movies, and make it complete."
+                }
+              </p>
+              <Link to="/shop">
+                <button className="rounded-md cursor-pointer bg-[#064F48] hover:bg-[#E56645] px-8 py-2 font-semibold text-lg text-gray-200 hover:text-white duration-300">
+                  Continue Shopping
+                </button>
               </Link>
-            </h3>
-          </div>
+            </div>
+          </motion.div>
         ) : (
           <>
             <div className="grid lg:grid-cols-3 gap-12 ">

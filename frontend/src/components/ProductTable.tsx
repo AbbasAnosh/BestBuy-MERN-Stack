@@ -105,7 +105,7 @@ const ProductTable = ({ data, refetch }) => {
                     className="p-2 hover:rounded-md hover:bg-gray-200"
                   >
                     <img
-                      src="../../public/icons/pencil.svg"
+                      src="/icons/pencil.svg"
                       className="w-6 h-6 fill-current"
                       alt=""
                     />
@@ -115,7 +115,7 @@ const ProductTable = ({ data, refetch }) => {
                     className="p-2 hover:rounded-md hover:bg-gray-200"
                   >
                     <img
-                      src="../../public/icons/trash.svg"
+                      src="/icons/trash.svg"
                       className="w-6 h-6 fill-current"
                       alt=""
                     />

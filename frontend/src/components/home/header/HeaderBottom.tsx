@@ -181,7 +181,7 @@ const HeaderBottom = () => {
               <div className="relative">
                 <BsSuitHeartFill />
                 {wishlistItems && wishlistItems.length > 0 && (
-                  <span className="absolute -top-2 -right-3 text-xs w-4 h-4 z-50 flex items-center justify-center rounded-full bg-red-600 text-white">
+                  <span className="absolute -top-2 -right-3 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-red-600 text-white">
                     {wishlistItems.length}
                   </span>
                 )}
