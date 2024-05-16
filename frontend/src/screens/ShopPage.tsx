@@ -11,11 +11,15 @@ import {
   PriceRange,
   ProductProps,
 } from "../types/ProductType";
+import { useNavigate, useParams } from "react-router-dom";
+import Pagination from "../components/shopComponent/Pagination";
 
 const ShopPage = () => {
-  const { data } = useGetProductsQuery({});
+  const { pageNumber } = useParams();
+  const { data } = useGetProductsQuery({ pageNumber });
 
-  // const [itemsPerPage, setItemsPerPage] = useState(48);
+  const Products = data?.products;
+
   const [selectedCategory, setSelectedCategory] = useState<CategoryProps[]>([]);
   const [selectedBrand, setSelectedBrand] = useState<BrandProps[]>([]);
   const [selectedPriceRanges, setSelectedPriceRanges] = useState<PriceRange[]>(
@@ -24,9 +28,7 @@ const ShopPage = () => {
   const [priceRange, setPriceRange] = useState({ min: 5, max: 10000 });
   const [sortOption, setSortOption] = useState("");
 
-  // const itemsPerPageFromBanner = (itemsPerPage) => {
-  //   setItemsPerPage(itemsPerPage);
-  // };
+  const navigate = useNavigate();
 
   const applyFilters = (products) => {
     return products
@@ -67,7 +69,14 @@ const ShopPage = () => {
       });
   };
 
-  const filteredAndSortedProducts = applyFilters(data || []);
+  const filteredAndSortedProducts = applyFilters(Products || []);
+
+  const handlePageClick = (e) => {
+    const newPageNumber = e.selected + 1;
+
+    navigate(`/shop/page/${newPageNumber}`);
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4">
       <Breadcrumbs title="Products" prevLocation="" />
@@ -101,6 +110,9 @@ const ShopPage = () => {
             ))}
           </div>
         </div>
+      </div>
+      <div>
+        <Pagination pageCount={data?.pages} handlePageClick={handlePageClick} />
       </div>
     </div>
   );
