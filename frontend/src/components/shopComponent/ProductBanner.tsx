@@ -15,19 +15,6 @@ const ProductBanner = ({ setSortOption }) => {
             <option value="Featured">Featured</option>
           </select>
         </div>
-        <div className="flex items-center gap-2 text-[#767676] relative">
-          <label className="hidden md:block">Show:</label>
-          <select
-            onChange={(e) => {}}
-            id="itemsPerPageSelect"
-            className="w-16 md:w-20 border-[1px] border-gray-200 py-1 px-2 cursor-pointer text-primeColor text-base block  appearance-none focus-within:outline-none focus-visible:border-primeColor"
-          >
-            <option value="12">12</option>
-            <option value="24">24</option>
-            <option value="36">36</option>
-            <option value="48">48</option>
-          </select>
-        </div>
       </div>
     </div>
   );

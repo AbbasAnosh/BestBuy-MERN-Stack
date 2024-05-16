@@ -9,6 +9,9 @@ import { useGetProductsQuery } from "../../../slices/productsApiSlice";
 import { CartState, ProductProps } from "../../../types/ProductType";
 import { useSelector } from "react-redux";
 import { useGetWishListQuery } from "../../../slices/wishListApiSlice";
+import { useDispatch } from "react-redux";
+import { useLogoutMutation } from "../../../slices/usersApiSlice";
+import { logout } from "../../../slices/authSlice";
 
 const HeaderBottom = () => {
   const [show, setShow] = useState(false);
@@ -18,9 +21,22 @@ const HeaderBottom = () => {
   const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>([]);
   const { data: products } = useGetProductsQuery({});
   const { cartItems } = useSelector((state: { cart: CartState }) => state.cart);
+  const { userInfo } = useSelector((state: any) => state.auth);
   const [close, setClose] = useState(false);
   const { data: wishlistData } = useGetWishListQuery({});
   const wishlistItems = wishlistData?.wishlistItems;
+
+  const dispatch = useDispatch();
+  const [logoutApiCall] = useLogoutMutation();
+  const handleLogout = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (searchQuery.length > 0 && products?.length > 0) {
@@ -135,34 +151,62 @@ const HeaderBottom = () => {
             )}
           </div>
           <div className="flex gap-4 mt-2 lg:mt-0 items-center pr-6 cursor-pointer relative">
-            <div onClick={() => setShowUser(!showUser)} className="flex">
-              <FaUser />
-              <FaCaretDown />
-            </div>
-            {showUser && (
-              <motion.ul
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="absolute top-14 -right-4 z-50 bg-primeColor w-64 bg-[#064F48] text-[#767676] h-[50vh] p-4 pb-6"
-              >
-                <Link to="/signin">
-                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Login
-                  </li>
+            {userInfo ? (
+              <>
+                <div onClick={() => setShowUser(!showUser)} className="flex">
+                  <FaUser />
+                  <FaCaretDown />
+                </div>
+                {showUser && (
+                  <motion.ul
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute top-14 -right-4 z-50 bg-primeColor w-64 bg-[#064F48] text-[#767676] h-[50vh] p-4 pb-6"
+                  >
+                    <Link to="/signin">
+                      <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                        Login
+                      </li>
+                    </Link>
+                    <Link onClick={() => setShowUser(false)} to="/signup">
+                      <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                        Sign Up
+                      </li>
+                    </Link>
+                    <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                      Profile
+                    </li>
+                    <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200  hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                      Orders
+                    </li>
+                  </motion.ul>
+                )}
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="flex flex-col justify-center items-center cursor-pointer"
+                  // onClick={handleToggle}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18px"
+                    height="18px"
+                    viewBox="0 0 512 512"
+                    fill="#ffffff"
+                  >
+                    <path
+                      d="M337.711 241.3a16 16 0 0 0-11.461 3.988c-18.739 16.561-43.688 25.682-70.25 25.682s-51.511-9.121-70.25-25.683a16.007 16.007 0 0 0-11.461-3.988c-78.926 4.274-140.752 63.672-140.752 135.224v107.152C33.537 499.293 46.9 512 63.332 512h385.336c16.429 0 29.8-12.707 29.8-28.325V376.523c-.005-71.552-61.831-130.95-140.757-135.223zM446.463 480H65.537V376.523c0-52.739 45.359-96.888 104.351-102.8C193.75 292.63 224.055 302.97 256 302.97s62.25-10.34 86.112-29.245c58.992 5.91 104.351 50.059 104.351 102.8zM256 234.375a117.188 117.188 0 1 0-117.188-117.187A117.32 117.32 0 0 0 256 234.375zM256 32a85.188 85.188 0 1 1-85.188 85.188A85.284 85.284 0 0 1 256 32z"
+                      data-original="#000000"
+                    />
+                  </svg>
+                  <span className="text-xs font-semibold mt-1 text-white">
+                    Profile
+                  </span>
                 </Link>
-                <Link onClick={() => setShowUser(false)} to="/signup">
-                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Sign Up
-                  </li>
-                </Link>
-                <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Profile
-                </li>
-                <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200  hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Orders
-                </li>
-              </motion.ul>
+              </>
             )}
             <Link to="/cart">
               <div className="relative">
