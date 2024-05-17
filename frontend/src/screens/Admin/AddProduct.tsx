@@ -68,9 +68,18 @@ function ProductForm() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-4">
-      <Breadcrumbs title="Create Product" prevLocation="" />
-      <section className="p-6 rounded-md shadow-md bg-[#F5F5F3] mt-20">
+    <div className="py-4">
+      <div className="flex items-center justify-between py-7 px-7 ">
+        <div>
+          <h1 className="text-2xl font-semibold leading-relaxed text-gray-800">
+            Create Product
+          </h1>
+          <p className="text-sm font-medium text-gray-500">
+            Prodcuts to be added
+          </p>
+        </div>
+      </div>
+      <section className="p-6">
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
