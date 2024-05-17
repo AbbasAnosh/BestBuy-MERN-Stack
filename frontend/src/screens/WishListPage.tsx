@@ -7,10 +7,11 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { addToCart } from "../slices/cartSlice";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Breadcrumbs from "../components/shopComponent/BreadCrumps";
 import { useEffect, useState } from "react";
+import { NewProductProps } from "../types/ProductType";
 
 const WishListPage = () => {
   const { data: wishlistData, refetch } = useGetWishListQuery({});
@@ -32,7 +33,7 @@ const WishListPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const addToCartHandler = (product) => {
+  const addToCartHandler = (product: NewProductProps) => {
     const productToAdd = {
       ...product,
       qty: product.qty || 1,
@@ -49,7 +50,7 @@ const WishListPage = () => {
   }, [location]);
 
   return (
-    <div className="max-w-7xl mx-auto ">
+    <div className="max-w-7xl mx-auto px-2">
       <Breadcrumbs title="wishlist" prevLocation={prevLocation} />
       {!wishlistItems || wishlistItems.length === 0 ? (
         <motion.div
@@ -84,17 +85,17 @@ const WishListPage = () => {
       ) : (
         <>
           <div className="py-4">
-            <div className="flex items-center justify-between py-7 px-10">
+            <div className="flex items-center justify-between py-7">
               <div>
                 <h1 className="text-2xl font-semibold leading-relaxed text-gray-800">
                   WishList Products
                 </h1>
               </div>
             </div>
-            <table className="w-full border-b border-gray-200">
+            <table className="w-full border-b border-gray-200 table-scrollable">
               <thead>
                 <tr className="text-sm font-medium text-gray-700 border-b border-gray-200">
-                  <td className="pl-10">
+                  <td className="">
                     <div className="flex items-center gap-x-4">
                       <span>Product Name</span>
                     </div>
@@ -104,7 +105,7 @@ const WishListPage = () => {
                   <td className="py-4 px-4 text-center">Rating</td>
                   <td className="py-4 pr-10 pl-4 text-center">
                     <img
-                      src="../../public/icons/filter.svg"
+                      src="/icons/filter.svg"
                       className="w-6 h-6 fill-current"
                       alt=""
                     />
@@ -121,20 +122,17 @@ const WishListPage = () => {
                         className="hover:bg-gray-100 transition-colors group"
                         key={product._id}
                       >
-                        <td className="flex gap-x-4 items-center py-4 pl-10">
+                        <td className="flex gap-x-4 items-center py-4 name-cell">
                           <img
                             src={image}
                             alt=""
                             className="w-40 aspect-[3/2] rounded-lg object-cover object-top border border-gray-200"
                           />
                           <div>
-                            <a
-                              href="#"
-                              className="text-lg font-semibold text-gray-700"
-                            >
+                            <p className="text-md md:text-lg font-semibold text-gray-700">
                               {name}
-                            </a>
-                            <div className="font-medium text-gray-400">
+                            </p>
+                            <div className="text-sm md:text-md font-medium text-gray-400">
                               {category}
                             </div>
                           </div>
@@ -147,7 +145,7 @@ const WishListPage = () => {
                         </td>
 
                         <td>
-                          <span className="inline-block w-20 group-hover:hidden">
+                          <span className="inline-block text-sm font-semibold w-20 group-hover:hidden">
                             {moment(product.addedAt).format("MMMM Do YYYY")}
                           </span>
                           <div className="hidden group-hover:flex group-hover:w-20 group-hover:items-center group-hover:text-gray-500 group-hover:gap-x-2">

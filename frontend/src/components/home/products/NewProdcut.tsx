@@ -6,8 +6,9 @@ import Rating from "../../Rating";
 
 import toast, { Toaster } from "react-hot-toast";
 import { addToCart } from "../../../slices/cartSlice";
+import { NewProductProps } from "../../../types/ProductType";
 
-const NewProduct = (product) => {
+const NewProduct = (product: NewProductProps) => {
   const dispatch = useDispatch();
 
   return (

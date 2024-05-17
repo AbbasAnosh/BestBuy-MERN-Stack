@@ -81,3 +81,21 @@ export type CategoriesProps = {
 export type BrandsProps = {
   setSelectedBrand: React.Dispatch<React.SetStateAction<BrandProps[]>>;
 };
+
+export type NewProductProps = {
+  qty: number;
+  _id: string;
+  name: string;
+  image: string;
+  description: string;
+  brand?: string;
+  category?: string;
+  price: number;
+  countInStock: number;
+  rating: number;
+  numReviews: number;
+  isLoading: boolean;
+  error?: string;
+  isFeatured: boolean;
+  isNewArrival: boolean;
+};

@@ -4,12 +4,13 @@ import GraphIcon from "/icons/graph.svg";
 import User from "/icons/user.svg";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductTable from "../components/ProductTable";
 import OrderTable from "../components/OrderTable";
 import { useGetOrdersQuery } from "../slices/ordersApiSlice";
 import UserTable from "../components/UserTable";
 import { useGetUsersQuery } from "../slices/usersApiSlice";
+import { useParams } from "react-router-dom";
 
 const sidebar = [
   { name: "Products", icon: ShoppingBagIcon },
@@ -19,16 +20,41 @@ const sidebar = [
 ];
 
 const Dashboard = () => {
-  const { data: products, refetch } = useGetProductsQuery({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data: products, refetch } = useGetProductsQuery({
+    pageNumber: currentPage,
+  });
+
+  // const Products = products?.products;
   const { data: orders } = useGetOrdersQuery({});
   const { data: users, refetch: userRefech } = useGetUsersQuery({});
   const [activeComponent, setActiveComponent] = useState("Products");
 
+  const handlePageClick = (data) => {
+    const newPageNumber = data.selected + 1;
+    setCurrentPage(newPageNumber);
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [currentPage]);
+
+  useEffect(() => {
+    console.log(products); // This will log the entire products object
+  }, [products]);
+
   const components = {
-    Products: <ProductTable data={products} refetch={refetch} />,
+    Products: (
+      <ProductTable
+        data={products}
+        refetch={refetch}
+        handlePageClick={handlePageClick}
+      />
+    ),
     Orders: <OrderTable data={orders} />,
     Users: <UserTable data={users} refetch={userRefech} />,
   };
+
   return (
     <div className="w-full min-h-screen font-sans text-gray-900 bg-gray-50 flex">
       <aside className="py-6 px-10 w-64 border-r border-gray-200">

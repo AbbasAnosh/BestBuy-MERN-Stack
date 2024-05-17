@@ -6,7 +6,6 @@ import NewArrivals from "../components/home/NewArrival";
 import Heading from "../components/home/products/Heading";
 import OurBestSellers from "../components/home/OurBestSellers";
 import YearProduct from "../components/home/YearProduct";
-import ParentSlider from "../components/Slider";
 import NewProduct from "../components/home/products/NewProdcut";
 import { useEffect, useState } from "react";
 import CartIcon from "../components/home/products/CartIcon";
@@ -39,7 +38,6 @@ const Homepage = () => {
         </div>
       )}
       <div>
-        {/* <ParentSlider /> */}
         <BannerSlider />
         <Services />
         <div className="max-w-7xl mx-auto px-4">

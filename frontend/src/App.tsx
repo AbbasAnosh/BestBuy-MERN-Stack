@@ -1,4 +1,3 @@
-import HomeScreen from "./screens/HomeScreen";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductsScreen from "./screens/ProductsScreen";
 import CartScreen from "./screens/CartScreen";
@@ -21,7 +20,6 @@ import ProductForm from "./screens/Admin/AddProduct";
 import ProductEditPage from "./screens/Admin/ProductEditPage";
 import UserList from "./screens/Admin/UserList";
 import UserEdite from "./screens/Admin/UserEdite";
-import Navbar from "./components/Navbar";
 import Homepage from "./screens/Homepage";
 
 import Footer from "./components/footer/Footer";
@@ -38,13 +36,11 @@ const App = () => {
     <Router>
       <NewHeader />
       <HeaderBottom />
-      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/shop/page/:pageNumber" element={<ShopPage />} />
-        <Route path="/home" element={<HomeScreen />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/product/:id" element={<ProductsScreen />} />
         <Route path="/cart" element={<CartScreen />} />
@@ -68,9 +64,8 @@ const App = () => {
           <Route path="/admin/user/:id/edit" element={<UserEdite />} />
         </Route>
       </Routes>
-      {/* <Footer /> */}
-      {/* <Footer /> */}
-      {/* <FooterBottom /> */}
+      <Footer />
+      <FooterBottom />
       <ToastContainer />
     </Router>
   );

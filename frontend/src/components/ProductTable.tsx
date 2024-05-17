@@ -2,10 +2,12 @@ import moment from "moment";
 import { useDeleteProductMutation } from "../slices/productsApiSlice";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import Pagination from "./shopComponent/Pagination";
 
-const ProductTable = ({ data, refetch }) => {
+const ProductTable = ({ data, refetch, handlePageClick }) => {
   const [deleteProduct] = useDeleteProductMutation();
-
+  const Products = data?.products;
+  const totalPages = data?.pages || 0;
   const deleteHandler = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
@@ -17,6 +19,7 @@ const ProductTable = ({ data, refetch }) => {
       }
     }
   };
+
   return (
     <>
       <div className="flex items-center justify-between py-7 px-10">
@@ -42,7 +45,7 @@ const ProductTable = ({ data, refetch }) => {
           </span>
         </Link>
       </div>
-      <table className="w-full border-b border-gray-200">
+      <table className="w-full border-b border-gray-200 ">
         <thead>
           <tr className="text-sm font-medium text-gray-700 border-b border-gray-200">
             <td className="pl-10">
@@ -64,7 +67,7 @@ const ProductTable = ({ data, refetch }) => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((product) => (
+          {Products?.map((product) => (
             <tr
               className="hover:bg-gray-100 transition-colors group"
               key={product._id}
@@ -126,6 +129,7 @@ const ProductTable = ({ data, refetch }) => {
           ))}
         </tbody>
       </table>
+      <Pagination pageCount={totalPages} handlePageClick={handlePageClick} />
     </>
   );
 };
