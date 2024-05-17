@@ -11,6 +11,7 @@ import { useGetOrdersQuery } from "../slices/ordersApiSlice";
 import UserTable from "../components/UserTable";
 import { useGetUsersQuery } from "../slices/usersApiSlice";
 import ProductForm from "./Admin/AddProduct";
+import ProductEditPage from "./Admin/ProductEditPage";
 
 const sidebar = [
   { name: "Products", icon: ShoppingBagIcon },

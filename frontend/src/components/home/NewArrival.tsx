@@ -56,6 +56,8 @@ const NewArrivals = () => {
               img={product.image}
               productName={product.name}
               price={product.price}
+              rating={product.rating}
+              review={product.numReviews}
               isNewArrival={product.isNewArrival}
             />
           </div>

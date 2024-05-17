@@ -56,7 +56,7 @@ const Rating = ({ value, review }: RatingProps) => {
         </span>
       </div>
       <p className="text-[#075049] text-sm text-nowrap">
-        {review} <span className="text-[#E56A40]">reviews</span>
+        ({review}) <span className="text-[#E56A40]">reviews</span>
       </p>
     </div>
   );

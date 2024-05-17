@@ -22,8 +22,17 @@ export const getProduct = asyncHandler(async (req, res) => {
 });
 
 export const createProduct = asyncHandler(async (req, res) => {
-  const { name, price, description, image, brand, category, countInStock } =
-    req.body;
+  const {
+    name,
+    price,
+    description,
+    image,
+    brand,
+    category,
+    countInStock,
+    isNewArrival,
+    isFeatured,
+  } = req.body;
 
   try {
     const product = new Product({
@@ -35,6 +44,8 @@ export const createProduct = asyncHandler(async (req, res) => {
       brand,
       category,
       countInStock,
+      isNewArrival,
+      isFeatured,
     });
 
     await product.save();
@@ -45,8 +56,17 @@ export const createProduct = asyncHandler(async (req, res) => {
 });
 
 export const updateProduct = asyncHandler(async (req, res) => {
-  const { name, price, description, image, brand, category, countInStock } =
-    req.body;
+  const {
+    name,
+    price,
+    description,
+    image,
+    brand,
+    category,
+    countInStock,
+    isNewArrival,
+    isFeatured,
+  } = req.body;
 
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -57,6 +77,8 @@ export const updateProduct = asyncHandler(async (req, res) => {
     product.brand = brand;
     product.category = category;
     product.countInStock = countInStock;
+    product.isNewArrival = isNewArrival;
+    product.isFeatured = isFeatured;
     const updatedProduct = await product.save();
     res.status(200).json(updatedProduct);
   } else {

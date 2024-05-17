@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import classNames from "classnames";
 import {
   useCreateProductMutation,
   useUploadAllProductImageMutation,
 } from "../../slices/productsApiSlice";
 import { toast } from "react-toastify";
-import Breadcrumbs from "../../components/shopComponent/BreadCrumps";
 
 function ProductForm() {
   const [name, setName] = useState("");
@@ -14,6 +14,8 @@ function ProductForm() {
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
+  const [isNewArrival, setIsNewArrival] = useState(false);
+  const [isFeatured, setIsFeatured] = useState(false);
 
   const [createProduct] = useCreateProductMutation();
   const [uploadAllProductImage] = useUploadAllProductImageMutation();
@@ -29,6 +31,8 @@ function ProductForm() {
       brand,
       category,
       countInStock,
+      isNewArrival,
+      isFeatured,
     };
 
     try {
@@ -42,6 +46,8 @@ function ProductForm() {
       setBrand("");
       setCategory("");
       setCountInStock(0);
+      setIsNewArrival(false);
+      setIsFeatured(false);
     } catch (error) {
       console.error("Product creation error:", error);
       toast.error("Product creation failed");
@@ -152,7 +158,42 @@ function ProductForm() {
                 className="block w-full px-4 py-2 mt-2 text-gray-700 border border-[#064F48] rounded-md focus:outline-none focus:ring-0 outline-none ring-0 focus:border-[#E56A40]"
               />
             </div>
-
+            <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+              <div
+                className={classNames("flex items-center", {
+                  "col-span-1": true,
+                })}
+              >
+                <input
+                  type="checkbox"
+                  id="isNewArrival"
+                  name="isNewArrival"
+                  checked={isNewArrival}
+                  onChange={(e) => setIsNewArrival(e.target.checked)}
+                  className="mr-2"
+                />
+                <label className="text-[#064F48]" htmlFor="isNewArrival">
+                  Is New Arrival
+                </label>
+              </div>
+              <div
+                className={classNames("flex items-center", {
+                  "col-span-1": true,
+                })}
+              >
+                <input
+                  type="checkbox"
+                  id="isFeatured"
+                  name="isFeatured"
+                  checked={isFeatured}
+                  onChange={(e) => setIsFeatured(e.target.checked)}
+                  className="mr-2"
+                />
+                <label className="text-[#064F48]" htmlFor="isFeatured">
+                  Is Featured
+                </label>
+              </div>
+            </div>
             <div>
               <label className="text-[#064F48]" htmlFor="passwordConfirmation">
                 Description

@@ -7,6 +7,8 @@ import toast, { Toaster } from "react-hot-toast";
 import Badge from "./Badge";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../slices/cartSlice";
+import { useNavigate } from "react-router-dom";
+import Rating from "../../Rating";
 
 const Product = (props) => {
   const [addProductToWishList] = useAddProductToWishListMutation();
@@ -20,9 +22,12 @@ const Product = (props) => {
     }
   };
   const product = props;
-  console.log(product);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const handleDetails = (id) => {
+    navigate(`/product/${id}`);
+  };
   return (
     <div className="w-full relative group">
       <div className="max-w-80 max-h-96 relative overflow-y-hidden ">
@@ -52,7 +57,10 @@ const Product = (props) => {
                 <FaShoppingCart />
               </span>
             </li>
-            <li className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full">
+            <li
+              onClick={() => handleDetails(props.id)}
+              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
+            >
               View Details
               <span className="text-lg">
                 <MdOutlineLabelImportant />
@@ -72,11 +80,14 @@ const Product = (props) => {
       </div>
       <div className="max-w-80 py-6 flex flex-col gap-1 border-[1px] border-t-0 px-4">
         <div className="flex items-center justify-between font-titleFont">
-          <h2 className="text-lg text-primeColor font-bold">
-            {props.productName}
+          <h2 className="text-md text-primeColor font-bold">
+            {props?.productName?.length > 25
+              ? `${props?.productName.substring(0, 20)}...`
+              : props.productName}
           </h2>
           <p className="text-[#767676] text-[14px]">${props.price}</p>
         </div>
+        <Rating value={props.rating} review={props.review} />
       </div>
       <Toaster
         position="top-right"

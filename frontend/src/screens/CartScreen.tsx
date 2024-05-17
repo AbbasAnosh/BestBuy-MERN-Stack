@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { IoChevronForward } from "react-icons/io5";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
 import { motion } from "framer-motion";
+import Breadcrumbs from "../components/shopComponent/BreadCrumps";
 
 const CartScreen = () => {
   const navigate = useNavigate();
@@ -23,15 +24,9 @@ const CartScreen = () => {
     <div className="bg-[#EEE1D1]">
       <div className="p-4 lg:max-w-7xl max-w-xl mx-auto pb-20 ">
         <div className="mb-10 flex items-center space-x-2 font-semibold">
-          <Link to="/" className="hover:text-[#E56A40]">
-            Home
-          </Link>
-          <IoChevronForward className="text-[#E56A40]" />
-          <p>Cart Page</p>
+          <Breadcrumbs title="Cart Screen" prevLocation="" />
         </div>
-        <h2 className="text-3xl font-extrabold text-[#064F48] mb-10">
-          Shopping Cart
-        </h2>
+
         {cartItems.length === 0 ? (
           <motion.div
             initial={{ y: 30, opacity: 0 }}
