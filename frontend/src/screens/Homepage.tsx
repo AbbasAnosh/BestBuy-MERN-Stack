@@ -1,5 +1,4 @@
 import Services from "../components/Services";
-import TrendingProduct from "../components/TrendingProduct";
 import { useGetTopProductsQuery } from "../slices/productsApiSlice";
 import { ProductProps } from "../types/ProductType";
 
@@ -11,6 +10,7 @@ import ParentSlider from "../components/Slider";
 import NewProduct from "../components/home/products/NewProdcut";
 import { useEffect, useState } from "react";
 import CartIcon from "../components/home/products/CartIcon";
+import BannerSlider from "../components/home/products/BannerSlider";
 
 const Homepage = () => {
   const [showCartIcon, setShowCartIcon] = useState(false);
@@ -39,10 +39,9 @@ const Homepage = () => {
         </div>
       )}
       <div>
-        <ParentSlider />
-        {/* <Banner /> */}
+        {/* <ParentSlider /> */}
+        <BannerSlider />
         <Services />
-        {/* <Trends /> */}
         <div className="max-w-7xl mx-auto px-4">
           <NewArrivals />
           <OurBestSellers />

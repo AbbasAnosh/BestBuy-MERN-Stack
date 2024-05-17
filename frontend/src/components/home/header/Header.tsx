@@ -50,9 +50,9 @@ const NewHeader = () => {
 
   return (
     <div className="w-full h-20 bg-[#064F48] z-50 opacity-100 sticky top-0 border-b-[1px] border-b-gray-200">
-      <nav className="h-full px-4 mx-auto relative">
+      <nav className="h-full px-4 max-w-7xl mx-auto relative">
         <div className="flex items-center justify-between h-full">
-          <div>
+          <div className="">
             <Logo />
           </div>
           <div>
@@ -77,10 +77,12 @@ const NewHeader = () => {
                 </>
               </motion.ul>
             )}
-            <HiMenuAlt2
-              onClick={() => setSidenav(!sidenav)}
-              className="inline-block md:hidden cursor-pointer w-8 h-6 absolute top-6 right-4"
-            />
+            {!showMenu && (
+              <HiMenuAlt2
+                onClick={() => setSidenav(!sidenav)}
+                className="inline-block md:hidden cursor-pointer text-white w-8 h-6 absolute top-6 right-4"
+              />
+            )}
             {sidenav && (
               <div className="fixed top-0 left-0 w-full h-screen bg-black text-gray-200 bg-opacity-80 z-50">
                 <motion.div
@@ -98,7 +100,6 @@ const NewHeader = () => {
                         >
                           <NavLink
                             to={item.link}
-                            // state={{ data: location.pathname.split("/")[1] }}
                             onClick={() => setSidenav(false)}
                           >
                             {item.title}

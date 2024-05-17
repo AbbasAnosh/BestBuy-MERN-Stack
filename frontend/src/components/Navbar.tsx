@@ -35,6 +35,17 @@ const Navbar = () => {
     }
   };
 
+  const getInitials = (name) => {
+    const parts = name.split(" ");
+    var initials = "";
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].length > 0 && parts[i] !== "") {
+        initials += parts[i][0];
+      }
+    }
+    return initials;
+  };
+
   return (
     <div className=" bg-[#064F48]">
       <header className="flex shadow-lg py-4 px-4 sm:px-10 max-w-7xl mx-auto   min-h-[70px] tracking-wide relative z-50 items-center justify-between">
@@ -126,7 +137,7 @@ const Navbar = () => {
                     />
                   </svg>
                   <span className="text-xs font-semibold mt-1 text-white">
-                    {userInfo.name}
+                    {getInitials(userInfo.name)}
                   </span>
                 </div>
                 {isOpen && (

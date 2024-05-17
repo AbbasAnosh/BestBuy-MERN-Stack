@@ -5,7 +5,7 @@ const Logo = () => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1264.000000 788.000000"
       preserveAspectRatio="xMidYMid meet"
-      className="w-96 h-full object-cover font-[600]"
+      className="w-72 -ml-16 lg:-ml-28 md:w-96 h-full object-cover font-[600]"
     >
       <g
         transform="translate(0.000000,788.000000) scale(0.100000,-0.100000)"

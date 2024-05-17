@@ -33,7 +33,7 @@ const NewProduct = (product) => {
                 dispatch(addToCart(productToAdd));
                 toast.success("... added to cart");
               }}
-              className="bg-gray-800 text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-1 hover:bg-gray-950 hover:text-white duration-200"
+              className="bg-[#064F48] text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-1 hover:bg-[#E56A40] hover:text-white duration-200"
             >
               <span>
                 <AiOutlineShopping />
@@ -42,7 +42,7 @@ const NewProduct = (product) => {
             </button>
             <Link
               to={`/product/${product._id}`}
-              className="bg-gray-800 text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-1 hover:bg-gray-950 hover:text-white duration-200"
+              className="bg-[#064F48] text-gray-200 px-4 py-2 text-xs rounded-full flex items-center gap-1 hover:bg-[#E56A40] hover:text-white duration-200"
             >
               <span>
                 <BsArrowsFullscreen />

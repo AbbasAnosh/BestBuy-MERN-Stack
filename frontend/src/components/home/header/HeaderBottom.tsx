@@ -53,6 +53,17 @@ const HeaderBottom = () => {
     setSearchQuery(e.target.value);
   };
 
+  const getInitials = (name: string) => {
+    const parts = name.split(" ");
+    var initials = "";
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].length > 0 && parts[i] !== "") {
+        initials += parts[i][0];
+      }
+    }
+    return initials;
+  };
+
   return (
     <div className="w-full bg-[#F5F5F3] relative">
       <div className="max-w-7xl mx-auto">
@@ -61,15 +72,15 @@ const HeaderBottom = () => {
             onClick={() => setShow(!show)}
             className="flex h-14 cursor-pointer items-center gap-2"
           >
-            <HiOutlineMenuAlt4 className="w-5 h-5 z-50" />
-            <p className="text-[14px] font-normal z-50">Shop by Category</p>
+            <HiOutlineMenuAlt4 className="w-5 h-5 z-50 text-[#064F48]" />
+            <p className="text-[14px] font-normal ">Shop by Category</p>
 
             {show && (
               <motion.ul
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute top-[96px] z-50 left-26 bg-[#064F48] w-[16vw] text-[#767676] h-[50vh] p-4 pb-6"
+                className="absolute top-[108px] lg:top-[96px] z-40 lg:left-26 bg-[#064F48]  text-[#767676] h-[50vh] p-4 pb-6"
               >
                 <Link to={"category/imprimante"}>
                   <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
@@ -105,7 +116,7 @@ const HeaderBottom = () => {
               </motion.ul>
             )}
           </div>
-          <div className="relative w-full lg:w-[600px] h-[50px] text-base text-primeColor bg-white flex items-center gap-2 justify-between px-6 rounded-xl">
+          <div className="relative w-full lg:w-[600px] h-[50px] text-base text-[#064F48] bg-white flex items-center gap-2 justify-between px-6 rounded-xl">
             <input
               className="flex-1 h-full outline-none ring-0 border-0 focus:border-0 focus:ring-0 placeholder:text-[#C4C4C4] placeholder:text-[14px]"
               type="text"
@@ -153,33 +164,45 @@ const HeaderBottom = () => {
           <div className="flex gap-4 mt-2 lg:mt-0 items-center pr-6 cursor-pointer relative">
             {userInfo ? (
               <>
-                <div onClick={() => setShowUser(!showUser)} className="flex">
-                  <FaUser />
-                  <FaCaretDown />
+                <div
+                  onClick={() => setShowUser(!showUser)}
+                  className="flex items-center"
+                >
+                  <span className="text-lg font-semibold mt-1 text-[#064F48]">
+                    {getInitials(userInfo.name)}
+                  </span>
+                  <FaCaretDown className="text-[#064F48]" />
                 </div>
                 {showUser && (
                   <motion.ul
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="absolute top-14 -right-4 z-50 bg-primeColor w-64 bg-[#064F48] text-[#767676] h-[50vh] p-4 pb-6"
+                    className="absolute top-12 lg:top-16 lg:-right-4 z-40 w-64 bg-[#064F48] text-[#767676] h-[50vh] p-4 pb-6"
                   >
-                    <Link to="/signin">
-                      <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                        Login
+                    <div>
+                      <li
+                        onClick={handleLogout}
+                        className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer"
+                      >
+                        Logout
                       </li>
-                    </Link>
-                    <Link onClick={() => setShowUser(false)} to="/signup">
+                    </div>
+                    {/* <Link onClick={() => setShowUser(false)} to="/signup">
                       <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                         Sign Up
                       </li>
+                    </Link> */}
+                    <Link to="/profile">
+                      <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                        Profile
+                      </li>
                     </Link>
-                    <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                      Profile
-                    </li>
-                    <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200  hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                      Orders
-                    </li>
+                    <Link to="/orders">
+                      <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200  hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                        Orders
+                      </li>
+                    </Link>
                   </motion.ul>
                 )}
               </>
@@ -187,30 +210,16 @@ const HeaderBottom = () => {
               <>
                 <Link
                   to="/login"
-                  className="flex flex-col justify-center items-center cursor-pointer"
-                  // onClick={handleToggle}
+                  className="flex justify-center items-center cursor-pointer"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18px"
-                    height="18px"
-                    viewBox="0 0 512 512"
-                    fill="#ffffff"
-                  >
-                    <path
-                      d="M337.711 241.3a16 16 0 0 0-11.461 3.988c-18.739 16.561-43.688 25.682-70.25 25.682s-51.511-9.121-70.25-25.683a16.007 16.007 0 0 0-11.461-3.988c-78.926 4.274-140.752 63.672-140.752 135.224v107.152C33.537 499.293 46.9 512 63.332 512h385.336c16.429 0 29.8-12.707 29.8-28.325V376.523c-.005-71.552-61.831-130.95-140.757-135.223zM446.463 480H65.537V376.523c0-52.739 45.359-96.888 104.351-102.8C193.75 292.63 224.055 302.97 256 302.97s62.25-10.34 86.112-29.245c58.992 5.91 104.351 50.059 104.351 102.8zM256 234.375a117.188 117.188 0 1 0-117.188-117.187A117.32 117.32 0 0 0 256 234.375zM256 32a85.188 85.188 0 1 1-85.188 85.188A85.284 85.284 0 0 1 256 32z"
-                      data-original="#000000"
-                    />
-                  </svg>
-                  <span className="text-xs font-semibold mt-1 text-white">
-                    Profile
-                  </span>
+                  <FaUser />
+                  <FaCaretDown />
                 </Link>
               </>
             )}
             <Link to="/cart">
               <div className="relative">
-                <FaShoppingCart />
+                <FaShoppingCart className="text-[#064F48]" />
                 {cartItems.length > 0 && (
                   <span className="absolute -top-2 -right-3 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-red-600 text-white">
                     {cartItems.reduce(
@@ -223,7 +232,7 @@ const HeaderBottom = () => {
             </Link>
             <Link to="/wishlist">
               <div className="relative">
-                <BsSuitHeartFill />
+                <BsSuitHeartFill className="text-[#064F48]" />
                 {wishlistItems && wishlistItems.length > 0 && (
                   <span className="absolute -top-2 -right-3 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-red-600 text-white">
                     {wishlistItems.length}

@@ -69,8 +69,8 @@ const App = () => {
         </Route>
       </Routes>
       {/* <Footer /> */}
-      <Footer />
-      <FooterBottom />
+      {/* <Footer /> */}
+      {/* <FooterBottom /> */}
       <ToastContainer />
     </Router>
   );
