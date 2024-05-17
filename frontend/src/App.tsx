@@ -55,12 +55,8 @@ const App = () => {
           <Route path="/profile" element={<ProfilePage />} />
         </Route>
         <Route path="" element={<AdminPrivateRoute />}>
-          {/* <Route path="/admin/orderlist" element={<OrderList />} /> */}
           <Route path="/admin/dashboard" element={<Dashboard />} />
-          {/* <Route path="/admin/productlist" element={<ProductListPage />} /> */}
-          {/* <Route path="/admin/addproduct" element={<ProductForm />} /> */}
           <Route path="/admin/product/:id/edit" element={<ProductEditPage />} />
-          {/* <Route path="/admin/userlist" element={<UserList />} /> */}
           <Route path="/admin/user/:id/edit" element={<UserEdite />} />
         </Route>
       </Routes>

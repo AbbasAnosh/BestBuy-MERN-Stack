@@ -12,50 +12,43 @@ const ProfilePage = () => {
   const { data: orders, isLoading, error } = useGetMyOrdersQuery({});
 
   return (
-    <div className="min-h-screen bg-[#EEE1D1] mx-auto">
-      <div className="w-full lg:max-w-7xl p-4 mx-auto space-y-16 pt-16 pb-10">
-        <div>
-          <h1 className="text-3xl font-extrabold text-[#064F48]">Profile</h1>
+    <div className="min-h-screen flex flex-col lg:flex-row mx-auto bg-gray-100">
+      <div className="lg:w-1/4 p-5 bg-white mt-5 rounded-tr-lg">
+        <h1 className="text-2xl font-bold text-gray-800 mb-10">Profile</h1>
+        <div className="space-y-4">
+          <button
+            className={`w-full text-left px-4 py-3 rounded-md text-white font-medium ${
+              selectedComponent === "UpdateProfile"
+                ? "bg-[#E56744]"
+                : " bg-[#064F48]"
+            }`}
+            onClick={() => setSelectedComponent("UpdateProfile")}
+          >
+            Update Account
+          </button>
+          <button
+            className={`w-full text-left px-4 py-3 rounded-md text-white font-medium ${
+              selectedComponent === "OrderForm"
+                ? "bg-[#E56744]"
+                : "bg-[#064F48] "
+            }`}
+            onClick={() => setSelectedComponent("OrderForm")}
+          >
+            Order Lists
+          </button>
         </div>
-        <div className=" flex flex-col md:flex-row gap-4">
-          <div className="lg:w-1/4 bg-white max-h-44 rounded-md">
-            <h1
-              className="cursor-pointer py-3 px-4 bg-[#064F48] rounded-md text-white  mb-2"
-              onClick={() => setSelectedComponent("UpdateProfile")}
-            >
-              Update account
-            </h1>
-            <h1
-              className="cursor-pointer bg-[#064F48] text-white py-3 px-4 rounded-md "
-              onClick={() => setSelectedComponent("OrderForm")}
-            >
-              Order Lists
-            </h1>
-          </div>
-          <div className="lg:w-3/4">
-            <div>
-              {selectedComponent === "UpdateProfile" && (
-                <h1 className="mb-10 text-xl font-extrabold text-[#064F48]">
-                  Update Account
-                </h1>
-              )}
-              {selectedComponent === "UpdateProfile" && <UpdateProfile />}
-            </div>
-            <div>
-              {selectedComponent === "OrderForm" && (
-                <h1 className="mb-10 text-xl font-extrabold text-[#064F48]">
-                  Order Lists
-                </h1>
-              )}
-              {selectedComponent === "OrderForm" && (
-                <OrderForm
-                  orders={orders}
-                  isLoading={isLoading}
-                  error={error}
-                />
-              )}
-            </div>
-          </div>
+      </div>
+      <div className="lg:w-3/4 p-5">
+        <div className="bg-white p-5 rounded-lg">
+          {selectedComponent === "UpdateProfile" && <UpdateProfile />}
+          {selectedComponent === "OrderForm" && (
+            <>
+              <h2 className="text-xl font-bold text-gray-800 mb-5">
+                Order Lists
+              </h2>
+              <OrderForm orders={orders} isLoading={isLoading} error={error} />
+            </>
+          )}
         </div>
       </div>
     </div>

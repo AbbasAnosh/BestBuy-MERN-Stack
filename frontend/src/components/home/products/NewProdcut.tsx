@@ -13,15 +13,15 @@ const NewProduct = (product: NewProductProps) => {
 
   return (
     <div className="w-full relative group border-[1px] border-black hover:shadow-lg duration-200 shadow-gray-500 rounded-md overflow-hidden group">
-      <div className="w-full h-80 flex items-center justify-center bg-white overflow-hidden">
-        <div className="relative bg-red-200">
+      <div className="w-full h-72 flex items-center justify-center bg-white overflow-hidden">
+        <div className="relative">
           <Link to={`/product/${product?._id}`}>
             <img
               src={product.image}
               alt="product image"
               width={700}
               height={700}
-              className="w-72 h-72 object-contain"
+              className="w-72 h-64 object-contain"
             />
           </Link>
           <div className="abosute bottom-0 flex items-center gap-5 justify-center translate-y-[110%] group-hover:-translate-y-2 transition-transform duration-300">
