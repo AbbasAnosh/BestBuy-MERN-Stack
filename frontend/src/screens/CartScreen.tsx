@@ -21,7 +21,7 @@ const CartScreen = () => {
     navigate("/login?redirect=/shipping");
   };
   return (
-    <div className="bg-[#EEE1D1]">
+    <div>
       <div className="p-4 lg:max-w-7xl max-w-xl mx-auto pb-20 ">
         <div className="mb-10 flex items-center space-x-2 font-semibold">
           <Breadcrumbs title="Cart Screen" prevLocation="" />

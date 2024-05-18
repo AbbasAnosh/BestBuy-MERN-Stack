@@ -1,7 +1,6 @@
 import { BsSuitHeartFill } from "react-icons/bs";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineLabelImportant } from "react-icons/md";
-import Image from "../designLayout/Image";
 import { useAddProductToWishListMutation } from "../../../slices/wishListApiSlice";
 import toast, { Toaster } from "react-hot-toast";
 import Badge from "./Badge";
@@ -9,33 +8,34 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../../slices/cartSlice";
 import { useNavigate } from "react-router-dom";
 import Rating from "../../Rating";
+import { ProductProps } from "../../../types/ProductType";
 
-const Product = (props) => {
+const Product = (product: ProductProps) => {
   const [addProductToWishList] = useAddProductToWishListMutation();
   const handleAddToWishList = async (e) => {
     e.preventDefault();
     try {
-      const result = await addProductToWishList({ _id: props.id }).unwrap();
+      const result = await addProductToWishList({ _id: product.id }).unwrap();
       toast.success("... added to wishlist");
     } catch (err) {
       toast.error(err.message || err.error);
     }
   };
-  const product = props;
+  console.log(product);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleDetails = (id) => {
-    navigate(`/product/${id}`);
+  const handleDetails = (_id) => {
+    navigate(`/product/${_id}`);
   };
   return (
     <div className="w-full relative group">
       <div className="max-w-80 max-h-96 relative overflow-y-hidden ">
         <div className="relative">
-          <Image className="w-full h-full" imgSrc={props.img} />
+          <img className="w-full h-full" src={product.image} />
           <div className="absolute top-6 left-8">
-            {props.isNewArrival && <Badge text="New" />}
-            {props.isFeatured && <Badge text="Featured" />}
+            {product.isNewArrival && <Badge text="New" />}
+            {product.isFeatured && <Badge text="Featured" />}
           </div>
         </div>
 
@@ -49,6 +49,7 @@ const Product = (props) => {
                 };
                 dispatch(addToCart(productToAdd));
                 toast.success("... added to cart");
+                console.log(productToAdd);
               }}
               className="text-[#064F48] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-[#064F48] hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
             >
@@ -58,7 +59,7 @@ const Product = (props) => {
               </span>
             </li>
             <li
-              onClick={() => handleDetails(props.id)}
+              onClick={() => handleDetails(product._id)}
               className="text-[#064F48] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-[#064F48] hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
             >
               View Details
@@ -81,15 +82,15 @@ const Product = (props) => {
       <div className="max-w-80 py-6 flex flex-col gap-1 border-[1px] border-t-0 px-4">
         <div className="flex items-center justify-between font-titleFont">
           <h2 className="text-md text-primeColor font-bold">
-            {props?.productName?.length > 25
-              ? `${props?.productName.substring(0, 20)}...`
-              : props.productName}
+            {product?.name?.length > 25
+              ? `${product?.name.substring(0, 20)}...`
+              : product.name}
           </h2>
           <p className="text-[#064F48] text-[14px] font-normal">
-            ${props.price}
+            ${product.price}
           </p>
         </div>
-        <Rating value={props.rating} review={props.review} />
+        <Rating value={product.rating} review={product.review} />
       </div>
       <Toaster
         position="top-right"

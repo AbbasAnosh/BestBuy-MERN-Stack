@@ -48,15 +48,7 @@ const OurBestSellers = () => {
       <Slider {...settings}>
         {featuredProducts?.map((product) => (
           <div key={product.id} className="px-2">
-            <Product
-              id={product._id}
-              img={product.image}
-              productName={product.name}
-              price={product.price}
-              rating={product.rating}
-              review={product.numReviews}
-              isFeatured={product.isFeatured}
-            />
+            <Product {...product} key={product._id} />
           </div>
         ))}
       </Slider>

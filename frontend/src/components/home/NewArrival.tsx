@@ -45,21 +45,15 @@ const NewArrivals = () => {
     ],
   };
 
+  console.log(newArrivals);
+
   return (
     <div className="w-full py-12 relative">
       <Heading heading="New Arrivals" />
       <Slider {...settings}>
         {newArrivals?.map((product) => (
-          <div key={product.id} className="px-2">
-            <Product
-              id={product._id}
-              img={product.image}
-              productName={product.name}
-              price={product.price}
-              rating={product.rating}
-              review={product.numReviews}
-              isNewArrival={product.isNewArrival}
-            />
+          <div key={product._id} className="px-2">
+            <Product {...product} key={product._id} />
           </div>
         ))}
       </Slider>

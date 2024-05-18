@@ -111,7 +111,7 @@ const HeaderBottom = () => {
                 className="absolute top-[108px] flex flex-col h-[50vh] md:flex-row md:space-x-10 lg:top-[96px] z-40 lg:left-26 bg-[#064F48]  text-[#767676] md:h-[15vh] p-4 pb-6"
               >
                 <Link to={"/women"}>
-                  <li className="text-white uppercase px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                  <li className="text-white uppercase px-4 py-1 border-b-[1px]  hover:border-b-white hover:text-white duration-300 cursor-pointer">
                     Women
                   </li>
                 </Link>
