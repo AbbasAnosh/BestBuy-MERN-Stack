@@ -47,7 +47,7 @@ const Brand: React.FC<BrandsProps> = ({ setSelectedBrand }) => {
     },
     {
       _id: 8,
-      title: "Ray Ban",
+      title: "Coach",
     },
   ];
 

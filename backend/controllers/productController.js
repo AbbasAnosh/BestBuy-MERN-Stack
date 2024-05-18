@@ -4,11 +4,56 @@ import Product from "../models/productModel.js";
 export const getProducts = asyncHandler(async (req, res) => {
   const pageSize = 12;
   const page = Number(req.query.pageNumber) || 1;
-  const count = await Product.countDocuments();
+  const category = req.query.category;
+  const brand = req.query.brand;
+  const minPrice = Number(req.query.minPrice) || 0;
+  const maxPrice = Number(req.query.maxPrice) || 10000;
+  const priceRanges = req.query.priceRanges;
+  const sort = req.query.sort;
 
-  const products = await Product.find({})
+  let query = {
+    ...(category && { category }),
+    ...(brand && { brand }),
+    price: { $gte: minPrice, $lte: maxPrice },
+  };
+
+  if (minPrice && maxPrice) {
+    query.price = { $gte: minPrice, $lte: maxPrice };
+  }
+  if (priceRanges) {
+    const ranges = priceRanges.split(",").map((range) => {
+      const [min, max] = range.split("-").map(Number);
+      return { price: { $gte: min, $lte: max } };
+    });
+    query.$or = ranges;
+  }
+  if (req.query.rangeValue) {
+    const rangeValue = Number(req.query.rangeValue);
+    query.price = { $gte: minPrice, $lte: rangeValue };
+  }
+  let sortOptions = {};
+  switch (sort) {
+    case "Top Products":
+      sortOptions.rating = -1;
+      break;
+    case "New Arrival":
+      sortOptions.createdAt = -1;
+      break;
+    case "Featured":
+      sortOptions.isFeatured = -1;
+      break;
+    case "All Products":
+    default:
+      sortOptions = {};
+  }
+
+  const count = await Product.countDocuments(query);
+
+  const products = await Product.find(query)
+    .sort(sortOptions)
     .limit(pageSize)
     .skip(pageSize * (page - 1));
+
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
@@ -161,7 +206,7 @@ export const getFeaturedProducts = asyncHandler(async (req, res) => {
 });
 
 export const getTopRatedProducts = asyncHandler(async (req, res) => {
-  const minNumberOfReviews = 10;
+  const minNumberOfReviews = 5;
 
   try {
     const topProducts = await Product.find({
@@ -173,5 +218,96 @@ export const getTopRatedProducts = asyncHandler(async (req, res) => {
   } catch (error) {
     res.status(404);
     throw new Error("Can't get the top rated products.");
+  }
+});
+
+export const getWomenProducts = asyncHandler(async (req, res) => {
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const count = await Product.countDocuments({ category: "Women" });
+
+  try {
+    const womenProducts = await Product.find({ category: "Women" })
+      .sort({ createdAt: -1 })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+
+    res.json({
+      womenProducts,
+      page,
+      pages: Math.ceil(count / pageSize),
+    });
+  } catch (error) {
+    res.status(404);
+    throw new Error("Can't get the women products.");
+  }
+});
+
+export const getMenProducts = asyncHandler(async (req, res) => {
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const count = await Product.countDocuments({ category: "Men" });
+
+  try {
+    const menProducts = await Product.find({ category: "Men" })
+      .sort({ createdAt: -1 })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+
+    res.json({
+      menProducts,
+      page,
+      pages: Math.ceil(count / pageSize),
+    });
+  } catch (error) {
+    res.status(404);
+    throw new Error("Can't get the men products.");
+  }
+});
+
+export const getKidsProducts = asyncHandler(async (req, res) => {
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const count = await Product.countDocuments({ category: "Kids" });
+
+  try {
+    const kidsProducts = await Product.find({ category: "Kids" })
+      .sort({ createdAt: -1 })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+
+    res.json({
+      kidsProducts,
+      page,
+      pages: Math.ceil(count / pageSize),
+    });
+  } catch (error) {
+    res.status(404);
+    throw new Error("Can't get the kids products.");
+  }
+});
+export const getTravelProducts = asyncHandler(async (req, res) => {
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const count = await Product.countDocuments({ category: "Travel" });
+
+  try {
+    const travelProducts = await Product.find({ category: "Travel" })
+      .sort({ createdAt: -1 })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+
+    res.json({
+      travelProducts,
+      page,
+      pages: Math.ceil(count / pageSize),
+    });
+  } catch (error) {
+    res.status(404);
+    throw new Error("Can't get the travel products.");
   }
 });

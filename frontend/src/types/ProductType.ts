@@ -99,3 +99,12 @@ export type NewProductProps = {
   isFeatured: boolean;
   isNewArrival: boolean;
 };
+
+export interface CategoryProp {
+  _id: number;
+  title: string;
+}
+
+export interface CategoriesProp {
+  setSelectedCategory: React.Dispatch<React.SetStateAction<CategoryProps[]>>;
+}

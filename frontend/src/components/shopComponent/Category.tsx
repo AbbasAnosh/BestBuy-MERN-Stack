@@ -1,36 +1,31 @@
 import { useState } from "react";
-import { ImPlus } from "react-icons/im";
 import { motion } from "framer-motion";
 import NavTitle from "./NavTitle";
-import { CategoriesProps, CategoryProps } from "../../types/ProductType";
+import {
+  CategoriesProp,
+  CategoryProp,
+  CategoryProps,
+} from "../../types/ProductType";
 
-const Category: React.FC<CategoriesProps> = ({ setSelectedCategory }) => {
+const Category: React.FC<CategoriesProp> = ({ setSelectedCategory }) => {
   const [showSubCatOne, setShowSubCatOne] = useState(true);
 
-  const category = [
+  const category: CategoryProp[] = [
     {
       _id: 1,
-      title: "Computers & Accessories",
+      title: "Women",
     },
     {
       _id: 2,
-      title: "Smartphones & Tablets",
+      title: "Men",
     },
     {
       _id: 3,
-      title: "TV, Video & Audio",
+      title: "Kids",
     },
     {
       _id: 4,
-      title: "Cameras, Photo & Video",
-    },
-    {
-      _id: 5,
-      title: "Headphones",
-    },
-    {
-      _id: 6,
-      title: "Wearable Electronics",
+      title: "Travel",
     },
   ];
 
@@ -76,14 +71,6 @@ const Category: React.FC<CategoriesProps> = ({ setSelectedCategory }) => {
                     }
                   />
                   {item.title}
-                  {item.icons && (
-                    <span
-                      onClick={() => setShowSubCatOne(!showSubCatOne)}
-                      className="text-[10px] lg:text-xs cursor-pointer text-gray-400 hover:text-primeColor duration-300"
-                    >
-                      <ImPlus />
-                    </span>
-                  )}
                 </li>
               ))}
             </ul>

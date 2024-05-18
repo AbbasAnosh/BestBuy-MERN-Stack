@@ -13,12 +13,10 @@ import OrderPage from "./screens/OrderPage";
 import ProfilePage from "./screens/ProfilePage";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 
-import OrderList from "./screens/Admin/OrderList";
-import ProductListPage from "./screens/Admin/ProductListPage";
 import Dashboard from "./screens/Dashboard";
-import ProductForm from "./screens/Admin/AddProduct";
+
 import ProductEditPage from "./screens/Admin/ProductEditPage";
-import UserList from "./screens/Admin/UserList";
+
 import UserEdite from "./screens/Admin/UserEdite";
 import Homepage from "./screens/Homepage";
 
@@ -30,6 +28,10 @@ import HeaderBottom from "./components/home/header/HeaderBottom";
 import AboutPage from "./screens/AboutPage";
 import ContactPage from "./screens/ContactPage";
 import WishListPage from "./screens/WishListPage";
+import Women from "./screens/categories/Women";
+import Men from "./screens/categories/Men";
+import Kids from "./screens/categories/Kids";
+import Travel from "./screens/categories/Travel";
 
 const App = () => {
   return (
@@ -46,6 +48,14 @@ const App = () => {
           path="/shop/search/:keyword/page/:pageNumber"
           element={<ShopPage />}
         />
+        <Route path="/women" element={<Women />} />
+        <Route path="/women/page/:pageNumber" element={<Women />} />
+        <Route path="/men" element={<Men />} />
+        <Route path="/men/page/:pageNumber" element={<Men />} />
+        <Route path="/kids/page/:pageNumber" element={<Kids />} />
+        <Route path="/kids" element={<Kids />} />
+        <Route path="/travel" element={<Travel />} />
+        <Route path="/travel/page/:pageNumber" element={<Travel />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/product/:id" element={<ProductsScreen />} />
         <Route path="/cart" element={<CartScreen />} />

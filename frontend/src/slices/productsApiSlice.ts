@@ -2,9 +2,10 @@ import { apiSlice } from "./apiSlice";
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: ({ pageNumber }) => ({
+      query: ({ pageNumber, ...filters }) => ({
         url: "http://localhost:8000/api/products",
         params: {
+          ...filters,
           pageNumber,
         },
       }),
@@ -94,6 +95,46 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Product"],
       keepUnusedDataFor: 5,
     }),
+    getWomenProducts: builder.query({
+      query: ({ pageNumber }) => ({
+        url: "http://localhost:8000/api/products/women",
+        params: {
+          pageNumber,
+        },
+      }),
+      providesTags: ["Product"],
+      keepUnusedDataFor: 5,
+    }),
+    getMenProducts: builder.query({
+      query: ({ pageNumber }) => ({
+        url: "http://localhost:8000/api/products/men",
+        params: {
+          pageNumber,
+        },
+      }),
+      providesTags: ["Product"],
+      keepUnusedDataFor: 5,
+    }),
+    getKidsProducts: builder.query({
+      query: ({ pageNumber }) => ({
+        url: "http://localhost:8000/api/products/kids",
+        params: {
+          pageNumber,
+        },
+      }),
+      providesTags: ["Product"],
+      keepUnusedDataFor: 5,
+    }),
+    getTravelProducts: builder.query({
+      query: ({ pageNumber }) => ({
+        url: "http://localhost:8000/api/products/travel",
+        params: {
+          pageNumber,
+        },
+      }),
+      providesTags: ["Product"],
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
@@ -110,4 +151,8 @@ export const {
   useGetFeaturedProductsQuery,
   useGetTopProductsQuery,
   useGetSearchProductsQuery,
+  useGetWomenProductsQuery,
+  useGetMenProductsQuery,
+  useGetKidsProductsQuery,
+  useGetTravelProductsQuery,
 } = productsApiSlice;

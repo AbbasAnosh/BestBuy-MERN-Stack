@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
@@ -15,6 +15,7 @@ import { logout } from "../../../slices/authSlice";
 
 const HeaderBottom = () => {
   const [show, setShow] = useState(false);
+
   const [showUser, setShowUser] = useState(false);
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,8 +38,37 @@ const HeaderBottom = () => {
       console.log(error);
     }
   };
-  const Products = products.products;
-  s;
+  const Products = products?.products;
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (show && ref.current && !ref.current.contains(e.target)) {
+        setShow(false);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [show]);
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (showUser && ref.current && !ref.current.contains(e.target)) {
+        setShowUser(false);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [showUser]);
+
   useEffect(() => {
     if (searchQuery.length > 0 && Products.length > 0) {
       const filtered = Products.filter((product: ProductProps) =>
@@ -66,6 +96,7 @@ const HeaderBottom = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full px-4 pb-4 lg:pb-0 h-full lg:h-24">
           <div
+            ref={ref}
             onClick={() => setShow(!show)}
             className="flex h-14 cursor-pointer items-center gap-2"
           >
@@ -77,37 +108,27 @@ const HeaderBottom = () => {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute top-[108px] lg:top-[96px] z-40 lg:left-26 bg-[#064F48]  text-[#767676] h-[50vh] p-4 pb-6"
+                className="absolute top-[108px] flex flex-col h-[50vh] md:flex-row md:space-x-10 lg:top-[96px] z-40 lg:left-26 bg-[#064F48]  text-[#767676] md:h-[15vh] p-4 pb-6"
               >
-                <Link to={"category/imprimante"}>
-                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Computers & Accessories
+                <Link to={"/women"}>
+                  <li className="text-white uppercase px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                    Women
                   </li>
                 </Link>
 
-                <Link to={"category/ancre"}>
-                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Smartphones & Tablets
+                <Link to={"/men"}>
+                  <li className="text-white uppercase px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                    Men
                   </li>
                 </Link>
-                <Link to={"category/Ruban"}>
-                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    TV, Video & Audio
+                <Link to={"/kids"}>
+                  <li className="text-white uppercase px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                    Kids
                   </li>
                 </Link>
-                <Link to={"category/Bac"}>
-                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Cameras, Photo & Video
-                  </li>
-                </Link>
-                <Link to={"category/Bac"}>
-                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Headphones
-                  </li>
-                </Link>
-                <Link to={"category/Bac"}>
-                  <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Wearable Electronics
+                <Link to={"/travel"}>
+                  <li className="text-white uppercase px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                    Travel
                   </li>
                 </Link>
               </motion.ul>
@@ -162,6 +183,7 @@ const HeaderBottom = () => {
             {userInfo ? (
               <>
                 <div
+                  ref={ref}
                   onClick={() => setShowUser(!showUser)}
                   className="flex items-center"
                 >

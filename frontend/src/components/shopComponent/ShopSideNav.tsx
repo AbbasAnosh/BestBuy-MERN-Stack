@@ -2,7 +2,16 @@ import Brand from "./Brand";
 import Category from "./Category";
 import Price from "./Price";
 import Range from "./Range";
-import { ShopSideNavProps } from "../../types/ProductType";
+import { BrandProps, CategoryProps, PriceRange } from "../../types/ProductType";
+
+interface ShopSideNavProps {
+  setSelectedCategory: React.Dispatch<React.SetStateAction<CategoryProps[]>>;
+  setSelectedBrand: React.Dispatch<React.SetStateAction<BrandProps[]>>;
+  setSelectedPriceRanges: React.Dispatch<React.SetStateAction<PriceRange[]>>;
+  selectedPriceRanges: PriceRange[];
+  rangeValue: number;
+  setRangeValue: React.Dispatch<React.SetStateAction<number>>;
+}
 
 const ShopSideNav: React.FC<ShopSideNavProps> = ({
   setSelectedCategory,
