@@ -50,29 +50,29 @@ const Product = (props) => {
                 dispatch(addToCart(productToAdd));
                 toast.success("... added to cart");
               }}
-              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
+              className="text-[#064F48] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-[#064F48] hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
             >
               Add to Cart
               <span>
-                <FaShoppingCart />
+                <FaShoppingCart className="text-[#064F48]" />
               </span>
             </li>
             <li
               onClick={() => handleDetails(props.id)}
-              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
+              className="text-[#064F48] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-[#064F48] hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
             >
               View Details
               <span className="text-lg">
-                <MdOutlineLabelImportant />
+                <MdOutlineLabelImportant className="text-[#064F48]" />
               </span>
             </li>
             <li
               onClick={handleAddToWishList}
-              className="text-[#767676] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
+              className="text-[#064F48] hover:text-primeColor text-sm font-normal border-b-[1px] border-b-[#064F48] hover:border-b-primeColor flex items-center justify-end gap-2 hover:cursor-pointer pb-1 duration-300 w-full"
             >
               Add to Wish List
               <span>
-                <BsSuitHeartFill />
+                <BsSuitHeartFill className="text-[#064F48]" />
               </span>
             </li>
           </ul>
@@ -85,7 +85,9 @@ const Product = (props) => {
               ? `${props?.productName.substring(0, 20)}...`
               : props.productName}
           </h2>
-          <p className="text-[#767676] text-[14px]">${props.price}</p>
+          <p className="text-[#064F48] text-[14px] font-normal">
+            ${props.price}
+          </p>
         </div>
         <Rating value={props.rating} review={props.review} />
       </div>

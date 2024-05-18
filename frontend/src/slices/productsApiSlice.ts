@@ -11,6 +11,14 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Product"],
       keepUnusedDataFor: 5,
     }),
+
+    getSearchProducts: builder.query({
+      query: (keyword) => ({
+        url: `http://localhost:8000/api/products/search?keyword=${keyword}`,
+      }),
+      providesTags: ["Product"],
+      keepUnusedDataFor: 5,
+    }),
     getProductDetails: builder.query({
       query: (productId) => ({
         url: `http://localhost:8000/api/products/${productId}`,
@@ -101,4 +109,5 @@ export const {
   useGetNewArrivalQuery,
   useGetFeaturedProductsQuery,
   useGetTopProductsQuery,
+  useGetSearchProductsQuery,
 } = productsApiSlice;

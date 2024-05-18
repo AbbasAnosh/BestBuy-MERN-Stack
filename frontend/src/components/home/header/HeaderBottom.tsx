@@ -5,7 +5,7 @@ import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
 
 import { Link, useNavigate } from "react-router-dom";
 import { BsSuitHeartFill } from "react-icons/bs";
-import { useGetProductsQuery } from "../../../slices/productsApiSlice";
+import { useGetSearchProductsQuery } from "../../../slices/productsApiSlice";
 import { CartState, ProductProps } from "../../../types/ProductType";
 import { useSelector } from "react-redux";
 import { useGetWishListQuery } from "../../../slices/wishListApiSlice";
@@ -19,7 +19,7 @@ const HeaderBottom = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>([]);
-  const { data: products } = useGetProductsQuery({});
+  const { data: products } = useGetSearchProductsQuery(searchQuery);
   const { cartItems } = useSelector((state: { cart: CartState }) => state.cart);
   const { userInfo } = useSelector((state: any) => state.auth);
   const [close, setClose] = useState(false);
@@ -37,31 +37,28 @@ const HeaderBottom = () => {
       console.log(error);
     }
   };
-
+  const Products = products.products;
+  s;
   useEffect(() => {
-    if (searchQuery.length > 0 && products?.length > 0) {
-      const filtered = products.filter((product: ProductProps) =>
+    if (searchQuery.length > 0 && Products.length > 0) {
+      const filtered = Products.filter((product: ProductProps) =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredProducts(filtered);
     } else {
       setFilteredProducts([]);
     }
-  }, [products, searchQuery]);
+  }, [Products, searchQuery]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
   const getInitials = (name: string) => {
-    const parts = name.split(" ");
-    var initials = "";
-    for (var i = 0; i < parts.length; i++) {
-      if (parts[i].length > 0 && parts[i] !== "") {
-        initials += parts[i][0];
-      }
-    }
-    return initials;
+    return name
+      .split(" ")
+      .map((part) => part[0])
+      .join("");
   };
 
   return (
@@ -73,7 +70,7 @@ const HeaderBottom = () => {
             className="flex h-14 cursor-pointer items-center gap-2"
           >
             <HiOutlineMenuAlt4 className="w-5 h-5 z-50 text-[#064F48]" />
-            <p className="text-[14px] font-normal ">Shop by Category</p>
+            <p className="text-[14px] font-normal z-50 ">Shop by Category</p>
 
             {show && (
               <motion.ul
@@ -188,19 +185,10 @@ const HeaderBottom = () => {
                         Logout
                       </li>
                     </div>
-                    {/* <Link onClick={() => setShowUser(false)} to="/signup">
-                      <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                        Sign Up
-                      </li>
-                    </Link> */}
+
                     <Link to="/profile">
                       <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                         Profile
-                      </li>
-                    </Link>
-                    <Link to="/orders">
-                      <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200  hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                        Orders
                       </li>
                     </Link>
                   </motion.ul>

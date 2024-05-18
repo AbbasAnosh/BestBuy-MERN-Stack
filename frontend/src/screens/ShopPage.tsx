@@ -105,6 +105,8 @@ const ShopPage = () => {
                   productName={product.name}
                   price={product.price}
                   isNewArrival={product.isNewArrival}
+                  review={product.numReviews}
+                  rating={product.rating}
                 />
               </div>
             ))}
