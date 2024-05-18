@@ -25,7 +25,7 @@ const WishListPage = () => {
         await removeProductFromWishList(id).unwrap();
         toast.success("Product deleted successfully");
         refetch();
-      } catch (err) {
+      } catch (err: any) {
         toast.error(err?.data?.message || err.error);
       }
     }

@@ -199,7 +199,7 @@ const OrderPage = () => {
                         Price
                       </h3>
                       <h3 className="text-sm lg:text-md bg-[#E56A40] py-1 px-2 rounded-lg text-white">
-                        ${item.price}
+                        ${item.price.toFixed(2)}
                       </h3>
                     </div>
                     <div className="flex flex-col gap-3 items-center">
@@ -207,7 +207,7 @@ const OrderPage = () => {
                         Total
                       </h3>
                       <h3 className="text-sm lg:text-md bg-[#E56A40] py-1 px-2 rounded-lg text-white">
-                        ${item.qty * item.price}
+                        ${(item.qty * item.price).toFixed(2)}
                       </h3>
                     </div>
                   </div>

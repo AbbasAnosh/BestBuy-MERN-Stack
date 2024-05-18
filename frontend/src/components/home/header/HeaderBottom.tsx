@@ -55,19 +55,19 @@ const HeaderBottom = () => {
     };
   }, [show]);
 
-  useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      if (showUser && ref.current && !ref.current.contains(e.target)) {
-        setShowUser(false);
-      }
-    };
+  // useEffect(() => {
+  //   const checkIfClickedOutside = (e) => {
+  //     if (showUser && ref.current && !ref.current.contains(e.target)) {
+  //       setShowUser(false);
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", checkIfClickedOutside);
+  //   document.addEventListener("mousedown", checkIfClickedOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  }, [showUser]);
+  //   return () => {
+  //     document.removeEventListener("mousedown", checkIfClickedOutside);
+  //   };
+  // }, [showUser]);
 
   useEffect(() => {
     if (searchQuery.length > 0 && Products.length > 0) {
@@ -183,7 +183,7 @@ const HeaderBottom = () => {
             {userInfo ? (
               <>
                 <div
-                  ref={ref}
+                  // ref={ref}
                   onClick={() => setShowUser(!showUser)}
                   className="flex items-center"
                 >
