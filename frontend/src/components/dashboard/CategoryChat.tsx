@@ -3,6 +3,13 @@ import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import { useGetSearchProductsQuery } from "../../slices/productsApiSlice";
 
+interface CategoryType {
+  backgroundColor: string[];
+  data: number[];
+  datasets: any[s];
+  labels: string[];
+}
+
 const DashboardCategoryDistribution = () => {
   const { data: productsData } = useGetSearchProductsQuery({});
   const [chartData, setChartData] = useState({
@@ -20,7 +27,7 @@ const DashboardCategoryDistribution = () => {
         return acc;
       }, {});
 
-      setChartData({
+      const categoryData: CategoryType = {
         labels: Object.keys(categoryCounts),
         datasets: [
           {
@@ -45,12 +52,13 @@ const DashboardCategoryDistribution = () => {
             borderWidth: 1,
           },
         ],
-      });
+      };
+      setChartData(categoryData);
     }
   }, [productsData]);
 
   return (
-    <div className="p-4 bg-white rounded shadow-lg">
+    <div className="p-4 rounded w-full h-[400px]">
       <Pie data={chartData} />
     </div>
   );

@@ -10,8 +10,22 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-
+import { ResponsiveContainer } from "recharts";
 Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+
+type ChartData = {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    backgroundColor: string;
+    borderColor: string;
+    borderWidth: number;
+    borderRadius: number;
+    barPercentage: number;
+    categoryPercentage: number;
+  }[];
+};
 
 const DashboardRoundedBarGraph = () => {
   const { data: productsData } = useGetSearchProductsQuery({});
@@ -26,7 +40,7 @@ const DashboardRoundedBarGraph = () => {
       const ratings = productsData.products.map((product) => product.rating);
       const prices = productsData.products.map((product) => product.price);
 
-      setChartData({
+      const chartData: ChartData = {
         labels,
         datasets: [
           {
@@ -35,9 +49,9 @@ const DashboardRoundedBarGraph = () => {
             backgroundColor: "rgba(255, 206, 86, 0.2)",
             borderColor: "rgba(255, 206, 86, 1)",
             borderWidth: 1,
-            borderRadius: 10, // Adding border radius
-            barPercentage: 0.5, // Adjust bar width
-            categoryPercentage: 0.5, // Adjust space between bars
+            borderRadius: 10,
+            barPercentage: 0.5,
+            categoryPercentage: 0.5,
           },
           {
             label: "Prices",
@@ -45,12 +59,13 @@ const DashboardRoundedBarGraph = () => {
             backgroundColor: "rgba(54, 162, 235, 0.2)",
             borderColor: "rgba(54, 162, 235, 1)",
             borderWidth: 1,
-            borderRadius: 10, // Adding border radius
-            barPercentage: 0.5, // Adjust bar width
-            categoryPercentage: 0.5, // Adjust space between bars
+            borderRadius: 10,
+            barPercentage: 0.5,
+            categoryPercentage: 0.5,
           },
         ],
-      });
+      };
+      setChartData(chartData);
     }
   }, [productsData]);
 
@@ -64,7 +79,7 @@ const DashboardRoundedBarGraph = () => {
   };
 
   return (
-    <div className="p-4 bg-white rounded shadow-lg">
+    <div className="p-4 rounded w-full h-full">
       <Bar data={chartData} options={options} />
     </div>
   );

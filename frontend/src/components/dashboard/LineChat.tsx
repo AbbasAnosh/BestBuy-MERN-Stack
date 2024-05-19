@@ -3,6 +3,14 @@ import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import { useGetSearchProductsQuery } from "../../slices/productsApiSlice";
 
+interface DatasetProps {
+  label: string;
+  data: number[];
+  fill: boolean;
+  backgroundColor: string;
+  borderColor: string;
+}
+
 const DashboardLineChart = () => {
   const { data: productsData } = useGetSearchProductsQuery({});
   const [chartData, setChartData] = useState({
@@ -31,7 +39,7 @@ const DashboardLineChart = () => {
   }, [productsData]);
 
   return (
-    <div className="p-4 bg-white rounded shadow-lg">
+    <div className="p-4 rounded">
       <Line data={chartData} />
     </div>
   );
