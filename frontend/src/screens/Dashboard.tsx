@@ -11,7 +11,7 @@ import { useGetOrdersQuery } from "../slices/ordersApiSlice";
 import UserTable from "../components/UserTable";
 import { useGetUsersQuery } from "../slices/usersApiSlice";
 import ProductForm from "./Admin/AddProduct";
-import ProductEditPage from "./Admin/ProductEditPage";
+import AnalyticsTable from "../components/dashboard/AnalyticsTable";
 
 const sidebar = [
   { name: "Products", icon: ShoppingBagIcon },
@@ -19,6 +19,14 @@ const sidebar = [
   { name: "Users", icon: User },
   { name: "Analytics", icon: GraphIcon },
 ];
+
+interface ComponentMap {
+  Products: JSX.Element;
+  Orders: JSX.Element;
+  Users: JSX.Element;
+  AddProduct: JSX.Element;
+  Analytics: JSX.Element;
+}
 
 const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,7 +47,7 @@ const Dashboard = () => {
     refetch();
   }, [currentPage]);
 
-  const components = {
+  const components: ComponentMap = {
     Products: (
       <ProductTable
         data={products}
@@ -51,6 +59,7 @@ const Dashboard = () => {
     Orders: <OrderTable data={orders} />,
     Users: <UserTable data={users} refetch={userRefech} />,
     AddProduct: <ProductForm />,
+    Analytics: <AnalyticsTable />,
   };
 
   return (

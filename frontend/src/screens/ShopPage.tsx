@@ -65,15 +65,7 @@ const ShopPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mdl:gap-4 lg:gap-10">
             {data?.products?.map((product: ProductProps) => (
               <div key={product._id} className="px-2">
-                <Product
-                  id={product._id}
-                  img={product.image}
-                  productName={product.name}
-                  price={product.price}
-                  isNewArrival={product.isNewArrival}
-                  review={product.numReviews}
-                  rating={product.rating}
-                />
+                <Product {...product} key={product._id} />
               </div>
             ))}
           </div>

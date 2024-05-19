@@ -39,6 +39,7 @@ const HeaderBottom = () => {
     }
   };
   const Products = products?.products;
+  console.log(Products);
   const ref = useRef(null);
 
   useEffect(() => {
