@@ -98,6 +98,7 @@ export type NewProductProps = {
   isLoading: boolean;
   error?: string;
   isFeatured: boolean;
+
   isNewArrival: boolean;
 };
 
@@ -143,6 +144,17 @@ export interface OrderProps {
   isPaidAt: string;
   isDeliveredAt: string;
 }
+export interface UserProps {
+  _id: string;
+  name: string;
+  email: string;
+  totalPrice: number;
+  auth: any;
+  password: string;
+  createdAt: string;
+  updatedAt: string;
+  isAdmin: boolean;
+}
 
 export interface ReviewProps {
   _id: string;
@@ -152,3 +164,21 @@ export interface ReviewProps {
   numReviews: number;
   createdAt: string;
 }
+
+export type ProductTable = {
+  _id: string;
+  name: string;
+  image: string;
+  description: string;
+  brand?: string;
+  category?: string;
+  price: number;
+  countInStock: number;
+  rating: number;
+  numReviews: number;
+  isLoading: boolean;
+  error?: string;
+  isFeatured: boolean;
+  isNewArrival: boolean;
+  createdAt: string;
+};

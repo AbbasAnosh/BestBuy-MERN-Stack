@@ -60,8 +60,8 @@ const ProductEditPage = () => {
     navigate("/admin/dashboard");
   };
 
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
+  const uploadFileHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       const formData = new FormData();
       formData.append("image", file);
@@ -69,7 +69,7 @@ const ProductEditPage = () => {
         const res = await uploadProductImage({ productId, formData }).unwrap();
         toast.success(res.message);
         setImage(res.image);
-      } catch (err) {
+      } catch (err: any) {
         toast.error(
           err.response?.data?.message || err.message || "An error occurred"
         );
@@ -116,7 +116,7 @@ const ProductEditPage = () => {
                   name="price"
                   value={price}
                   onChange={(e) =>
-                    setPrice(e.target.value ? Number(e.target.value) : "")
+                    setPrice(e.target.value ? Number(e.target.value) : 0)
                   }
                   className="block w-full px-4 py-2 mt-2 text-gray-700 border border-[#064F48] rounded-md focus:outline-none focus:ring-0 outline-none ring-0 focus:border-[#E56A40]"
                 />

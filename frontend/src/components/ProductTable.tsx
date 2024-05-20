@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import Pagination from "./shopComponent/Pagination";
 import { FaPlus } from "react-icons/fa6";
+import { ProductTable } from "../types/ProductType";
 
 const ProductTable = ({
   data,
@@ -20,7 +21,7 @@ const ProductTable = ({
         await deleteProduct(id);
         toast.success("Product deleted successfully");
         refetch();
-      } catch (err) {
+      } catch (err: any) {
         toast.error(err?.data?.message || err.error);
       }
     }
@@ -74,7 +75,7 @@ const ProductTable = ({
             </tr>
           </thead>
           <tbody className="whitespace-nowrap lg:whitespace-normal">
-            {Products?.map((product) => (
+            {Products?.map((product: ProductTable) => (
               <tr
                 className="hover:bg-gray-100 transition-colors group"
                 key={product._id}
@@ -83,7 +84,7 @@ const ProductTable = ({
                   <img
                     src={product.image}
                     alt=""
-                    className="w-40 aspect-[3/2] rounded-lg object-cover object-top border border-gray-200"
+                    className="w-40 aspect-[3/2] rounded-lg objecst-cover object-top border border-gray-200"
                   />
                   <div>
                     <p className="text-md lg:text-lg font-semibold text-gray-700">

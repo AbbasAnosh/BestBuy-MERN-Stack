@@ -4,11 +4,12 @@ import { addToCart, removeFromCart } from "../slices/cartSlice";
 import { motion } from "framer-motion";
 import Breadcrumbs from "../components/shopComponent/BreadCrumps";
 import { ProductProps } from "../types/ProductType";
+import { RootState } from "../store";
 
 const CartScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state: RootState) => state.cart);
 
   const addToCartHandler = (product: ProductProps, qty: number) => {
     dispatch(addToCart({ ...product, qty }));

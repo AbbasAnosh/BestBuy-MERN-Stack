@@ -1,11 +1,26 @@
 import moment from "moment";
-import { FaTimes } from "react-icons/fa";
-import { TbListDetails } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { useDeleteUserMutation } from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
+import { UserProps } from "../types/ProductType";
 
-const UserTable = ({ data, refetch }) => {
+type UserType = {
+  id: string;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+type RefetchFunction = () => Promise<UserType>;
+
+const UserTable = ({
+  data,
+  refetch,
+}: {
+  data: UserProps[];
+  refetch: RefetchFunction;
+}) => {
   const [deleteUser] = useDeleteUserMutation();
 
   const deleteHandler = async (id: string) => {
@@ -48,7 +63,7 @@ const UserTable = ({ data, refetch }) => {
           </tr>
         </thead>
         <tbody>
-          {data?.map((user) => (
+          {data?.map((user: UserProps) => (
             <tr
               className="hover:bg-gray-100 transition-colors group h-24"
               key={user._id}

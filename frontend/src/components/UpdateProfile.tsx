@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useProfileMutation } from "../slices/usersApiSlice";
 import { toast } from "react-toastify";
 import { setCredentials } from "../slices/authSlice";
+import { RootState } from "../store";
 
 const UpdateProfile = () => {
   const [name, setName] = useState("");
@@ -12,7 +13,7 @@ const UpdateProfile = () => {
   const [confirm, setConfirm] = useState("");
 
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state: RootState) => state.auth);
   const [UpdateProfile, { isLoading: loadingUpdateProfile }] =
     useProfileMutation();
   useEffect(() => {
@@ -22,7 +23,7 @@ const UpdateProfile = () => {
     }
   }, [userInfo, userInfo.name, userInfo.email]);
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirm) {
       toast.error("Password do not match");
@@ -36,7 +37,7 @@ const UpdateProfile = () => {
         }).unwrap();
         dispatch(setCredentials(res));
         toast.success("Profile updated");
-      } catch (err) {
+      } catch (err: any) {
         toast.error(err?.data?.message || err?.error);
       }
     }
