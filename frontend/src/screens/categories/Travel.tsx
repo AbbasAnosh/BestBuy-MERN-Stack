@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetTravelProductsQuery } from "../../slices/productsApiSlice";
-import Breadcrumbs from "../../components/shopComponent/BreadCrumps";
+import Breadcrumbs from "../../components/shopComponent/ComponentName";
 import NewProduct from "../../components/home/products/NewProdcut";
 import { useNavigate, useParams } from "react-router-dom";
 import Pagination from "../../components/shopComponent/Pagination";

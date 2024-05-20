@@ -1,4 +1,4 @@
-import Breadcrumbs from "../../components/shopComponent/BreadCrumps";
+import Breadcrumbs from "../../components/shopComponent/ComponentName";
 import { useGetMenProductsQuery } from "../../slices/productsApiSlice";
 import NewProduct from "../../components/home/products/NewProdcut";
 import { useNavigate, useParams } from "react-router-dom";

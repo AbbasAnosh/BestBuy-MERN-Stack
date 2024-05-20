@@ -2,83 +2,73 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
-
 import { Link, useNavigate } from "react-router-dom";
 import { BsSuitHeartFill } from "react-icons/bs";
 import { useGetSearchProductsQuery } from "../../../slices/productsApiSlice";
 import { CartState, ProductProps } from "../../../types/ProductType";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useGetWishListQuery } from "../../../slices/wishListApiSlice";
-import { useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../../slices/usersApiSlice";
 import { logout } from "../../../slices/authSlice";
 
 const HeaderBottom = () => {
   const [show, setShow] = useState(false);
-
   const [showUser, setShowUser] = useState(false);
-  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState<ProductProps[]>([]);
   const { data: products } = useGetSearchProductsQuery(searchQuery);
   const { cartItems } = useSelector((state: { cart: CartState }) => state.cart);
   const { userInfo } = useSelector((state: any) => state.auth);
-  const [close, setClose] = useState(false);
   const { data: wishlistData } = useGetWishListQuery({});
   const wishlistItems = wishlistData?.wishlistItems;
 
   const dispatch = useDispatch();
   const [logoutApiCall] = useLogoutMutation();
-  const handleLogout = async (arg: string) => {
+  const navigate = useNavigate();
+  const categoryRef = useRef(null);
+  const userRef = useRef(null);
+
+  const handleLogout = async () => {
     try {
-      await logoutApiCall(arg).unwrap();
+      await logoutApiCall().unwrap();
       dispatch(logout());
       navigate("/login");
     } catch (error) {
       console.log(error);
     }
   };
-  const Products = products?.products;
-  const ref = useRef(null);
 
-  // useEffect(() => {
-  //   const checkIfClickedOutside = (e) => {
-  //     if (show && ref.current && !ref.current.contains(e.target)) {
-  //       setShow(false);
-  //     }
-  //   };
+  const handleClickOutsideCategory = (e) => {
+    if (categoryRef.current && !categoryRef.current.contains(e.target)) {
+      setShow(false);
+    }
+  };
 
-  //   document.addEventListener("mousedown", checkIfClickedOutside);
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", checkIfClickedOutside);
-  //   };
-  // }, [show]);
-
-  // useEffect(() => {
-  //   const checkIfClickedOutside = (e) => {
-  //     if (showUser && ref.current && !ref.current.contains(e.target)) {
-  //       setShowUser(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", checkIfClickedOutside);
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", checkIfClickedOutside);
-  //   };
-  // }, [showUser]);
+  const handleClickOutsideUser = (e) => {
+    if (userRef.current && !userRef.current.contains(e.target)) {
+      setShowUser(false);
+    }
+  };
 
   useEffect(() => {
-    if (searchQuery.length > 0 && Products.length > 0) {
-      const filtered = Products.filter((product: ProductProps) =>
+    document.addEventListener("mousedown", handleClickOutsideCategory);
+    document.addEventListener("mousedown", handleClickOutsideUser);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideCategory);
+      document.removeEventListener("mousedown", handleClickOutsideUser);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery.length > 0 && products?.products.length > 0) {
+      const filtered = products.products.filter((product: ProductProps) =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredProducts(filtered);
     } else {
       setFilteredProducts([]);
     }
-  }, [Products, searchQuery]);
+  }, [products, searchQuery]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -96,7 +86,7 @@ const HeaderBottom = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full px-4 pb-4 lg:pb-0 h-full lg:h-24">
           <div
-            ref={ref}
+            ref={categoryRef}
             onClick={() => setShow(!show)}
             className="flex h-14 cursor-pointer items-center gap-2"
           >
@@ -110,14 +100,13 @@ const HeaderBottom = () => {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute top-[108px] flex flex-col h-[50vh] md:flex-row md:space-x-10 lg:top-[96px] z-40 lg:left-26 bg-[#064F48]  text-[#767676] md:h-[15vh] p-4 pb-6"
+                className="absolute top-[108px] flex flex-col h-[50vh] md:flex-row md:space-x-10 lg:top-[96px] z-40 lg:left-26 bg-[#064F48] text-[#767676] md:h-[15vh] p-4 pb-6"
               >
                 <Link to={"/women"}>
-                  <li className="text-white uppercase px-4 py-1 border-b-[1px]  hover:border-b-white hover:text-white duration-300 cursor-pointer">
+                  <li className="text-white uppercase px-4 py-1 border-b-[1px] hover:border-b-white hover:text-white duration-300 cursor-pointer">
                     Women
                   </li>
                 </Link>
-
                 <Link to={"/men"}>
                   <li className="text-white uppercase px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                     Men
@@ -153,9 +142,8 @@ const HeaderBottom = () => {
                     onClick={() => {
                       navigate(`/product/${product._id}`);
                       setSearchQuery("");
-                      setClose(true);
                     }}
-                    className="flex items-center gap-3 ..."
+                    className="flex items-center gap-3"
                   >
                     <img
                       className="w-24 rounded-sm"
@@ -185,7 +173,6 @@ const HeaderBottom = () => {
             {userInfo ? (
               <>
                 <div
-                  // ref={ref}
                   onClick={() => setShowUser(!showUser)}
                   className="flex items-center"
                 >
@@ -199,6 +186,7 @@ const HeaderBottom = () => {
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.5 }}
+                    ref={userRef}
                     className="absolute top-12 lg:top-16 lg:-right-4 z-40 w-64 bg-[#064F48] text-[#767676] h-[50vh] p-4 pb-6"
                   >
                     <div>
@@ -209,7 +197,6 @@ const HeaderBottom = () => {
                         Logout
                       </li>
                     </div>
-
                     <Link to="/profile">
                       <li className="text-white px-4 py-1 border-b-[1px] border-b-slate-200 hover:border-b-white hover:text-white duration-300 cursor-pointer">
                         Profile
@@ -219,15 +206,13 @@ const HeaderBottom = () => {
                 )}
               </>
             ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="flex justify-center items-center cursor-pointer"
-                >
-                  <FaUser />
-                  <FaCaretDown />
-                </Link>
-              </>
+              <Link
+                to="/login"
+                className="flex justify-center items-center cursor-pointer"
+              >
+                <FaUser />
+                <FaCaretDown />
+              </Link>
             )}
             <Link to="/cart">
               <div className="relative">

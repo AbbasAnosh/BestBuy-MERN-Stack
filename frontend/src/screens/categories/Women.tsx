@@ -1,6 +1,6 @@
 import { useGetWomenProductsQuery } from "../../slices/productsApiSlice";
 import NewProduct from "../../components/home/products/NewProdcut";
-import Breadcrumbs from "../../components/shopComponent/BreadCrumps";
+import Breadcrumbs from "../../components/shopComponent/ComponentName";
 import { useNavigate, useParams } from "react-router-dom";
 import Pagination from "../../components/shopComponent/Pagination";
 import { NewProductProps, PaginationProps } from "../../types/ProductType";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Breadcrumbs from "../components/shopComponent/BreadCrumps";
+import Breadcrumbs from "../components/shopComponent/ComponentName";
 import ProductBanner from "../components/shopComponent/ProductBanner";
 import ShopSideNav from "../components/shopComponent/ShopSideNav";
 import { useGetProductsQuery } from "../slices/productsApiSlice";

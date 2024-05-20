@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
 import { motion } from "framer-motion";
-import Breadcrumbs from "../components/shopComponent/BreadCrumps";
+import Breadcrumbs from "../components/shopComponent/ComponentName";
 import { ProductProps } from "../types/ProductType";
 import { RootState } from "../store";
 

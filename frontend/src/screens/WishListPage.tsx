@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { addToCart } from "../slices/cartSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Breadcrumbs from "../components/shopComponent/BreadCrumps";
+import Breadcrumbs from "../components/shopComponent/ComponentName";
 import { useEffect, useState } from "react";
 import { NewProductProps } from "../types/ProductType";
 

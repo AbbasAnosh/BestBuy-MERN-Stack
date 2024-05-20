@@ -20,6 +20,7 @@ const sliderVariants = {
       opacity: { duration: 0.2 },
     },
   },
+
   exit: (direction: number) => ({
     zIndex: 0,
     x: direction < 0 ? 300 : -300,
@@ -104,21 +105,14 @@ const BannerSlider = () => {
   };
 
   useEffect(() => {
-    let slideInterval: number;
-    const startSlider = () => {
-      slideInterval = setInterval(() => {
-        setDirection(1);
-        setCurrentSlide((prevSlide) =>
-          prevSlide === slides.length - 1 ? 0 : prevSlide + 1
-        );
-      }, 3000);
-    };
+    const slideInterval = setInterval(() => {
+      setDirection(1);
+      setCurrentSlide((prevSlide) =>
+        prevSlide === slides.length - 1 ? 0 : prevSlide + 1
+      );
+    }, 3000);
 
-    startSlider();
-
-    return () => {
-      clearInterval(slideInterval);
-    };
+    return () => clearInterval(slideInterval);
   }, [slides.length]);
 
   return (

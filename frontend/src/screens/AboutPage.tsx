@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Breadcrumbs from "../components/shopComponent/BreadCrumps";
+import Breadcrumbs from "../components/shopComponent/ComponentName";
 import Button from "../constants/Button";
 
 const AboutPage = () => {
