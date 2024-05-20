@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import Pagination from "./shopComponent/Pagination";
 import { FaPlus } from "react-icons/fa6";
-import { ProductTable } from "../types/ProductType";
+import { ProductTableProps } from "../types/ProductType";
 
 const ProductTable = ({
   data,
@@ -75,7 +75,7 @@ const ProductTable = ({
             </tr>
           </thead>
           <tbody className="whitespace-nowrap lg:whitespace-normal">
-            {Products?.map((product: ProductTable) => (
+            {Products?.map((product: ProductTableProps) => (
               <tr
                 className="hover:bg-gray-100 transition-colors group"
                 key={product._id}

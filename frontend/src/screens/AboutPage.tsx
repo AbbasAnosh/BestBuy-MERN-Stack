@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Breadcrumbs from "../components/shopComponent/BreadCrumps";
+import Button from "../constants/Button";
 
 const AboutPage = () => {
   const location = useLocation();
@@ -32,9 +33,7 @@ const AboutPage = () => {
             your style.
           </h1>
           <Link to="/shop">
-            <button className="w-52 h-10 bg-[#064F48] text-white hover:bg-[#C85948] duration-300">
-              Continue Shopping
-            </button>
+            <Button text="Continue Shopping"></Button>
           </Link>
         </div>
         <div>

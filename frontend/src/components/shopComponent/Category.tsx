@@ -61,7 +61,7 @@ const Category: React.FC<CategoriesProp> = ({ setSelectedCategory }) => {
               {category.map((item) => (
                 <li
                   key={item._id}
-                  className="border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 hover:text-primeColor hover:border-gray-400 duration-300"
+                  className="border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 cursor-pointer hover:text-[#064F48] hover:border-[#064F48] duration-300"
                 >
                   <input
                     type="checkbox"

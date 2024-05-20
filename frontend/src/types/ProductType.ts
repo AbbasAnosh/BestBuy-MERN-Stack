@@ -165,7 +165,7 @@ export interface ReviewProps {
   createdAt: string;
 }
 
-export type ProductTable = {
+export type ProductTableProps = {
   _id: string;
   name: string;
   image: string;
