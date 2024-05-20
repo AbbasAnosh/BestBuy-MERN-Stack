@@ -39,13 +39,13 @@ const PlaceOrderPage = () => {
   };
 
   return (
-    <div className="bg-[#EEE1D1] ">
+    <div className="">
       <div className="max-w-4xl pt-16 mx-auto w-full mb-24">
         <CheckoutSteps activeStep={4} />
       </div>
       <div className="grid lg:grid-cols-3 gap-12 p-4 lg:p-10 max-w-7xl mx-auto">
-        <div className="lg:col-span-2 bg-[#EEE1D1] divide-y divide-[#064F48]">
-          <div className=" bg-[#EEE1D1] divide-y divide-[#064F48]">
+        <div className="lg:col-span-2  divide-y divide-[#064F48]">
+          <div className="  divide-y divide-[#064F48]">
             <div className="space-y-6 mb-8">
               <h2 className="text-2xl font-extrabold text-[#064F48] inline-block">
                 Shipping
@@ -82,7 +82,7 @@ const PlaceOrderPage = () => {
                     key={index}
                   >
                     <div className="md:col-span-2 flex items-center gap-6">
-                      <div className="w-32 h-22 shrink-0 bg-[#E56A40] rounded-lg p-4">
+                      <div className="w-32 h-22 shrink-0 rounded-lg p-4">
                         <img
                           src={item.image}
                           className="w-full h-full object-contain rounded-md"
@@ -101,7 +101,7 @@ const PlaceOrderPage = () => {
                         <h3 className="text-md lg:text-lg text-bold text-[#064F48]">
                           Quantity
                         </h3>
-                        <h3 className="text-sm lg:text-md bg-[#E56A40] py-1 px-2 rounded-lg text-white">
+                        <h3 className="text-sm lg:text-md  py-1 px-2 rounded-lg text-black">
                           {item.qty}
                         </h3>
                       </div>
@@ -109,7 +109,7 @@ const PlaceOrderPage = () => {
                         <h3 className="text-md lg:text-lg text-bold text-[#064F48]">
                           Price
                         </h3>
-                        <h3 className="text-sm lg:text-md bg-[#E56A40] py-1 px-2 rounded-lg text-white">
+                        <h3 className="text-sm lg:text-md  py-1 px-2 rounded-lg text-black">
                           ${item.price}
                         </h3>
                       </div>
@@ -117,7 +117,7 @@ const PlaceOrderPage = () => {
                         <h3 className="text-md lg:text-lg text-bold text-[#064F48]">
                           Total
                         </h3>
-                        <h3 className="text-sm lg:text-md bg-[#E56A40] py-1 px-2 rounded-lg text-white">
+                        <h3 className="text-sm lg:text-md  py-1 px-2 rounded-lg text-black">
                           ${(item.qty * item.price).toFixed(2)}
                         </h3>
                       </div>
@@ -129,11 +129,11 @@ const PlaceOrderPage = () => {
           </div>
         </div>
         <div>
-          <div className="bg-[#E56A40] rounded p-6">
-            <h3 className="text-xl font-extrabold text-[#EBD0D1] border-b border-[#064F48] pb-4">
+          <div className="bg-[#F5F5F3] rounded p-6">
+            <h3 className="text-xl font-extrabold text-black border-b border-[#064F48] pb-4">
               Order Summary
             </h3>
-            <ul className="text-[#EBD0D1] divide-y divide-[#064F48] mt-6">
+            <ul className=" divide-y divide-[#064F48] mt-6">
               <li className="flex flex-wrap gap-4 text-md py-4">
                 Items{" "}
                 <span className="ml-auto font-bold">${cart.itemsPrice}</span>
@@ -154,7 +154,7 @@ const PlaceOrderPage = () => {
               type="button"
               disabled={cart.cartItems.length === 0}
               onClick={placeOrderHandler}
-              className="mt-6 text-md px-6 py-2.5 w-full bg-[#064F48] text-white rounded"
+              className="mt-6 text-md px-6 py-2.5 w-full bg-[#064F48] hover:bg-[#E56A40] text-white rounded"
             >
               Place Order
             </button>

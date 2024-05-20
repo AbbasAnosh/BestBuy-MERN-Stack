@@ -24,7 +24,7 @@ const PaymentPage = () => {
     navigate("/placeorder");
   };
   return (
-    <div className=" bg-[#EEE1D1] p-6">
+    <div className="  p-6">
       <div className="max-w-4xl mx-auto w-full">
         <div className="mb-10 pt-3">
           <h2 className="text-2xl font-extrabold text-[#333] inline-block">

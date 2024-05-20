@@ -61,25 +61,25 @@ const CartScreen = () => {
         ) : (
           <>
             <div className="grid lg:grid-cols-3 gap-12 ">
-              <div className="lg:col-span-2 divide-y-2 divide-[#E56A40] shadow-lg p-4 bg-[#064D46] rounded-md">
+              <div className="lg:col-span-2 divide-y-2 divide-[#E56A40] bg-[#EFD29B] p-4 rounded-md">
                 {cartItems.map((item: any) => (
                   <div
                     className="flex max-sm:flex-col gap-8 py-6"
                     key={item._id}
                   >
-                    <div className="h-52 w-52 shrink-0 rounded-md">
+                    <div className="h-52 w-52 shrink-0 rounded-md ">
                       <img
                         src={item.image}
                         className="w-full h-full object-contain rounded-md"
                       />
                     </div>
                     <div className="w-full">
-                      <h3 className="text-xl font-extrabold text-[#D3D1C2] mb-8 text-nowrap">
+                      <h3 className="text-xl font-extrabold text-black mb-8 text-nowrap">
                         {item.name}
                       </h3>
 
                       <div className="flex items-center justify-between ">
-                        <h4 className="w-1/3 text-lg font-bold text-[#D3D1C2] text-nowrap ">
+                        <h4 className="w-1/3 text-lg font-bold text-[#064F48] text-nowrap ">
                           ${item.price}
                         </h4>
                         <div className="w-1/3">
@@ -90,7 +90,7 @@ const CartScreen = () => {
                               onChange={(e) =>
                                 addToCartHandler(item, Number(e.target.value))
                               }
-                              className="bg-[#E56A40] border-0 focus:border-0 focus:ring-0 outline-none text-[#D3D1C2] text-semibold
+                              className=" border-0 focus:border-0 focus:ring-0 outline-none text-[#064F48] text-semibold
                               block w-16 p-2.5 rounded-md custom-select"
                             >
                               {[...Array(item.countInStock).keys()].map((p) => (
@@ -129,12 +129,12 @@ const CartScreen = () => {
                   </div>
                 ))}
               </div>
-              <div className="shadow-lg p-6 bg-[#E56A40] max-h-[17rem] rounded-lg">
-                <h3 className="text-xl font-extrabold text-[#EEE1D1] border-b border-[#EEE1D1] pb-4">
+              <div className="shadow-lg p-6 bg-[#EFD29B] max-h-[17rem] rounded-lg">
+                <h3 className="text-xl font-extrabold text-black border-b border-[#064F48] pb-4">
                   Order Summary
                 </h3>
                 <ul className="text-[#333] divide-y mt-6">
-                  <li className="flex text-[#EEE1D1] flex-wrap gap-4 text-md py-4">
+                  <li className="flex text-black flex-wrap gap-4 text-md py-4">
                     Subtotal (
                     {cartItems.reduce(
                       (acc: number, item: any) => acc + item.qty,
@@ -156,8 +156,8 @@ const CartScreen = () => {
                   onClick={checkoutHandler}
                   type="button"
                   disabled={cartItems.length == 0}
-                  className="mt-6 font-semibold px-6 py-2.5 w-full bg-[#064F48] hover:bg-[#EEE1D1]
-                   text-white hover:text-[#064F48] rounded"
+                  className="mt-6 font-semibold px-6 py-2.5 w-full bg-[#064F48] hover:bg-[#E56A40]
+                   text-white hover:text-white rounded"
                 >
                   Check out
                 </button>

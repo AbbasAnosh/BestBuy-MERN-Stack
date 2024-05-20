@@ -49,7 +49,7 @@ const NewHeader = () => {
   }, []);
 
   return (
-    <div className="w-full h-20 bg-[#064F48] z-50 opacity-100 sticky top-0 border-b-[1px] border-b-gray-200">
+    <div className="w-full h-20 bg-[#064F48] z-[1000] opacity-100 sticky top-0 border-b-[1px] border-b-gray-200">
       <nav className="h-full px-4 max-w-7xl mx-auto relative">
         <div className="flex items-center justify-between h-full">
           <Link to="/" className="">

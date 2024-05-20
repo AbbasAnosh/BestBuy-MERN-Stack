@@ -100,8 +100,10 @@ const HeaderBottom = () => {
             onClick={() => setShow(!show)}
             className="flex h-14 cursor-pointer items-center gap-2"
           >
-            <HiOutlineMenuAlt4 className="w-5 h-5 z-50 text-[#064F48]" />
-            <p className="text-[14px] font-normal z-50 ">Shop by Category</p>
+            <HiOutlineMenuAlt4 className="w-5 h-5 z-[1000] text-[#064F48]" />
+            <p className="text-[14px] font-normal z-[1000] ">
+              Shop by Category
+            </p>
 
             {show && (
               <motion.ul

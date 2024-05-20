@@ -57,7 +57,7 @@ const OrderPage = () => {
         await payOrder({ orderId, details });
         refetch();
         toast.success("Payment successful");
-      } catch (err) {
+      } catch (err: any) {
         toast.error(err?.data?.message || err.message);
       }
     });
@@ -67,7 +67,7 @@ const OrderPage = () => {
     refetch();
     toast.success("Payment successful");
   };
-  const onError = (err) => {
+  const onError = (err: any) => {
     toast.error(err.message);
   };
   const createOrder = (data, actions) => {
@@ -81,7 +81,7 @@ const OrderPage = () => {
           },
         ],
       })
-      .then((orderId) => {
+      .then((orderId: string) => {
         return orderId;
       });
   };
@@ -91,7 +91,7 @@ const OrderPage = () => {
       await deliverOrders(orderId);
       refetch();
       toast.success("Order delivered");
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err?.data?.message || err.message);
     }
   };
@@ -101,10 +101,10 @@ const OrderPage = () => {
   ) : error ? (
     <h1>There is an error</h1>
   ) : (
-    <div className="bg-[#EEE1D1] ">
+    <div className=" ">
       <div className="grid lg:grid-cols-3 gap-12 p-4 lg:p-10 max-w-7xl mx-auto">
-        <div className="lg:col-span-2 bg-[#EEE1D1] divide-y divide-[#064F48]">
-          <div className=" bg-[#EEE1D1] divide-y divide-[#064F48]">
+        <div className="lg:col-span-2 divide-y divide-[#064F48]">
+          <div className="  divide-y divide-[#064F48]">
             <div className="space-y-6 mb-8">
               <h2 className="text-2xl font-extrabold text-[#064F48] inline-block">
                 Shipping
@@ -125,13 +125,13 @@ const OrderPage = () => {
                 {order.shippingAddress.postalCode},{" "}
                 {order.shippingAddress.country}
               </p>
-              <p className="  text-white text-lg">
+              <p className="  text-black text-lg">
                 {order.isDelivered ? (
                   <p className="bg-[#064F48] max-w-md p-3 rounded-md">
                     Deliverd on {order.deliveredAt}
                   </p>
                 ) : (
-                  <p className="bg-[#E56A40] max-w-md p-3 rounded-md">
+                  <p className="bg-[#F5F5F3] max-w-md p-3 rounded-md">
                     Not Delivered
                   </p>
                 )}
@@ -147,13 +147,13 @@ const OrderPage = () => {
                 </span>{" "}
                 {order.paymentMethod}
               </p>
-              <p className="  text-white text-lg">
+              <p className="  text-black text-lg">
                 {order.isPaid ? (
                   <p className="bg-[#064F48] max-w-md p-3 rounded-md">
                     Paid on {order.paidAt}
                   </p>
                 ) : (
-                  <p className="bg-[#E56A40] max-w-md p-3 rounded-md">
+                  <p className="bg-[#F5F5F3] max-w-md p-3 rounded-md">
                     Not Paid
                   </p>
                 )}
@@ -161,7 +161,7 @@ const OrderPage = () => {
             </div>
           </div>
           <div className="divide-y divide-[#064F48] mb-8 pt-6">
-            {order?.orderItems?.map((item: any, index: any) => (
+            {order?.orderItems?.map((item: any, index: number) => (
               <div>
                 <h2 className="text-2xl font-extrabold text-[#064F48] inline-block">
                   Payment Method
@@ -171,7 +171,7 @@ const OrderPage = () => {
                   key={index}
                 >
                   <div className="md:col-span-2 flex items-center gap-6">
-                    <div className="w-32 h-22 shrink-0 bg-[#E56A40] rounded-lg p-4">
+                    <div className="w-32 h-22 shrink-0  rounded-lg p-4">
                       <img
                         src={item.image}
                         className="w-full h-full object-contain rounded-md"
@@ -190,7 +190,7 @@ const OrderPage = () => {
                       <h3 className="text-md lg:text-lg text-bold text-[#064F48]">
                         Quantity
                       </h3>
-                      <h3 className="text-sm lg:text-md bg-[#E56A40] py-1 px-2 rounded-lg text-white">
+                      <h3 className="text-sm lg:text-md  py-1 px-2 rounded-lg text-black">
                         {item.qty}
                       </h3>
                     </div>
@@ -198,7 +198,7 @@ const OrderPage = () => {
                       <h3 className="text-md lg:text-lg text-bold text-[#064F48]">
                         Price
                       </h3>
-                      <h3 className="text-sm lg:text-md bg-[#E56A40] py-1 px-2 rounded-lg text-white">
+                      <h3 className="text-sm lg:text-md  py-1 px-2 rounded-lg text-black">
                         ${item.price.toFixed(2)}
                       </h3>
                     </div>
@@ -206,7 +206,7 @@ const OrderPage = () => {
                       <h3 className="text-md lg:text-lg text-bold text-[#064F48]">
                         Total
                       </h3>
-                      <h3 className="text-sm lg:text-md bg-[#E56A40] py-1 px-2 rounded-lg text-white">
+                      <h3 className="text-sm lg:text-md  py-1 px-2 rounded-lg text-black">
                         ${(item.qty * item.price).toFixed(2)}
                       </h3>
                     </div>
@@ -217,11 +217,11 @@ const OrderPage = () => {
           </div>
         </div>
         <div>
-          <div className="bg-[#E56A40] rounded p-6">
-            <h3 className="text-xl font-extrabold text-[#EBD0D1] border-b border-[#064F48] pb-4">
+          <div className="bg-[#F5F5F3] rounded p-6">
+            <h3 className="text-xl font-extrabold text-black border-b border-[#064F48] pb-4">
               Order Summary
             </h3>
-            <ul className="text-[#EBD0D1] divide-y divide-[#064F48] mt-6">
+            <ul className=" divide-y divide-[#064F48] mt-6">
               <li className="flex flex-wrap gap-4 text-md py-4">
                 Items{" "}
                 <span className="ml-auto font-bold">${order.itemsPrice}</span>
@@ -257,21 +257,12 @@ const OrderPage = () => {
                 {isPending ? (
                   <h1>Loading</h1>
                 ) : (
-                  <div className="space-y-3">
-                    {/* <button
-                      onClick={onApproveTest}
-                      type="button"
-                      className="mt-6 text-md px-6 py-2.5 w-full bg-[#064F48] text-white rounded"
-                    >
-                      Pay Order
-                    </button> */}
-                    <div>
-                      <PayPalButtons
-                        createOrder={createOrder}
-                        onApprove={onApprove}
-                        onError={onError}
-                      ></PayPalButtons>
-                    </div>
+                  <div className="space-y-3 -z-40">
+                    <PayPalButtons
+                      createOrder={createOrder}
+                      onApprove={onApprove}
+                      onError={onError}
+                    ></PayPalButtons>
                   </div>
                 )}
               </div>

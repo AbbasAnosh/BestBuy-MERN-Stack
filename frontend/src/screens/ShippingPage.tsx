@@ -29,7 +29,7 @@ const ShippingPage = () => {
     navigate("/payment");
   };
   return (
-    <div className="bg-[#EEE1D1]">
+    <div className="">
       <div className="max-w-4xl max-h-screen mx-auto p-4 ">
         <div className="mb-[6rem]">
           <CheckoutSteps
