@@ -52,9 +52,9 @@ const NewHeader = () => {
     <div className="w-full h-20 bg-[#064F48] z-50 opacity-100 sticky top-0 border-b-[1px] border-b-gray-200">
       <nav className="h-full px-4 max-w-7xl mx-auto relative">
         <div className="flex items-center justify-between h-full">
-          <div className="">
+          <Link to="/" className="">
             <Logo />
-          </div>
+          </Link>
           <div>
             {showMenu && (
               <motion.ul

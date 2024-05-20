@@ -1,16 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { IoChevronForward } from "react-icons/io5";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
 import { motion } from "framer-motion";
 import Breadcrumbs from "../components/shopComponent/BreadCrumps";
+import { ProductProps } from "../types/ProductType";
 
 const CartScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state: any) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
 
-  const addToCartHandler = (product: any, qty: any) => {
+  const addToCartHandler = (product: ProductProps, qty: number) => {
     dispatch(addToCart({ ...product, qty }));
   };
 
@@ -136,7 +136,7 @@ const CartScreen = () => {
                   <li className="flex text-[#EEE1D1] flex-wrap gap-4 text-md py-4">
                     Subtotal (
                     {cartItems.reduce(
-                      (acc: any, item: any) => acc + item.qty,
+                      (acc: number, item: any) => acc + item.qty,
                       0
                     )}
                     ) items

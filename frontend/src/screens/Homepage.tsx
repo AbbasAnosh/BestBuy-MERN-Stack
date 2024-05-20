@@ -1,15 +1,15 @@
 import Services from "../components/Services";
 import { useGetTopProductsQuery } from "../slices/productsApiSlice";
-import { ProductProps } from "../types/ProductType";
+import { NewProductProps } from "../types/ProductType";
 
 import NewArrivals from "../components/home/NewArrival";
 import Heading from "../components/home/products/Heading";
-import OurBestSellers from "../components/home/OurBestSellers";
 import YearProduct from "../components/home/YearProduct";
 import NewProduct from "../components/home/products/NewProdcut";
 import { useEffect, useState } from "react";
 import CartIcon from "../components/home/products/CartIcon";
 import BannerSlider from "../components/home/products/BannerSlider";
+import FeaturedProdcuts from "../components/home/FeaturedProducts";
 
 const Homepage = () => {
   const [showCartIcon, setShowCartIcon] = useState(false);
@@ -42,7 +42,7 @@ const Homepage = () => {
         <Services />
         <div className="max-w-7xl mx-auto px-4">
           <NewArrivals />
-          <OurBestSellers />
+          <FeaturedProdcuts />
           <div className="pt-20">
             <YearProduct />
           </div>
@@ -61,7 +61,7 @@ const Homepage = () => {
                   <Heading heading="Top Products" />
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {data &&
-                      data?.map((product: ProductProps) => (
+                      data?.map((product: NewProductProps) => (
                         <div>
                           <NewProduct {...product} key={product._id} />
                         </div>

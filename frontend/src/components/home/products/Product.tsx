@@ -3,29 +3,29 @@ import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineLabelImportant } from "react-icons/md";
 import { useAddProductToWishListMutation } from "../../../slices/wishListApiSlice";
 import toast, { Toaster } from "react-hot-toast";
-import Badge from "./Badge";
+import Badge from "../../../constants/Badge";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../slices/cartSlice";
 import { useNavigate } from "react-router-dom";
 import Rating from "../../Rating";
-import { ProductProps } from "../../../types/ProductType";
+import { NewProductProps } from "../../../types/ProductType";
 
-const Product = (product: ProductProps) => {
+const Product = (product: NewProductProps) => {
   const [addProductToWishList] = useAddProductToWishListMutation();
-  const handleAddToWishList = async (e) => {
+  const handleAddToWishList = async (e: React.MouseEvent<HTMLLIElement>) => {
     e.preventDefault();
     try {
-      const result = await addProductToWishList({ _id: product.id }).unwrap();
+      const result = await addProductToWishList({ _id: product._id }).unwrap();
       toast.success("... added to wishlist");
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err.message || err.error);
     }
   };
-  console.log(product);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleDetails = (_id) => {
+  const handleDetails = (_id: string) => {
     navigate(`/product/${_id}`);
   };
   return (
@@ -90,7 +90,7 @@ const Product = (product: ProductProps) => {
             ${product.price}
           </p>
         </div>
-        <Rating value={product.rating} review={product.review} />
+        <Rating value={product.rating} review={product.numReviews} />
       </div>
       <Toaster
         position="top-right"

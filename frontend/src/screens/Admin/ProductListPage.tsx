@@ -4,6 +4,7 @@ import {
   useGetProductsQuery,
 } from "../../slices/productsApiSlice";
 import { Link } from "react-router-dom";
+import { ProductProps } from "../../types/ProductType";
 
 const ProductListPage = () => {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery({});
@@ -15,7 +16,7 @@ const ProductListPage = () => {
         await deleteProduct(id);
         toast.success("Product deleted successfully");
         refetch();
-      } catch (err) {
+      } catch (err: any) {
         toast.error(err?.data?.message || err.error);
       }
     }
@@ -76,7 +77,7 @@ const ProductListPage = () => {
                 </th>
               </tr>
             </thead>
-            {products.map((product) => (
+            {products.map((product: ProductProps) => (
               <tbody className="whitespace-nowrap" key={product._id}>
                 <tr className="even:bg-blue-50">
                   <td className="px-6 py-4 text-sm">{product._id}</td>

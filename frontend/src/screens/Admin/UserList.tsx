@@ -5,6 +5,7 @@ import {
   useGetUsersQuery,
 } from "../../slices/usersApiSlice";
 import { toast } from "react-toastify";
+import { userInfo } from "../../types/ProductType";
 const UserList = () => {
   const { data: users, isLoading, error, refetch } = useGetUsersQuery({});
   const [deleteUser] = useDeleteUserMutation();
@@ -54,7 +55,7 @@ const UserList = () => {
                   </tr>
                 </thead>
                 <tbody className="whitespace-nowrap divide-y divide-gray-200">
-                  {users.map((user) => (
+                  {users.map((user: userInfo) => (
                     <tr className="hover:bg-blue-50" key={user._id}>
                       <td className="px-6 py-4 text-sm">{user._id}</td>
                       <td>{user.name}</td>

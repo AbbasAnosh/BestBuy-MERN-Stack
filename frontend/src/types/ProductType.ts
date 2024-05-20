@@ -50,10 +50,11 @@ export type PriceRange = {
 export type BrandProps = {
   _id: string;
   title: string;
-};
+}[];
 export type CategoryProps = {
   _id: string;
   title: string;
+  icons: boolean;
 };
 export type RangeProp = {
   rangeValue: number;
@@ -107,4 +108,47 @@ export interface CategoryProp {
 
 export interface CategoriesProp {
   setSelectedCategory: React.Dispatch<React.SetStateAction<CategoryProps[]>>;
+}
+
+export type PaginationProps = {
+  data: ProductProps;
+  selected: number;
+};
+
+export interface userInfo {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+  auth: any;
+}
+
+export interface OrderProps {
+  _id: string;
+  orderItems: ProductProps[];
+  shippingAddress: {};
+  paymentMethod: string;
+  itemsPrice: number;
+  shippingPrice: number;
+  taxPrice: number;
+  totalPrice: number;
+  isPaid: boolean;
+  paidAt: string;
+  isDelivered: boolean;
+  deliveredAt: string;
+  createdAt: string;
+  updatedAt: string;
+  user: string;
+  isPaidAt: string;
+  isDeliveredAt: string;
+}
+
+export interface ReviewProps {
+  _id: string;
+  name: string;
+  rating: number;
+  comment: string;
+  numReviews: number;
+  createdAt: string;
 }

@@ -1,4 +1,3 @@
-import { BsArrowsFullscreen } from "react-icons/bs";
 import { AiOutlineShopping } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -53,13 +52,6 @@ const NewProduct = (product: NewProductProps) => {
               Quick view
             </Link>
           </div>
-          {product?.isnew && (
-            <div className="absolute top-2 right-2 z-50">
-              <p className="bg-primeColor px-4 py-1 text-white flex justify-center items-center text-sm font-semibold hover:bg-black duration-300 cursor-pointer rounded-md">
-                New
-              </p>
-            </div>
-          )}
         </div>
       </div>
       <div className="max-w-80 py-6 flex flex-col gap-1 px-4">

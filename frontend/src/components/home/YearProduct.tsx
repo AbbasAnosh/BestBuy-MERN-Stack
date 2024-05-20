@@ -1,19 +1,13 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import productOfTheYear from "/img/bag.png";
-
-import Image from "./designLayout/Image";
-import ShopNow from "./designLayout/Button";
+import Button from "../../constants/Button";
 
 const YearProduct = () => {
   return (
     <Link to="/shop">
       <div className="w-full h-80 mb-20 bg-[#EFD29B] flex flex-col md:flex-row items-center justify-between p-6 md:p-16 font-titleFont">
         <div className="hidden md:block w-full h-full md:w-1/2">
-          <Image
-            className="w-full h-64 object-cover"
-            imgSrc={productOfTheYear}
-          />
+          <img className="w-full h-64 object-cover" src={productOfTheYear} />
         </div>
         <div className="flex flex-col gap-6 md:w-1/2 ">
           <h1 className="text-2xl md:text-3xl font-semibold text-primeColor">
@@ -23,7 +17,7 @@ const YearProduct = () => {
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat
             cupiditate modi amet! Facilis, aperiam quaerat.
           </p>
-          <ShopNow />
+          <Button text="Shop Now"></Button>
         </div>
       </div>
     </Link>

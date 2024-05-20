@@ -6,7 +6,7 @@ const Range: React.FC<RangeProp> = ({ rangeValue, setRangeValue }) => {
   };
 
   return (
-    <div className="space-y-6 py-8 ">
+    <div className="space-y-6  ">
       <div>
         <p className="text-lg font-sm border-b-2 pb-4">Price Range</p>
       </div>

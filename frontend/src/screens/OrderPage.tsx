@@ -9,6 +9,7 @@ import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { userInfo } from "../types/ProductType";
 
 const OrderPage = () => {
   const { id: orderId } = useParams();
@@ -19,12 +20,11 @@ const OrderPage = () => {
     error,
   } = useGetOrderDetailsQuery(orderId);
 
-  const [deliverOrders, { isLoading: loadingDeliver }] =
-    useDeliverOrdersMutation();
+  const [deliverOrders] = useDeliverOrdersMutation();
 
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
-  const { userInfo } = useSelector((state: any) => state.auth);
+  const { userInfo } = useSelector((state: userInfo) => state.auth);
   const {
     data: paypal,
     isLoading: loadingPayPal,

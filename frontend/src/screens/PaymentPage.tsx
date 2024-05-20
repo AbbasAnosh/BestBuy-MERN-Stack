@@ -3,11 +3,13 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { savePaymentMethod } from "../slices/cartSlice";
+import { CartState } from "../types/ProductType";
+
 const PaymentPage = () => {
   const [paymentMethod, setPaymentMethod] = useState("PayPal");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cart = useSelector((state: any) => state.cart);
+  const cart: CartState = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
   useEffect(() => {
@@ -16,7 +18,7 @@ const PaymentPage = () => {
     }
   }, [shippingAddress, navigate]);
 
-  const submitHandler = (e: any) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");

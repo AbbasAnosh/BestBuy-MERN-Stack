@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 import Rating from "../components/Rating";
@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../slices/cartSlice";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { ReviewProps, userInfo } from "../types/ProductType";
 
 const ProductsScreen = () => {
   const { id: productId } = useParams<{ id: string }>();
@@ -32,7 +33,7 @@ const ProductsScreen = () => {
   } = useGetProductDetailsQuery(productId);
 
   const [createReview] = useCreateReviewMutation();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state: userInfo) => state.auth);
 
   const isError: any = error;
 
@@ -41,7 +42,7 @@ const ProductsScreen = () => {
     navigate("/cart");
   };
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     try {
       await createReview({
@@ -53,7 +54,7 @@ const ProductsScreen = () => {
       toast.success("Review Submitted");
       setRating(0);
       setComment("");
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err.data.message || err.error);
     }
   };
@@ -76,28 +77,6 @@ const ProductsScreen = () => {
           <>
             <div className="grid items-start grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="w-full  top-0 sm:flex gap-2">
-                {/* <div className="sm:space-y-3 w-16 max-sm:flex max-sm:mb-4 max-sm:gap-4">
-                  <img
-                    src="https://readymadeui.com/images/product1.webp"
-                    alt="Product1"
-                    className="w-full cursor-pointer outline"
-                  />
-                  <img
-                    src="https://readymadeui.com/images/product6.webp"
-                    alt="Product2"
-                    className="w-full cursor-pointer"
-                  />
-                  <img
-                    src="https://readymadeui.com/images/product7.webp"
-                    alt="Product3"
-                    className="w-full cursor-pointer"
-                  />
-                  <img
-                    src="https://readymadeui.com/images/product3.webp"
-                    alt="Product4"
-                    className="w-full cursor-pointer"
-                  />
-                </div> */}
                 <img
                   src={Product?.image}
                   alt="Product"
@@ -115,7 +94,7 @@ const ProductsScreen = () => {
                   </p>
                 </div>
 
-                <Rating value={Product?.rating} reviews={Product?.numReviews} />
+                <Rating value={Product?.rating} review={Product?.numReviews} />
 
                 {Product.countInStock > 0 && (
                   <div className="flex items-center justify-between mt-4">
@@ -295,7 +274,7 @@ const ProductsScreen = () => {
                           )}
                         </div>
                         <div className="flex-1">
-                          {Product.reviews.map((review) => (
+                          {Product.reviews.map((review: ReviewProps) => (
                             <div
                               key={review._id}
                               className="flex flex-col gap-2"
@@ -303,7 +282,10 @@ const ProductsScreen = () => {
                               <h1 className="bg-white p-2 rounded-md text-md font-normals">
                                 {review.name}
                               </h1>
-                              <Rating value={review.rating} />
+                              <Rating
+                                value={review.rating}
+                                review={review.numReviews}
+                              />
                               <p className="bg-white p-2 rounded-md text-md font-normal">
                                 {review.createdAt.substring(0, 10)}
                               </p>

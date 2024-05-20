@@ -1,7 +1,14 @@
 import ReactPaginate from "react-paginate";
 import { FaChevronRight } from "react-icons/fa6";
 import { FaChevronLeft } from "react-icons/fa6";
-const Pagination = ({ pageCount, handlePageClick }) => {
+import { PaginationProps } from "../../types/ProductType";
+const Pagination = ({
+  pageCount,
+  handlePageClick,
+}: {
+  pageCount: number;
+  handlePageClick: (e: PaginationProps) => void;
+}) => {
   return (
     <div className="flex items-center justify-center pb-3">
       <ReactPaginate

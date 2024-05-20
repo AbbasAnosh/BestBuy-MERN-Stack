@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import { userInfo } from "../types/ProductType";
 const RegisterScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,10 +15,10 @@ const RegisterScreen = () => {
   const navigate = useNavigate();
 
   const [register, { isLoading }] = useRegisterMutation();
-  const { userInfo } = useSelector((state: any) => state.auth);
+  const { userInfo } = useSelector((state: userInfo) => state.auth);
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
-  const redirect: any = sp.get("redirect") || "/";
+  const redirect: string = sp.get("redirect") || "/";
 
   useEffect(() => {
     if (userInfo) {

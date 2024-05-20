@@ -1,19 +1,23 @@
-import Slider from "react-slick";
+import NextArrowSample from "./NextArrow";
+import PrevArrowSample from "./PrevArrow";
 import Product from "./products/Product";
 import Heading from "./products/Heading";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { useGetFeaturedProductsQuery } from "../../slices/productsApiSlice";
-import NextArrow from "./NextArrow";
-import PrevArrow from "./PrevArrow";
+import { NewProductProps } from "../../types/ProductType";
 
-const OurBestSellers = () => {
-  const { data: featuredProducts } = useGetFeaturedProductsQuery({});
+const FeaturedProdcuts = () => {
+  const { data: featiredProducts } = useGetFeaturedProductsQuery({});
+
   const settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    nextArrow: <NextArrow onClick={() => {}} />,
-    prevArrow: <PrevArrow onClick={() => {}} />,
+    nextArrow: <NextArrowSample onClick={() => {}} />,
+    prevArrow: <PrevArrowSample onClick={() => {}} />,
     responsive: [
       {
         breakpoint: 1025,
@@ -43,11 +47,11 @@ const OurBestSellers = () => {
   };
 
   return (
-    <div className="w-full py-12">
+    <div className="w-full py-12 relative">
       <Heading heading="Featured Products" />
       <Slider {...settings}>
-        {featuredProducts?.map((product) => (
-          <div key={product.id} className="px-2">
+        {featiredProducts?.map((product: NewProductProps) => (
+          <div key={product._id} className="px-2">
             <Product {...product} key={product._id} />
           </div>
         ))}
@@ -56,4 +60,4 @@ const OurBestSellers = () => {
   );
 };
 
-export default OurBestSellers;
+export default FeaturedProdcuts;

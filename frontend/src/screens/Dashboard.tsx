@@ -12,6 +12,7 @@ import UserTable from "../components/UserTable";
 import { useGetUsersQuery } from "../slices/usersApiSlice";
 import ProductForm from "./Admin/AddProduct";
 import AnalyticsTable from "../components/dashboard/AnalyticsTable";
+import { PaginationProps } from "../types/ProductType";
 
 const sidebar = [
   { name: "Products", icon: ShoppingBagIcon },
@@ -36,9 +37,10 @@ const Dashboard = () => {
 
   const { data: orders } = useGetOrdersQuery({});
   const { data: users, refetch: userRefech } = useGetUsersQuery({});
-  const [activeComponent, setActiveComponent] = useState("Products");
+  const [activeComponent, setActiveComponent] =
+    useState<keyof ComponentMap>("Products");
 
-  const handlePageClick = (data) => {
+  const handlePageClick = (data: PaginationProps) => {
     const newPageNumber = data.selected + 1;
     setCurrentPage(newPageNumber);
   };
@@ -68,14 +70,15 @@ const Dashboard = () => {
         <h1 className="text-xl px-2 font-semibold">BestBuy</h1>
         <ul className="flex flex-row gap-3  lg:flex-col gap-y-6 pt-8 lg:pt-20">
           {sidebar.map((item, index) => (
-            <div>
-              <li key={index}>
+            <div key={index}>
+              <li>
                 <button
                   className="flex gap-x-2 lg:gap-x-4 items-center -ml-2 md:ml-0 py-2 text-gray-500 hover:text-indigo-600 group"
-                  onClick={() => setActiveComponent(item.name)}
+                  onClick={() =>
+                    setActiveComponent(item.name as keyof ComponentMap)
+                  }
                 >
                   <span className="w-1.5 h-8 lg:bg-indigo-600 rounded-r-full left-0 lg:absolute lg:scale-y-0 lg:-translate-x-full group-hover:scale-y-100 group-hover:translate-x-0 transition-transform ease-in-out" />
-
                   <img
                     src={item.icon}
                     className="hidden md:block w-6 h-6 fill-current"
@@ -87,7 +90,7 @@ const Dashboard = () => {
                   </span>
                 </button>
               </li>
-              {index === 5 && <li className="py-4"></li>}{" "}
+              {index === 5 && <li className="py-4"></li>}
             </div>
           ))}
         </ul>

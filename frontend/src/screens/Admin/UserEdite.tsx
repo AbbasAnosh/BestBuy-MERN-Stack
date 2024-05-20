@@ -39,7 +39,7 @@ const UserEdite = () => {
       toast.success("User updated successfully");
       refetch();
       navigate("/admin/userlist");
-    } catch (err) {
+    } catch (err: any) {
       toast.error(err?.data?.message || err.error);
     }
   };

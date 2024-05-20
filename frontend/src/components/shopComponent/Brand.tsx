@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import NavTitle from "./NavTitle";
 import { BrandProps, BrandsProps } from "../../types/ProductType";
-
+type Brands = {
+  _id: number;
+  title: string;
+};
 const Brand: React.FC<BrandsProps> = ({ setSelectedBrand }) => {
   const [showBrands, setShowBrands] = useState(true);
   const handleBrandChange = (brand: BrandProps, isChecked: boolean) => {
@@ -15,7 +18,7 @@ const Brand: React.FC<BrandsProps> = ({ setSelectedBrand }) => {
     });
   };
 
-  const brands = [
+  const brands: Brands[] = [
     {
       _id: 1,
       title: "Apple",

@@ -29,9 +29,9 @@ const HeaderBottom = () => {
 
   const dispatch = useDispatch();
   const [logoutApiCall] = useLogoutMutation();
-  const handleLogout = async () => {
+  const handleLogout = async (arg: string) => {
     try {
-      await logoutApiCall().unwrap();
+      await logoutApiCall(arg).unwrap();
       dispatch(logout());
       navigate("/login");
     } catch (error) {
@@ -39,22 +39,21 @@ const HeaderBottom = () => {
     }
   };
   const Products = products?.products;
-  console.log(Products);
   const ref = useRef(null);
 
-  useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      if (show && ref.current && !ref.current.contains(e.target)) {
-        setShow(false);
-      }
-    };
+  // useEffect(() => {
+  //   const checkIfClickedOutside = (e) => {
+  //     if (show && ref.current && !ref.current.contains(e.target)) {
+  //       setShow(false);
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", checkIfClickedOutside);
+  //   document.addEventListener("mousedown", checkIfClickedOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  }, [show]);
+  //   return () => {
+  //     document.removeEventListener("mousedown", checkIfClickedOutside);
+  //   };
+  // }, [show]);
 
   // useEffect(() => {
   //   const checkIfClickedOutside = (e) => {

@@ -7,8 +7,9 @@ import Product from "../components/home/products/Product";
 import {
   BrandProps,
   CategoryProps,
+  NewProductProps,
+  PaginationProps,
   PriceRange,
-  ProductProps,
 } from "../types/ProductType";
 import { useNavigate, useParams } from "react-router-dom";
 import Pagination from "../components/shopComponent/Pagination";
@@ -41,7 +42,7 @@ const ShopPage = () => {
 
   const { data } = useGetProductsQuery(filters);
 
-  const handlePageClick = (e) => {
+  const handlePageClick = (e: PaginationProps) => {
     const newPageNumber = e.selected + 1;
     navigate(`/shop/page/${newPageNumber}`);
   };
@@ -63,7 +64,7 @@ const ShopPage = () => {
         <div className="w-full mdl:w-[80%] lgl:w-[75%] h-full flex flex-col gap-10">
           <ProductBanner setSortOption={setSortOption} />
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mdl:gap-4 lg:gap-10">
-            {data?.products?.map((product: ProductProps) => (
+            {data?.products?.map((product: NewProductProps) => (
               <div key={product._id} className="px-2">
                 <Product {...product} key={product._id} />
               </div>

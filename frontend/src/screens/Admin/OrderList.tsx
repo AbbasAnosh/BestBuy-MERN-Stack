@@ -1,12 +1,11 @@
-import React from "react";
 import { useGetOrdersQuery } from "../../slices/ordersApiSlice";
-import OrderForm from "../../components/OrderForm";
 import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
+import { OrderProps } from "../../types/ProductType";
 
 const OrderList = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery({});
-  console.log(orders, "orders");
+  console.log(orders);
   return (
     <div className="bg-[#EEE1D1]">
       <div className="p-6 lg:max-w-6xl max-w-2xl h-[70vh] mx-auto">
@@ -47,10 +46,10 @@ const OrderList = () => {
                   </tr>
                 </thead>
                 <tbody className="whitespace-nowrap divide-y divide-gray-200">
-                  {orders.map((order) => (
+                  {orders.map((order: OrderProps) => (
                     <tr className="hover:bg-blue-50" key={order._id}>
                       <td className="px-6 py-4 text-sm">{order._id}</td>
-                      <td>{order.user && order.user.name}</td>
+                      <td>{order.user}</td>
                       <td className="px-6 py-4 text-sm">
                         {order.createdAt.substring(0, 10)}
                       </td>
