@@ -126,7 +126,7 @@ const WishListPage = () => {
                           <img
                             src={image}
                             alt=""
-                            className="w-40 aspect-[3/2] rounded-lg object-cover object-top border border-gray-200"
+                            className="w-40 rounded-lg object-cover object-top border border-gray-200"
                           />
                           <div>
                             <p className="text-md md:text-lg font-semibold text-gray-700">
